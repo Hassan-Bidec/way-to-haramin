@@ -1,0 +1,55 @@
+"use client";
+import React from "react";
+import { FaInstagram, FaFacebookF, FaWhatsapp } from "react-icons/fa";
+
+const Footer = () => {
+  return (
+    <footer className="bg-[#0D3C34] text-white py-6 md:py-8 px-6 md:px-16">
+      <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-0">
+        {/* Left Section */}
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
+          <h2 className="text-lg font-semibold">Logo Here</h2>
+          <div className="hidden md:block h-6 w-px bg-gray-400"></div>
+
+          {/* Links + Copyright Container */}
+          <div className="flex flex-col gap-1 md:gap-0">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-sm">
+              <a href="#" className="hover:underline">
+                How It Works
+              </a>
+              <a href="#" className="hover:underline">
+                Vehicle Categories
+              </a>
+              <a href="#" className="hover:underline">
+                Why Choose Us
+              </a>
+            </div>
+
+            {/* ✅ Copyright below links */}
+            <p className="text-xs text-gray-300 mt-2 md:mt-1">
+              Copyright © 2025 Way To Haramain
+            </p>
+          </div>
+        </div>
+
+        {/* Right Section (Social + Email) */}
+        <div className="flex flex-col items-start md:items-end gap-2">
+          <div className="flex items-center gap-4 text-white">
+            <a href="#" className="hover:text-gray-300">
+              <FaInstagram size={18} />
+            </a>
+            <a href="#" className="hover:text-gray-300">
+              <FaFacebookF size={18} />
+            </a>
+            <a href="#" className="hover:text-gray-300">
+              <FaWhatsapp size={18} />
+            </a>
+          </div>
+          <p className="text-xs text-gray-300">support@waytoharamain.com</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
