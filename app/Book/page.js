@@ -1,0 +1,26 @@
+import React from 'react'
+import BookRide from '../components/BookRideComponents/bookRide'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const Page = () => {
+  return (
+    <div>
+      <BookRide/>
+        <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </div>
+  )
+}
+
+export default Page

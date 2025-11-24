@@ -1,0 +1,72 @@
+import Image from "next/image";
+
+export default function Simple() {
+  const vehicles = [
+    { id: 1, name: "Search Your Route", img: "/kaba1.png", description: "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks." },
+    { id: 2, name: "Select Vehicle", img: "/kaba2.png", description: "Choose the vehicle that suits your comfort and group size." },
+    { id: 3, name: "Travel Comfortably", img: "/kaba3.png", description: "Enjoy reliable travel with trusted drivers and instant WhatsApp updates." },
+    { id: 4, name: "Book & Pay", img: "/kaba4.png", description: "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments." },
+  ];
+
+  return (
+    <section
+      className="relative py-20 bg-gray-50 bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/s-1.png')",
+      }}
+    >
+      {/* 🟢 Gradient overlay for fade at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/40 to-white"></div>
+
+      {/* Overlay for brightness */}
+      <div className="absolute inset-0 bg-white/90"></div>
+
+      <div className="relative max-w-6xl mx-auto px-6 text-center">
+        <span className="uppercase font-semibold tracking-widest text-sm text-gray-800 mb-2">
+          ~ Travel with Ease ~
+        </span>
+        <h1 className="text-3xl md:text-4xl font-normal text-gray-800 mb-4">
+          Makkah & Madinah in 4 Simple Steps
+        </h1>
+        <p className="text-gray-600 text-[14px] mb-12 max-w-2xl mx-auto">
+          From searching your Car comfortably, we make your sacred journey seamless and stress-free.
+        </p>
+
+<div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 px-4 sm:px-6 md:px-15">
+  {vehicles.map((vehicle) => (
+    <div
+      key={vehicle.id}
+      className="rounded-xl overflow-hidden w-full mx-auto"
+    >
+      {/* IMAGE WRAPPER TO FIX ROUNDED ISSUE */}
+      <div className="w-full h-44 sm:h-52 md:h-70">
+        <Image
+          src={vehicle.img}
+          alt={vehicle.name}
+          width={400}
+          height={400}
+          className="object-cover w-full h-full"
+        />
+      </div>
+
+      <div className="p-4 text-center">
+        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
+          {vehicle.name}
+        </h3>
+        <span className="text-xs sm:text-sm md:text-base w-full line-clamp-2 text-gray-700">
+          {vehicle.description}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+
+
+      </div>
+    </section>
+
+  );
+}

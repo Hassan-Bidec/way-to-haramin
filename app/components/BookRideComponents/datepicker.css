@@ -1,0 +1,24 @@
+/* calendar background */
+.custom-datepicker {
+  background-color: #F7F7F9 !important;
+  border-radius: 0.75rem; /* rounded-xl */
+  padding: 0.5rem;
+}
+
+/* all day cells background */
+.custom-day {
+  background-color: #F7F7F9 !important;
+  color: #1f2937; /* dark gray text */
+  border-radius: 0.375rem; /* small rounding for days */
+}
+
+/* selected day styling */
+.custom-day.react-datepicker__day--selected {
+  background-color: #3b82f6 !important; /* blue selected */
+  color: white !important;
+}
+
+/* hover day styling */
+.custom-day:hover {
+  background-color: #93c5fd !important; /* light blue hover */
+}
