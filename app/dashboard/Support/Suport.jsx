@@ -76,11 +76,11 @@ const handleSubmitIssue = async () => {
 
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/966501234567', '_blank');
+    window.open('https://wa.me/0538500266', '_blank');
   };
 
   const handleCall = () => {
-    window.location.href = 'tel:+966501234567';
+    window.location.href = 'tel:+0538500266';
   };
 
 
@@ -142,7 +142,7 @@ const handleSubmitIssue = async () => {
                 onClick={handleCall}
                 className="w-full bg-gradient-to-r from-[#C7A76C] to-[#C7A76C]/90 text-white hover:shadow-lg transition-all"
               >
-                +966 50 123 4567
+                0538500266
               </Button>
             </CardContent>
           </Card>
@@ -153,7 +153,7 @@ const handleSubmitIssue = async () => {
               <div className="w-16 h-16 bg-[#F2EDE3] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <HelpCircle className="w-8 h-8 text-[#C7A76C]" />
               </div>
-              <h3 className="mb-2 text-[#1B2A3D]">Address</h3>
+              <h3 className="mb-2 text-[#1B2A3D]">FAQ</h3>
               <p className="text-sm text-gray-500 mb-4">
                 Find answers to common questions
               </p>

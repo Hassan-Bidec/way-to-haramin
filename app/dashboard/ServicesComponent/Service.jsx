@@ -302,157 +302,146 @@ export function Packages({ vendorId }) {
           </section>
 
 
-          <section>
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-[#0E3C2F] mb-2">🏆 Top Rated Providers</h2>
-                <p className="text-gray-600 text-sm">Our most trusted and highly rated partners</p>
+         <section>
+  {searchQuery || ratingFilter !== 'all' ? (
+    // Agar search/filter active ho to filtered vendors dikhayein
+    <div className="space-y-4">
+      {filteredAndSortedVendors.map((vendor, index) => (
+        <motion.div
+          key={vendor.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 }}
+        >
+          <div
+            onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
+            className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-gray-100"
+          >
+            {/* Left Image */}
+            <div className="w-35 h-35 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200">
+              <ImageWithFallback
+                src={vendor.logo}
+                alt={vendor.name}
+                className="w-full h-full"
+              />
+            </div>
+
+            {/* Right Side Info */}
+            <div className="flex flex-col gap-1 flex-1">
+              <h3 className="text-[#0E3C2F] text-lg font-semibold truncate">
+                {vendor.name}
+              </h3>
+
+              {/* Rating */}
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-[#C7A76C]/10 px-2 py-0.5 rounded-lg">
+                  <Star className="w-4 h-4 text-[#C7A76C] fill-[#C7A76C]" />
+                  <span className="text-sm text-[#0E3C2F]">
+                    {vendor.rating.toFixed(1)}
+                  </span>
+                </div>
+                <span className="text-xs text-gray-500">
+                  ({vendor.reviews} reviews)
+                </span>
+              </div>
+
+              {/* Badges */}
+              <div className="flex flex-wrap gap-1 mt-1">
+                {vendor.badges.slice(0, 3).map((badge, i) => (
+                  <span
+                    key={i}
+                    className="text-xs bg-[#0E3C2F]/10 text-[#0E3C2F] px-2 py-1 rounded-md"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
+
+              {/* Bookings + Phone */}
+              <span className="text-sm text-gray-600 mt-1">
+                {vendor.bookings.toLocaleString()} bookings completed
+              </span>
+              <span className="text-sm text-gray-600 mt-1 flex gap-2">
+                <Phone className='w-3.5 h-3.5 text-[#0E3C2F]'/>
+                {vendor.phone}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  ) : (
+    // Agar search/filter active nahi hai to Top Rated dikhayein
+    <div className="space-y-4">
+      {topVendors.map((vendor) => (
+        <motion.div
+          key={vendor.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div
+            className="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
+            onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
+          >
+            {/* Image Left */}
+            <div className="w-30 h-30 rounded-lg overflow-hidden flex-shrink-0">
+              <ImageWithFallback
+                src={vendor?.logo}
+                alt={vendor?.name}
+                className="w-full h-full"
+              />
+            </div>
+
+            {/* Right Side Content */}
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-[#0E3C2F] truncate">
+                {vendor.name}
+              </h3>
+
+              {/* Rating + Reviews */}
+              <div className="flex items-center gap-2 my-1">
+                <div className="flex items-center gap-1 bg-[#C7A76C]/10 px-2 py-1 rounded-md">
+                  <Star className="w-4 h-4 text-[#C7A76C] fill-[#C7A76C]" />
+                  <span className="text-sm">{vendor.rating.toFixed(1)}</span>
+                </div>
+                <span className="text-xs text-gray-500">
+                  ({vendor.reviews} reviews)
+                </span>
+              </div>
+
+              {/* Badges */}
+              <div className="flex flex-wrap gap-1 mb-2">
+                {vendor.badges.slice(0, 3).map((badge, index) => (
+                  <Badge
+                    key={index}
+                    className="text-xs bg-[#0E3C2F]/10 text-[#0E3C2F]"
+                  >
+                    {badge}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Bookings + Button */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600">
+                  {vendor.bookings.toLocaleString()} bookings
+                </span>
+
+                <Button
+                  size="sm"
+                  className="bg-[#0E3C2F] text-white px-4 py-1 rounded-md hover:bg-[#124f3d]"
+                >
+                  View Details
+                </Button>
               </div>
             </div>
-
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {topVendors.map((vendor, index) => (
-                <motion.div
-                  key={vendor.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="relative border-none shadow-lg hover:shadow-xl transition-all overflow-hidden group cursor-pointer bg-gradient-to-br from-white to-[#F2EDE3]/30"
-                    onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
-                  >
-
-                    {index === 0 && (
-                      <div className="absolute top-4 right-4 z-10">
-                        <div className="bg-gradient-to-br from-[#C7A76C] to-[#D4B876] p-2 rounded-xl shadow-lg">
-                          <Crown className="w-5 h-5 text-white" />
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="p-6">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-16 h-16 rounded-xl overflow-hidden ring-2 ring-[#C7A76C]/20 flex-shrink-0">
-                          <img
-                            src={vendor.logo}
-                            alt={vendor.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-[#0E3C2F] mb-1 truncate">{vendor.name}</h3>
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="flex items-center gap-1 bg-[#C7A76C]/10 px-2 py-1 rounded-lg">
-                              <Star className="w-4 h-4 text-[#C7A76C] fill-[#C7A76C]" />
-                              <span className="text-sm text-[#0E3C2F]">{vendor.rating}</span>
-                            </div>
-                            <span className="text-xs text-gray-500">({vendor.reviews} reviews)</span>
-                          </div>
-                          <div className="flex flex-wrap gap-1">
-                            {vendor.badges.slice(0, 2).map((badge, i) => (
-                              <Badge
-                                key={i}
-                                className="text-xs bg-[#0E3C2F]/10 text-[#0E3C2F] hover:bg-[#0E3C2F]/20"
-                              >
-                                {badge}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                        <span className="text-sm text-gray-600">
-                          {vendor.bookings.toLocaleString()} bookings
-                        </span>
-                        <Button
-                          onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
-                          size="sm"
-                          className="bg-gradient-to-r from-[#0E3C2F] to-[#1A5540] text-white hover:shadow-lg transition-all group-hover:translate-x-1"
-                        >
-                          View Details
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-
-
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#C7A76C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div> */}
-            {/* Top Rated Providers Section */}
-          <div className="space-y-4">
-  {topVendors.map((vendor) => (
-    <motion.div
-      key={vendor.id}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div
-        className="flex items-center gap-4 p-4 bg-white border rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
-        onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
-      >
-        {/* Image Left */}
-        <div className="w-30 h-30 rounded-lg overflow-hidden flex-shrink-0">
-          <ImageWithFallback
-            src={vendor?.logo}
-            alt={vendor?.name}
-            className="w-full h-full"
-          />
-        </div>
-
-        {/* Right Side Content */}
-        <div className="flex-1">
-          <h3 className="text-lg font-semibold text-[#0E3C2F] truncate">
-            {vendor.name}
-          </h3>
-
-          {/* Rating + Reviews */}
-          <div className="flex items-center gap-2 my-1">
-            <div className="flex items-center gap-1 bg-[#C7A76C]/10 px-2 py-1 rounded-md">
-              <Star className="w-4 h-4 text-[#C7A76C] fill-[#C7A76C]" />
-              <span className="text-sm">{vendor.rating.toFixed(1)}</span>
-            </div>
-            <span className="text-xs text-gray-500">
-              ({vendor.reviews} reviews)
-            </span>
           </div>
-
-          {/* Badges */}
-          <div className="flex flex-wrap gap-1 mb-2">
-            {vendor.badges.slice(0, 3).map((badge, index) => (
-              <Badge
-                key={index}
-                className="text-xs bg-[#0E3C2F]/10 text-[#0E3C2F]"
-              >
-                {badge}
-              </Badge>
-            ))}
-          </div>
-
-          {/* Bookings + Button */}
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
-              {vendor.bookings.toLocaleString()} bookings
-            </span>
-
-            <Button
-              size="sm"
-              className="bg-[#0E3C2F] text-white px-4 py-1 rounded-md hover:bg-[#124f3d]"
-            >
-              View Details
-            </Button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  ))}
-</div>
-
-          </section>
+        </motion.div>
+      ))}
+    </div>
+  )}
+</section>
 
 
           {/* <section>
@@ -516,7 +505,7 @@ export function Packages({ vendorId }) {
             className="flex items-start gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-gray-100"
           >
             {/* Left Image */}
-            <div className="w-35 h-35 rounded-lg overflow-hidden flex-shrink-0 border">
+            <div className="w-35 h-35 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200">
               <ImageWithFallback
                 src={vendor.logo}
                 alt={vendor.name}
