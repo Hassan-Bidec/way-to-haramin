@@ -77,15 +77,16 @@ export default function Sidebar() {
 
         {/* Logo */}
         <div>
-          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-300">
-            <img
-              src="/logo11.png"
-              alt="Way To Haramain"
-              className="w-full h-full rounded-lg object-cover"
-            />
-            {/* <h2 className="text-xl font-semibold text-[#206D69]">Way To Haramain</h2> */}
-          </div>
-
+        <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-300">
+  <Link href="/">
+    <img
+      src="/logo11.png"
+      alt="Way To Haramain"
+      className="w-full h-full rounded-lg object-cover cursor-pointer"
+    />
+  </Link>
+  {/* <h2 className="text-xl font-semibold text-[#206D69]">Way To Haramain</h2> */}
+</div>
           {/* Menu */}
           <nav className="flex flex-col space-y-2">
             {menu.map((item, i) => {
