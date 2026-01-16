@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthStore } from "@/lib/useAuthStore";
+import Link from "next/link";
 
 
 export default function AuthPage() {
@@ -273,34 +274,42 @@ const verifyOtp = async () => {
         pauseOnHover
         theme="light"
       />
-      <div
-        className="md:w-1/2 hscreen flex flex-col justify-between items-center bg-cover bg-center 
-  fixed top-0 left-0 md:flex hidden"
-        style={{
-          backgroundImage: "url('/bgimg.png')",
-        }}
-      >
+     <div
+  className="md:w-1/2 hscreen flex flex-col justify-between items-center bg-cover bg-center fixed top-0 left-0 md:flex hidden"
+  style={{
+    backgroundImage: "url('/bgimg.png')",
+  }}
+>
+  {/* 🔹 Back Button Left Top */}
+  <div className="absolute top-4 left-4 z-20">
+    <Link href="/">
+      <button className="bg-transparent cursor-pointer border border-gray-200 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition">
+        Back to Home
+      </button>
+    </Link>
+  </div>
 
-        {/* Top Logo + Text */}
-        <div className="w-full flex flex-col items-center p-6">
-          <img
-    src="/logo11.png"
-    alt="logo"
-    className="h-20 md:h-24 object-contain"
+  {/* Top Logo + Text */}
+  <div className="w-full flex flex-col items-center p-6">
+    <img
+      src="/logo11.png"
+      alt="logo"
+      className="h-20 md:h-24 object-contain"
+    />
+    <p className="mt-2 text-white text-center md:text-2xl">
+      Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from  experts.
+    </p>
+  </div>
+
+  {/* Bottom Car Image */}
+  <img
+    src={isLogin ? "/cars1.png" : "/cars2.png"}
+    alt="car"
+    className="w-[95%] md:h-[500px] object-contain -mt-20"
+    style={{ marginBottom: -0 }}
   />
-          <p className="mt-2 text-white text-center md:text-2xl">
-            Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from  experts.
-          </p>
-        </div>
+</div>
 
-        {/* Bottom Car Image */}
-        <img
-          src={isLogin ? "/cars1.png" : "/cars2.png"}
-          alt="car"
-          className="w-[95%] md:h-[500px] object-contain -mt-20"
-          style={{ marginBottom: -0 }}
-        />
-      </div>
 
 
       <div className="md:ml-[50%] w-full md:w-[50%] hscreen
@@ -393,11 +402,10 @@ px-6 md:px-12 py-10">
                     <input
                       type="date"
                       required
-                       min={new Date().toISOString().split("T")[0]}
-                       onKeyDown={(e) => e.preventDefault()}
+                      min={new Date().toISOString().split("T")[0]}
+                      onKeyDown={(e) => e.preventDefault()}
                       className="w-full p-2 border border-gray-300 rounded-md "
                       onChange={(e) => setForm({ ...form, iqama_expiry_date: e.target.value })}
-
                     />
                   </div>
                 </div>
