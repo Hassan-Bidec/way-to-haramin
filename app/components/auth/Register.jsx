@@ -22,6 +22,32 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [otpLoading, setOtpLoading] = useState(false);
   const [otpModal, setOtpModal] = useState(false);
+  const [filteredCities, setFilteredCities] = useState([]);
+
+  const handleNationalityChange = (e) => {
+  const nationality = e.target.value;
+
+  setForm({
+    ...form,
+    nationality,
+    city: "", // reset city
+  });
+
+  const selectedCountry = countryList.find(
+    (c) => c.nationality === nationality
+  );
+
+  if (selectedCountry) {
+    const citiesByCountry = cityList.filter(
+      (city) => city.id === selectedCountry.id
+    );
+    setFilteredCities(citiesByCountry);
+  } else {
+    setFilteredCities([]);
+  }
+};
+
+
  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
     const [form, setForm] = useState({
@@ -422,36 +448,39 @@ px-6 md:px-12 py-10">
                   </div> */}
                   <div className="md:w-1/2 relative">
                     <label className="block mb-1 text-sm font-medium">Nationality</label>
-                    <select
-                      required
-                      className="w-full p-2 border border-gray-300 rounded-md "
-                      value={form.nationality}  // city_id store hoga
-                      onChange={(e) => setForm({ ...form, nationality: e.target.value })}
-                    >
-                      <option value="">Select Nationality</option>
-                      {countryList.map((country) => (
-                        <option key={country.id} value={country.nationality}>
-                          {country.nationality}
-                        </option>
-                      ))}
-                    </select>
+                   <select
+  required
+  className="w-full p-2 border border-gray-300 rounded-md"
+  value={form.nationality}
+  onChange={handleNationalityChange}
+>
+  <option value="">Select Nationality</option>
+  {countryList.map((country) => (
+    <option key={country.id} value={country.nationality}>
+      {country.nationality}
+    </option>
+  ))}
+</select>
+
                   </div>
 
                   <div className="md:w-1/2 relative">
                     <label className="block mb-1 text-sm font-medium">City</label>
                     <select
-                      required
-                      className="w-full p-2 border border-gray-300 rounded-md "
-                      value={form.city_id}  // city_id store hoga
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    >
-                      <option value="">Select City</option>
-                      {cityList.map((city) => (
-                        <option key={city.id} value={city.id}>
-                          {city.name}
-                        </option>
-                      ))}
-                    </select>
+  required
+  className="w-full p-2 border border-gray-300 rounded-md"
+  value={form.city}
+  onChange={(e) => setForm({ ...form, city: e.target.value })}
+  disabled={!filteredCities.length}
+>
+  <option value="">Select City</option>
+  {filteredCities.map((city) => (
+    <option key={city.id} value={city.id}>
+      {city.name}
+    </option>
+  ))}
+</select>
+
                   </div>
 
 

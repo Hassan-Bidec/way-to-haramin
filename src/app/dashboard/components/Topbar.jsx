@@ -397,7 +397,7 @@ const statusText = {
                     className="w-full bg-white text-[#0E3C2F] hover:bg-white/90"
                     // onClick={() => navigate.push('/support')}
                     onClick={() => {
-    const phone = "966500000000"; // <-- Saudi number
+    const phone = "0538500266"; // <-- Saudi number
     const msg = encodeURIComponent("Hello, I need support.");
     window.location.href = `https://wa.me/${phone}?text=${msg}`;
   }}
