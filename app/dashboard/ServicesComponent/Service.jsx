@@ -24,8 +24,8 @@ import Loading from '../components/Loading';
 
 
 export function Packages({ vendorId }) {
+  
   const router = useRouter();
-  const navigate = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [ratingFilter, setRatingFilter] = useState('all');
   const [sortBy, setSortBy] = useState('rating');
@@ -607,7 +607,7 @@ export function Packages({ vendorId }) {
                     <Button
                       size="lg"
                       className="bg-white text-[#0E3C2F] hover:bg-white/90 shadow-xl"
-                      onClick={() => navigate('/support')}
+                      onClick={() => router.push('/support')}
                     >
                       Contact Support
                       <ArrowRight className="ml-2 w-5 h-5" />
