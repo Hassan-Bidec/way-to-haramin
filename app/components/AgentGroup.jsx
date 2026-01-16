@@ -45,8 +45,10 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const AgentGroup = () => {
+  const router = useRouter();
   return (
     <section className="relative w-[90%] mx-auto h-[90vh] md:h-[90vh] flex flex-col md:flex-row items-center justify-between overflow-hidden  bg-white ">
   {/* 🔹 Background Image */}
@@ -70,7 +72,7 @@ const AgentGroup = () => {
   simplifies coordination, <br /> payments, and communication — all in one place.
 </span>
 
-    <button className="bg-white mt-5 text-gray-800 border border-gray-300 text-sm font-medium px-6 py-2 rounded-md hover:bg-gray-200 transition">
+    <button  onClick={() => router.push("/dashboard")} className="bg-white mt-5 text-gray-800 border border-gray-300 text-sm font-medium px-6 py-2 rounded-md hover:bg-gray-200 transition">
       Join an Agent
     </button>
   </div>

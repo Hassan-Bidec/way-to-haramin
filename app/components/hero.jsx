@@ -4,11 +4,13 @@ import { LuMoveRight } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/useAuthStore";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
   const { user } = useAuthStore();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const user = localStorage.getItem("user");
@@ -82,7 +84,7 @@ export default function Hero() {
           </span>
         </div>
         <div className="flex flex-row gap-4 justify-center md:justify-start flex-nowrap overflow-x-auto">
-          <button className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]">
+          <button onClick={() => router.push("/Book")} className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]">
             Booking
           </button>
           <Link

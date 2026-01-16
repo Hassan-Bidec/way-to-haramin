@@ -6,7 +6,7 @@ import { IoArrowBackOutline, IoArrowForwardOutline } from "react-icons/io5";
 
 const Travelers = () => {
   return (
-    <section className="w-[90%] sm:w-[85%] md:w-[75%] mx-auto flex flex-col md:flex-row items-center justify-between py-16 md:py-24 gap-10 relative">
+    <section id="how-it-works" className=" w-[90%] sm:w-[85%] md:w-[75%] mx-auto flex flex-col md:flex-row items-center justify-between py-16 md:py-24 gap-10 relative">
       {/* Left Image */}
       <div className="w-full md:w-1/2 relative z-0">
         <Image

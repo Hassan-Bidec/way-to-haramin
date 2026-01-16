@@ -4,7 +4,7 @@ import React from "react";
 
 export default function TrustWayToHaramain() {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-20 -mt-35 grid md:grid-cols-2 items-center">
+    <section id="why-choose-us" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-20 -mt-35 grid md:grid-cols-2 items-center">
       
       <div className="rounded-2xl overflow-hidden flex justify-center md:justify-start mb-8 md:mb-0">
         <Image
