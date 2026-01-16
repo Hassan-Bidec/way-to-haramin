@@ -33,8 +33,9 @@ export function PackageCard({ package: pkg = {}, details = [], onViewDetails }) 
         </div>
 
         <h3 className="mb-2">{title}</h3>
-        <p className="text-muted-foreground mb-4 line-clamp-2">{description}</p>
-
+        <p className="text-muted-foreground mb-4 line-clamp-2 min-h-[3rem]">
+            {description || " "}
+          </p>
         {cities.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {cities.map((city, index) => (
