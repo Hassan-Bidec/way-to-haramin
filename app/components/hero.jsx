@@ -9,60 +9,86 @@ import { useRouter } from "next/navigation";
 export default function Hero() {
   const { user } = useAuthStore();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [gtReady, setGtReady] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) setIsLoggedIn(true);
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) setIsLoggedIn(true);
+
+    // Google Translate Initialization
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,ar",
+          autoDisplay: false,
+        },
+        "google_translate_element"
+      );
+      setGtReady(true);
+    };
+
+    if (!document.getElementById("google-translate-script")) {
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    } else {
+      setGtReady(true);
+    }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    setMenuOpen(false);
+  const handleLanguageChange = (e) => {
+    const lang = e.target.value;
+    const select = document.querySelector(".goog-te-combo");
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+    }
   };
 
   return (
     <div
       className="relative min-h-[70vh] md:min-h-[90vh] bg-cover bg-center flex items-center justify-center md:justify-start px-6 md:px-12"
-      style={{
-        backgroundImage: "url('/bg.png')",
-      }}
+      style={{ backgroundImage: "url('/bg.png')" }}
     >
-      {/* Top Right - User Icon */}
-      <div className="absolute top-6 right-6 z-20">
-        {isLoggedIn && (
-          <div className="relative">
-            <Link
-              href={user?.id ? "/dashboard" : "/auth"}
-              className="text-white text-3xl hover:text-gray-300 transition"
-            >
-              <FaUserCircle />
-            </Link>
+      {/* Global CSS to kill Google Branding */}
+      <style jsx global>{`
+        iframe.goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+        .goog-te-gadget span { display: none !important; }
+        #google_translate_element { display: none !important; }
+        .skiptranslate { display: none !important; }
+        .goog-te-spinner-pos { display: none !important; }
+      `}</style>
 
-            {/* {menuOpen && (
-              <div className="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg w-32 text-sm">
-                <Link
-                  href="/dashboard"
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Dashboard
-                </Link>
-
-                 <button
-                  onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Logout
-                </button>
-              </div>
-            )} */}
+      <div className="absolute top-6 right-6 z-20 flex items-center gap-4">
+        <div className="relative w-32 md:w-40">
+          <select
+            className="w-full h-10 px-4 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-full shadow-sm cursor-pointer appearance-none transition-all hover:border-green-400 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-green-300"
+            onChange={handleLanguageChange}
+            disabled={!gtReady}
+          >
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
+          {/* Custom Arrow for dropdown */}
+          <div className="absolute right-3 top-3 pointer-events-none">
+            <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
+        </div>
+
+        {isLoggedIn && (
+          <Link href={user?.id ? "/dashboard" : "/auth"} className="text-white text-3xl hover:text-gray-300 transition">
+            <FaUserCircle />
+          </Link>
         )}
       </div>
 
-      {/* Hero Text Section */}
       <div className="relative z-10 text-white flex flex-col items-center md:items-start text-center md:text-left">
         <p className="tracking-widest uppercase text-sm mb-2">~Seamless~</p>
         <h1 className="text-4xl md:text-6xl mb-4">
@@ -97,6 +123,9 @@ export default function Hero() {
         </div>
 
       </div>
+
+      {/* Actual Google element hidden far away */}
+      <div id="google_translate_element" style={{ visibility: 'hidden', position: 'absolute', zIndex: -1 }}></div>
     </div>
   );
 }
