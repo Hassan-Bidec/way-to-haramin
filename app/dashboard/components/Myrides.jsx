@@ -38,21 +38,17 @@ const [otherReason, setOtherReason] = useState('');
   // 🔥 Fetch Rides from API on mount
   // =====================================================
   useEffect(() => {
+  const fetchRides = async () => {
+    try {
+      const response = await getUserRideView(user?.customer_id);
+      if (!response.status) {
+        toast.error(response.message || "Failed to fetch rides");
+        return;
+      }
 
-    const fetchRides = async () => {
-      try {
-        const response = await getUserRideView(user?.customer_id);
+      const allRides = response.data.reverse() || [];
 
-        if (!response.status) {
-          toast.error(response.message || "Failed to fetch rides");
-          return;
-        }
-
-        const allRides = response.data.reverse() || [];
-
-// Format rides for UI
       const formattedRides = allRides.map(ride => {
-        // Pick first detail as main trip info
         const mainDetail = ride.details?.[0] || {};
         return {
           ...ride,
@@ -62,32 +58,30 @@ const [otherReason, setOtherReason] = useState('');
           time: mainDetail.time,
           vehicleType: ride.vehicle_name,
           driverName: ride.driver_name,
-          status: ride.status, 
+          status: Number(ride.status),  // ensure number
           price: ride?.charges || 0,
           type: ride?.booking_type || '',
         };
       });
 
-      // Divide by status
       const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
-      const completed = formattedRides.filter(r => r.status === 5);
+      const completed = formattedRides.filter(r => r.status === 7); // completed
+      const cancelled = formattedRides.filter(r => r.status === 4);
+
+      console.log("Upcoming:", upcoming, "Completed:", completed, "Cancelled:", cancelled);
 
       setUpcomingRides(upcoming);
       setCompletedRides(completed);
-      const cancelled = allRides.filter(ride => ride.status == 4);
+    } catch (err) {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      // setUpcomingRides(upcoming);
-      // setCompletedRides(completed);
-      // setCancelledRides(cancelled);
-      } catch (err) {
-        toast.error("Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    };
+  fetchRides();
+}, [user?.customer_id]);
 
-    fetchRides();
-  }, [user?.id]);
 
    const fetchRides = async () => {
       try {
@@ -119,8 +113,9 @@ const [otherReason, setOtherReason] = useState('');
 
       // Divide by status
       const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
-      const completed = formattedRides.filter(r => r.status === 5);
+     const completed = formattedRides.filter(r => Number(r.status) === 7);
 
+console.log("All formatted rides:", formattedRides);
       setUpcomingRides(upcoming);
       setCompletedRides(completed);
       const cancelled = allRides.filter(ride => ride.status == 4);

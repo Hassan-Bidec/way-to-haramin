@@ -1,0 +1,221 @@
+{
+  "Create Your Account": "أنشئ حسابك",
+  "Register now and manage your travel bookings, payments, and groups all in one place": "سجّل الآن وأدِر حجوزاتك للسفر والمدفوعات والمجموعات جميعها في مكان واحد",
+
+  "Full Name": "الاسم الكامل",
+  "Contact No (Saudi)": "رقم الجوال (السعودي)",
+  "Iqama Number": "رقم الإقامة",
+  "Iqama Expiry Date": "تاريخ انتهاء الإقامة",
+
+  "Nationality": "الجنسية",
+  "Select nationality": "اختر الجنسية",
+
+  "City": "المدينة",
+  "Select city": "اختر المدينة",
+
+  "Residential Address": "العنوان السكني",
+
+  "Passport Number": "رقم جواز السفر",
+  "Passport Expiry Date": "تاريخ انتهاء جواز السفر",
+
+  "Email": "البريد الإلكتروني",
+  "Password": "كلمة المرور",
+  "Confirm password": "تأكيد كلمة المرور",
+
+  "Already have an account?": "هل لديك حساب؟",
+  "Register": "التسجيل",
+
+  "Back to home": "الرجوع إلى الرئيسية",
+  "Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from experts.": "لنصنع شيئًا استثنائيًا معًا. ابدأ خطوتك الأولى نحو التحول الرقمي مع استشارة مجانية من الخبراء",
+
+  "Welcome Back!": "مرحبًا بعودتك!",
+  "Login to manage your travel bookings, payments, and groups all in one place.": "سجّل الدخول لإدارة حجوزات سفرك، ومدفوعاتك، ومجموعاتك كل ذلك في مكان واحد",
+
+  "Login": "تسجيل الدخول",
+  "Don't have an account?": "ليس لديك حساب؟",
+ 
+
+  "Trip Details": "تفاصيل الرحلة",
+
+  "Confirm": "تأكيد",
+
+  "Plan Your Journey": "خطّط رحلتك",
+  "Select your route and preferred travel time": "اختر مسارك ووقت السفر المفضل",
+
+  "Trip Type": "نوع الرحلة",
+  "One Way": "ذهاب فقط",
+  "Round Trip": "ذهاب وعودة",
+
+  "Travel Date": "تاريخ السفر",
+
+  "Departure": "مغادرة",
+  "Departure City": "مدينة الانطلاق",
+
+
+  "Destination": "الوصول",
+  "Destination City": "مدينة الوصول",
+
+
+  "Start Time": "وقت الانطلاق",
+  "Hour": "ساعة",
+  "Min": "دقيقة",
+  "AM/PM": "ص / م",
+
+  "Continue to Vehicle Selection": "تابع لاختيار المركبة",
+ 
+  "Support Center": "مركز الدعم",
+
+  "We're here to help with any questions or issues": "نحن هنا لمساعدتك في أي أسئلة أو مشكلات",
+
+  "WhatsApp Support": "دعم واتساب",
+  "Chat with us instantly": "تحدث معنا فورًا",
+
+
+  "Call Support": "اتصل بالدعم",
+  "Speak directly with our team": "تحدث مباشرة مع فريقنا",
+
+  "FAQ": "الأسئلة الشائعة",
+  "Find answers to common questions": "احصل على إجابات للأسئلة الشائعة",
+  "Browse FAQs": "تصفح الأسئلة",
+
+  "Report an Issue": "الإبلاغ عن مشكلة",
+  "Issue Type": "نوع المشكلة",
+  "Select issue type": "اختر نوع المشكلة",
+
+  "Describe Your Issue": "وضح المشكلة",
+  "Please provide as much detail as possible": "من فضلك أضف كل التفاصيل الممكنة",
+
+  "Submit Issue": "إرسال المشكلة",
+  "Frequently Asked Questions": "الأسئلة الشائعة",
+  "Service Providers": "موفروا الخدمات",
+  "Trusted Partners": "الشركاء الموثوقون",
+
+  "Choose from our verified transport partners for your spiritual journey": "اختر من شركائنا الموثوقين لرحلتك الروحية",
+
+  "Verified Partners": "الشركاء الموثوقون",
+  "Average Rating": "تقييم متوسط",
+  "Happy Customers": "عملاء سعداء",
+
+  "Browse All Providers": "تصفح جميع الموفرين",
+  "Search and filter to find the perfect partner for your journey": "ابحث وقم بالتصفية لإيجاد الشريك المثالي لرحلتك",
+
+  "Search vendors by name": "ابحث عن الموفرين بالاسم",
+
+  "Can't find the right provider?": "لم تجد الموفر المناسب؟",
+  "Our support team is here to help you find the perfect transport partner for your journey": "فريق الدعم لدينا موجود لمساعدتك في العثور على شريك النقل المناسب لرحلتك",
+
+  "Contact Support": "الاتصال بالدعم",
+
+  "Profile & Settings": "الملف الشخصي والإعدادات",
+  "Manage your account and preferences": "إدارة حسابك وتفضيلاتك",
+
+  "Profile Information": "معلومات الملف الشخصي",
+  "Verified User": "مستخدم موثّق",
+
+  "Phone Number": "رقم الجوال",
+  "Email Address": "عنوان البريد الإلكتروني",
+  "Preferred Language": "اللغة المفضلة",
+
+  "Edit Profile": "تعديل الملف الشخصي",
+
+  "Settings": "الإعدادات",
+  "Push Notifications": "الإشعارات الفورية",
+  "Receive updates about your bookings": "تلقي إشعارات فورية حول حجوزاتك",
+
+  "WhatsApp Updates": "تحديثات واتساب",
+  "Get booking confirmations via WhatsApp": "تلقي تأكيدات الحجز عبر واتساب",
+
+
+  "My Rides": "رحلاتي",
+  "View and manage your ride bookings": "إدارة حجوزات رحلاتك",
+
+ 
+
+  "Vehicle": "مركبة",
+  "Driver": "سائق",
+
+  "Cancel Ride": "إلغاء الرحلة",
+  "Cancel This Ride?": "إلغاء هذه الرحلة؟",
+  "Reason for Cancellation": "سبب الإلغاء",
+  "Select a reason": "اختر سببًا",
+  "Keep Ride": "ابقِ الرحلة",
+  "Confirm Cancellation": "تأكيد الإلغاء",
+  "Back to Dashboard": "الرجوع إلى لوحة التحكم",
+
+  "My Packages": "طرودي",
+  "View and manage your packages bookings": "عرض وإدارة حجوزات طرودك",
+
+  "Upcoming": "القادمة",
+  "Completed": "مكتمل",
+  "Duration": "المدة",
+  "Capacity": "السعة",
+  "Umrah": "عمرة",
+
+  "Pending": "معلق",
+  "Starting from": "ابتداءً من",
+  "Cancel": "إلغاء",
+  "View Details": "عرض التفاصيل",
+  "Seamless": "سلس وسهل",
+
+  "Hajj & Umrah Transportation Booking": "حج وعمرہ – حجز النقل",
+  "Book verified vehicles between Makkah, Madinah, and Jeddah with trusted service providers": "احجز سيارات موثوقة بين مكة، المدينة وجدة مع مزوّدي خدمة معتمدين",
+  "Trusted by 500+ clients all over the world": "موثوق من قبل أكثر من 500 عميل حول العالم",
+
+  "Booking": "الحجز",
+  "Register as Vendor": "التسجيل كبائع",
+
+  "Travel with Ease": "سافر بسهولة",
+  "Makkah & Madinah in 4 Simple Steps": "مكة والمدينة في أربع خطوات بسيطة",
+  "From searching your Car comfortably, we make your sacred journey seamless and stress-free.": "من البحث عن سيارتك براحة، نجعل رحلتك المقدسة سلسة وخالية من التوتر",
+
+  "Search Your Route": "ابحث عن مسارك",
+  "Find your ideal route between Makkah": "اعثر على مسارك المثالي بين مكة",
+
+  "Select Vehicle": "اختر المركبة",
+  "Choose the vehicle that suits your comfort and group size": "اختر المركبة التي تناسب راحتك وعدد أفراد مجموعتك.",
+
+  "Travel Comfortably": "سافر براحة",
+  "Enjoy reliable travel with trusted drivers and instant": "استمتع برحلة موثوقة مع سائقين معتمدين وتحديثات فورية عبر واتساب",
+
+  "Book & Pay": "احجز وادفع",
+  "Instant ride confirmation with secure Mada, Visa,": "تأكيد الرحلة الفوري مع مدع، فيزا،","way to Harmain": "الطريق إلى الحرمين",
+  "Welcome back": "أهلاً بعودتك",
+  "Premium Member": "عضو مميز",
+  "Dashboard": "لوحة التحكم",
+
+  "Flash Sale Today": "تخفيض اليوم",
+  "Makkah-Madinah Express": "إكسبريس مكة–المدينة",
+  "Premium transport between the holy cities": "نقل مميز بين المدينتين المقدستين",
+  "Group Savings": "الادخار الجماعي",
+  "Family Package Bonanza": "عرض العائلة المميز",
+  "Save more when you travel together": "وفر أكثر عند السفر معًا",
+  "Limited Time Offer": "عرض لفترة محدودة",
+  "Umrah Season Special": "موسم العمرة المميز",
+  "Book your spiritual journey with exclusive rates": "احجز رحلتك الروحية بأسعار حصرية",
+
+  "Logout": "تسجيل الخروج",
+  "Quick Actions": "إجراءات سريعة",
+  "Book a Ride": "احجز رحلة",
+  "Schedule your next journey": "جدول رحلتك القادمة",
+  "View My Rides": "عرض رحلاتي",
+  "Track all your bookings": "تتبع جميع حجوزاتك",
+  "Services Provider": "موفر الخدمات",
+  "Explore tour packages": "استكشف باقات الرحلات",
+  "Quick Booking": "حجز سريع",
+
+  "From": "من",
+  "Select departure city": "اختر مدينة الانطلاق",
+  "To": "إلى",
+  "Select destination city": "اختر مدينة الوصول",
+  "Date": "التاريخ",
+  "Continue Booking": "تابع الحجز",
+
+  "Need Help?": "تحتاج مساعدة؟",
+  "Chat with us on WhatsApp for instant support": "تحدث معنا على واتساب للدعم الفوري",
+  "Open WhatsApp": "افتح واتساب",
+
+  "Special Offer": "عرض خاص",
+  "Winter Package Sale": "عرض باقة الشتاء",
+  "View Offers": "شاهد العروض",
+  "View All": "شاهد الكل"
+}

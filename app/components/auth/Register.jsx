@@ -10,9 +10,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthStore } from "@/lib/useAuthStore";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
 
 
 export default function AuthPage() {
+  const { t } = useTranslation();
+
+
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
   const [cityList, setCityList] = useState([]);
@@ -22,9 +27,9 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [otpLoading, setOtpLoading] = useState(false);
   const [otpModal, setOtpModal] = useState(false);
- const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef([]);
-    const [form, setForm] = useState({
+  const [form, setForm] = useState({
     full_name: "",
     email: "",
     contact_no: "",
@@ -39,20 +44,21 @@ export default function AuthPage() {
     password: "",
     confirm_password: "",
   });
-const [customer, setCustomer] = useState(null);
+  const [customer, setCustomer] = useState(null);
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     if (form.iqama_number.length !== 10) {
-  toast.error("Iqama Number must be exactly 10 digits");
-  return;
-}
+      toast.error("Iqama Number must be exactly 10 digits");
+      return;
+    }
 
-if (form.passport_number.length !== 12) {
-  toast.error("Passport Number must be exactly 12 letters");
-  return;
-}
+    if (form.passport_number.length !== 12) {
+      toast.error("Passport Number must be exactly 12 letters");
+      return;
+    }
 
     setLoading(true);
     try {
@@ -83,60 +89,60 @@ if (form.passport_number.length !== 12) {
   };
 
 
-const handleLogin = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const payload = {
-      email: form.email,
-      password: form.password,
-    };
+    try {
+      const payload = {
+        email: form.email,
+        password: form.password,
+      };
 
-    const response = await loginCustomer(payload);
+      const response = await loginCustomer(payload);
 
-    console.log("Login Response:", response);
+      console.log("Login Response:", response);
 
-  if (
-  response.status === false &&
-  (
-    response.message?.toLowerCase().includes("not verified") ||
-    response.message?.toLowerCase().includes("verify")
-  )
-) {
-  setCustomer({
-    customer_no: response.customer_contact,
-    id: response.customer_id,
-  });
-   toast.error(response.message)
-  setOtpModal(true);  
-  return;              
-}
+      if (
+        response.status === false &&
+        (
+          response.message?.toLowerCase().includes("not verified") ||
+          response.message?.toLowerCase().includes("verify")
+        )
+      ) {
+        setCustomer({
+          customer_no: response.customer_contact,
+          id: response.customer_id,
+        });
+        toast.error(response.message)
+        setOtpModal(true);
+        return;
+      }
 
 
-    if (response.status) {
-      useAuthStore.getState().setAuthData({
-        user: response.user,
-        token: response.token,
-        user_type: response.user_type,
-      });
+      if (response.status) {
+        useAuthStore.getState().setAuthData({
+          user: response.user,
+          token: response.token,
+          user_type: response.user_type,
+        });
 
-      localStorage.setItem("auth_token", response.token);
-      localStorage.setItem("auth_user", JSON.stringify(response.user));
-      localStorage.setItem("auth_user_type", response.user_type);
+        localStorage.setItem("auth_token", response.token);
+        localStorage.setItem("auth_user", JSON.stringify(response.user));
+        localStorage.setItem("auth_user_type", response.user_type);
 
-      toast.success("Login successful!");
-      router.push("/dashboard");
-    } else {
-      toast.error(response.message || "Invalid credentials!");
+        toast.success("Login successful!");
+        router.push("/dashboard");
+      } else {
+        toast.error(response.message || "Invalid credentials!");
+      }
+    } catch (err) {
+      console.error("Unexpected login error:", err);
+      toast.error("Something went wrong during login.");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Unexpected login error:", err);
-    toast.error("Something went wrong during login.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
 
   useEffect(() => {
@@ -159,7 +165,7 @@ const handleLogin = async (e) => {
     fetchCities();
   }, []);
 
- const handleOtpChange = (e, index) => {
+  const handleOtpChange = (e, index) => {
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (!value) return;
 
@@ -195,27 +201,27 @@ const handleLogin = async (e) => {
   //   setOtpModal(false);
   //   setIsLogin(true); // switch to login screen
   // };
-const verifyOtp = async () => {
-  const finalOtp = otp.join("");
+  const verifyOtp = async () => {
+    const finalOtp = otp.join("");
 
-  if (finalOtp.length !== 6) {
-    toast.error("Please enter the 6-digit OTP");
-    return;
-  }
+    if (finalOtp.length !== 6) {
+      toast.error("Please enter the 6-digit OTP");
+      return;
+    }
 
-  try {
-    setOtpLoading(true);
+    try {
+      setOtpLoading(true);
 
-    const payload = {
-      contact_no: isLogin ? customer.customer_no : form.contact_no,
-      otp_code: finalOtp,
-      customer_id: customer.id,
-    };
+      const payload = {
+        contact_no: isLogin ? customer.customer_no : form.contact_no,
+        otp_code: finalOtp,
+        customer_id: customer.id,
+      };
 
-    const response = await verifyCustomerOtp(payload);
+      const response = await verifyCustomerOtp(payload);
 
-    if (response.status == true) {
-       // Save in Zustand store
+      if (response.status == true) {
+        // Save in Zustand store
         useAuthStore.getState().setAuthData({
           user: response.user,
           token: response.token,
@@ -227,35 +233,35 @@ const verifyOtp = async () => {
         localStorage.setItem("auth_user", JSON.stringify(response.user));
         localStorage.setItem("auth_user_type", response.user_type);
 
-    
-      toast.success(response.message || "OTP Verified Successfully!");
-      setOtpModal(false);
-      setOtp(["", "", "", "", "", ""]);
-      setForm({
-    full_name: "",
-    email: "",
-    contact_no: "",
-    iqama_number: "",
-    iqama_expiry_date: "",
-    passport_number: "",
-    passport_expiry_date: "",
-    full_address: "",
-    accommodation_address: "",
-    nationality: "",
-    city: "",
-    password: "",
-    confirm_password: "",
-  })
-      router.push("/dashboard");
-    } else {
-      toast.error(response.message || "Invalid OTP");
+
+        toast.success(response.message || "OTP Verified Successfully!");
+        setOtpModal(false);
+        setOtp(["", "", "", "", "", ""]);
+        setForm({
+          full_name: "",
+          email: "",
+          contact_no: "",
+          iqama_number: "",
+          iqama_expiry_date: "",
+          passport_number: "",
+          passport_expiry_date: "",
+          full_address: "",
+          accommodation_address: "",
+          nationality: "",
+          city: "",
+          password: "",
+          confirm_password: "",
+        })
+        router.push("/dashboard");
+      } else {
+        toast.error(response.message || "Invalid OTP");
+      }
+    } catch (error) {
+      toast.error("Something went wrong while verifying OTP.");
+    } finally {
+      setOtpLoading(false);
     }
-  } catch (error) {
-    toast.error("Something went wrong while verifying OTP.");
-  } finally {
-    setOtpLoading(false);
-  }
-};
+  };
 
 
 
@@ -274,41 +280,41 @@ const verifyOtp = async () => {
         pauseOnHover
         theme="light"
       />
-     <div
-  className="md:w-1/2 hscreen flex flex-col justify-between items-center bg-cover bg-center fixed top-0 left-0 md:flex hidden"
-  style={{
-    backgroundImage: "url('/bgimg.png')",
-  }}
->
-  {/* 🔹 Back Button Left Top */}
-  <div className="absolute top-4 left-4 z-20">
-    <Link href="/">
-      <button className="bg-transparent cursor-pointer border border-gray-200 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition">
-        Back to Home
-      </button>
-    </Link>
-  </div>
+      <div
+        className="md:w-1/2 hscreen flex flex-col justify-between items-center bg-cover bg-center fixed top-0 left-0 md:flex hidden"
+        style={{
+          backgroundImage: "url('/bgimg.png')",
+        }}
+      >
+        {/* 🔹 Back Button Left Top */}
+        <div className="absolute top-4 left-4 z-20">
+          <Link href="/">
+            <button className="bg-transparent cursor-pointer border border-gray-200 text-white px-5 py-2 rounded-md hover:bg-gray-500 transition">
+              {t("Back to Home")}
+            </button>
+          </Link>
+        </div>
 
-  {/* Top Logo + Text */}
-  <div className="w-full flex flex-col items-center p-6">
-    <img
-      src="/logo11.png"
-      alt="logo"
-      className="h-20 md:h-24 object-contain"
-    />
-    <p className="mt-2 text-white text-center md:text-2xl">
-      Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from  experts.
-    </p>
-  </div>
+        {/* Top Logo + Text */}
+        <div className="w-full flex flex-col items-center p-6">
+          <img
+            src="/logo11.png"
+            alt="logo"
+            className="h-20 md:h-24 object-contain"
+          />
+          <p className="mt-2 text-white text-center md:text-2xl">
+            {t("Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from  experts. ")}
+          </p>
+        </div>
 
-  {/* Bottom Car Image */}
-  <img
-    src={isLogin ? "/cars1.png" : "/cars2.png"}
-    alt="car"
-    className="w-[95%] md:h-[500px] object-contain -mt-20"
-    style={{ marginBottom: -0 }}
-  />
-</div>
+        {/* Bottom Car Image */}
+        <img
+          src={isLogin ? "/cars1.png" : "/cars2.png"}
+          alt="car"
+          className="w-[95%] md:h-[500px] object-contain -mt-20"
+          style={{ marginBottom: -0 }}
+        />
+      </div>
 
 
 
@@ -322,13 +328,15 @@ px-6 md:px-12 py-10">
           {/* Top Text */}
           <div className="mb-6">
             <h1 className="text-4xl font-bold mb-2">
-              {isLogin ? "Welcome Back!" : "Create Your Account"}
+              {isLogin ? t("Welcome Back!") : t("Create Your Account")}
             </h1>
-            <p className="text-gray-600">
-              {isLogin
-                ? "Login to manage your travel bookings, payments, and groups all in one place."
-                : "Register now and manage your travel bookings, payments, and groups all in one place."}
-            </p>
+
+           <p className="text-gray-600">
+  {isLogin
+    ? t("Login to manage your travel bookings, payments, and groups all in one place.")
+    : t("Register now and manage your travel bookings, payments, and groups all in one place.")}
+</p>
+
           </div>
 
           {!isLogin ? (
@@ -336,7 +344,7 @@ px-6 md:px-12 py-10">
               <div className="flex flex-col gap-6">
                 <div className="flex gap-4 flex-col md:flex-row">
                   <div className="md:w-1/2">
-                    <label className="block mb-1 text-sm font-medium">Full Name</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Full Name")}</label>
                     <input
                       type="text"
                       required
@@ -346,7 +354,7 @@ px-6 md:px-12 py-10">
                   </div>
 
                   <div className="md:w-1/2">
-                    <label className="block mb-1 text-sm font-medium">Contact No (Saudi)</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Contact No (Saudi)")}</label>
                     <PhoneInput
                       country={"sa"}
                       disableDropdown={true}
@@ -363,42 +371,42 @@ px-6 md:px-12 py-10">
                 <div className="flex gap-4 flex-col md:flex-row">
 
                   <div className="md:w-1/2 relative">
-  <label className="block mb-1 text-sm font-medium">Iqama Number</label>
-  <input
-    type="text"
-    inputMode="numeric"
-    pattern="[0-9]*"
-    required
-    className="w-full p-2 border border-gray-300 rounded-md "
-    value={form.iqama_number}
-    onChange={(e) => {
-      // Remove all non-numeric characters
-      // setForm({ ...form, iqama_number: e.target.value.replace(/\D/g, "") });
-       const value = e.target.value.replace(/\D/g, ""); // only digits
-    if (value.length <= 10) {
-      setForm({ ...form, iqama_number: value });
-    }
-    }}
-    onKeyDown={(e) => {
-      // Allow only numbers, backspace, delete, arrow keys, tab
-      if (
-        !/[0-9]/.test(e.key) &&
-        e.key !== "Backspace" &&
-        e.key !== "Delete" &&
-        e.key !== "ArrowLeft" &&
-        e.key !== "ArrowRight" &&
-        e.key !== "Tab"
-      ) {
-        e.preventDefault();
-      }
-    }}
-  />
-</div>
+                    <label className="block mb-1 text-sm font-medium">{t("Iqama Number")}</label>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      required
+                      className="w-full p-2 border border-gray-300 rounded-md "
+                      value={form.iqama_number}
+                      onChange={(e) => {
+                        // Remove all non-numeric characters
+                        // setForm({ ...form, iqama_number: e.target.value.replace(/\D/g, "") });
+                        const value = e.target.value.replace(/\D/g, ""); // only digits
+                        if (value.length <= 10) {
+                          setForm({ ...form, iqama_number: value });
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        // Allow only numbers, backspace, delete, arrow keys, tab
+                        if (
+                          !/[0-9]/.test(e.key) &&
+                          e.key !== "Backspace" &&
+                          e.key !== "Delete" &&
+                          e.key !== "ArrowLeft" &&
+                          e.key !== "ArrowRight" &&
+                          e.key !== "Tab"
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
+                    />
+                  </div>
 
 
 
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Iqama Expiry Date</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Iqama Expiry Date")}</label>
                     <input
                       type="date"
                       required
@@ -421,14 +429,14 @@ px-6 md:px-12 py-10">
                     />
                   </div> */}
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Nationality</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Nationality")}</label>
                     <select
                       required
                       className="w-full p-2 border border-gray-300 rounded-md "
                       value={form.nationality}  // city_id store hoga
                       onChange={(e) => setForm({ ...form, nationality: e.target.value })}
                     >
-                      <option value="">Select Nationality</option>
+                      <option value="">{t("Select nationality")}</option>
                       {countryList.map((country) => (
                         <option key={country.id} value={country.nationality}>
                           {country.nationality}
@@ -438,14 +446,14 @@ px-6 md:px-12 py-10">
                   </div>
 
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">City</label>
+                    <label className="block mb-1 text-sm font-medium">{t("City")}</label>
                     <select
                       required
                       className="w-full p-2 border border-gray-300 rounded-md "
                       value={form.city_id}  // city_id store hoga
                       onChange={(e) => setForm({ ...form, city: e.target.value })}
                     >
-                      <option value="">Select City</option>
+                      <option value="">{t("Select city")}</option>
                       {cityList.map((city) => (
                         <option key={city.id} value={city.id}>
                           {city.name}
@@ -462,7 +470,7 @@ px-6 md:px-12 py-10">
 
                 {/* Full Address */}
                 <div>
-                  <label className="block mb-1 text-sm font-medium">Residential Address</label>
+                  <label className="block mb-1 text-sm font-medium">{t("Residential Address")}</label>
                   <input
                     type="text"
                     required
@@ -475,30 +483,30 @@ px-6 md:px-12 py-10">
                 <div className="flex gap-4 flex-col md:flex-row">
                   {/* Passport Number */}
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Passport Number</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Passport Number")}</label>
                     <input
                       type="text"
                       required
                       className="w-full p-2 border border-gray-300 rounded-md "
                       value={form.passport_number}
                       // onChange={(e) => setForm({ ...form, passport_number: e.target.value })}
-                       onChange={(e) => {
-      let value = e.target.value.toUpperCase(); // convert to uppercase automatically
+                      onChange={(e) => {
+                        let value = e.target.value.toUpperCase(); // convert to uppercase automatically
 
-      // allow only alphabets + numbers
-      value = value.replace(/[^A-Z0-9]/gi, "");
-console.log("Passport Value:", value);
-      // limit to 12 characters (adjust if needed)
-      if (value.length <= 12) {
-        setForm({ ...form, passport_number: value });
-      }
-    }}
+                        // allow only alphabets + numbers
+                        value = value.replace(/[^A-Z0-9]/gi, "");
+                        console.log("Passport Value:", value);
+                        // limit to 12 characters (adjust if needed)
+                        if (value.length <= 12) {
+                          setForm({ ...form, passport_number: value });
+                        }
+                      }}
                     />
                   </div>
 
                   {/* Passport Expiry Date */}
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Passport Expiry Date</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Passport Expiry Date")}</label>
                     <input
                       type="date"
                       required
@@ -524,7 +532,7 @@ console.log("Passport Value:", value);
 
                 {/* Email */}
                 <div>
-                  <label className="block mb-1 text-sm font-medium">Email</label>
+                  <label className="block mb-1 text-sm font-medium">{t("Email")}</label>
                   <input
                     type="email"
                     required
@@ -536,46 +544,46 @@ console.log("Passport Value:", value);
                 {/* Password + Confirm */}
                 <div className="flex gap-4 flex-col md:flex-row">
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Password</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Password")}</label>
                     <input
                       // type="password"
-                  type={showPassword ? "text" : "password"}
+                      type={showPassword ? "text" : "password"}
                       required
                       className="w-full p-2 border border-gray-300 rounded-md "
                       onChange={(e) => setForm({ ...form, password: e.target.value })}
                     />
-                     <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-9 cursor-pointer text-gray-500"
-                >
-                  {showPassword ? (
-                    <BsFillEyeFill className="w-5 h-5" />
-                  ) : (
-                    <BsFillEyeSlashFill className="w-5 h-5" />
-                  )}
-                </span>
+                    <span
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-9 cursor-pointer text-gray-500"
+                    >
+                      {showPassword ? (
+                        <BsFillEyeFill className="w-5 h-5" />
+                      ) : (
+                        <BsFillEyeSlashFill className="w-5 h-5" />
+                      )}
+                    </span>
                     {/* <BsFillEyeSlashFill className="absolute right-3 top-9 text-gray-400 w-5 h-5" /> */}
                   </div>
 
                   <div className="md:w-1/2 relative">
-                    <label className="block mb-1 text-sm font-medium">Confirm Password</label>
+                    <label className="block mb-1 text-sm font-medium">{t("Confirm password")}</label>
                     <input
-                       type={confirmPassword ? "text" : "password"}
+                      type={confirmPassword ? "text" : "password"}
                       required
                       className="w-full p-2 border border-gray-300 rounded-md "
                       onChange={(e) => setForm({ ...form, confirm_password: e.target.value })}
                     />
 
-                     <span
-                  onClick={() => setConfirmPassword(!confirmPassword)}
-                  className="absolute right-3 top-9 cursor-pointer text-gray-500"
-                >
-                  {confirmPassword ? (
-                    <BsFillEyeFill className="w-5 h-5" />
-                  ) : (
-                    <BsFillEyeSlashFill className="w-5 h-5" />
-                  )}
-                </span>
+                    <span
+                      onClick={() => setConfirmPassword(!confirmPassword)}
+                      className="absolute right-3 top-9 cursor-pointer text-gray-500"
+                    >
+                      {confirmPassword ? (
+                        <BsFillEyeFill className="w-5 h-5" />
+                      ) : (
+                        <BsFillEyeSlashFill className="w-5 h-5" />
+                      )}
+                    </span>
                     {/* <BsFillEyeSlashFill className="absolute right-3 top-9 text-gray-400 w-5 h-5" /> */}
                   </div>
                 </div>
@@ -593,13 +601,13 @@ console.log("Passport Value:", value);
               </button>
 
               <p className="text-sm text-gray-600 text-center">
-                Already have an account?{" "}
+                {t("Already have an account?")}{" "}
                 <button
                   type="button"
                   onClick={() => setIsLogin(true)}
                   className="text-[#206D69] font-medium hover:underline"
                 >
-                  Login
+                  {t("Login")}
                 </button>
               </p>
             </>
@@ -607,7 +615,7 @@ console.log("Passport Value:", value);
             <>
               {/* Login Fields */}
               <div>
-                <label className="block mb-1 text-sm font-medium">Email</label>
+                <label className="block mb-1 text-sm font-medium">{t("Email")}</label>
                 <input
                   type="email"
                   required
@@ -617,7 +625,7 @@ console.log("Passport Value:", value);
               </div>
 
               <div className="relative">
-                <label className="block mb-1 text-sm font-medium">Password</label>
+                <label className="block mb-1 text-sm font-medium">{t("Password")}</label>
                 <input
                   type={showPassword ? "text" : "password"}
                   required
@@ -652,58 +660,58 @@ console.log("Passport Value:", value);
                   onClick={() => setIsLogin(false)}
                   className="text-[#206D69] font-medium hover:underline"
                 >
-                  Register
+                  {t("Register")}
                 </button>
               </p>
             </>
           )}
         </form>
       </div>
-    {otpModal && (
-  <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md relative">
-      {/* Close Button */}
-      <button
-        onClick={() => {setOtpModal(false) , setOtp(["", "", "", "", "", ""])}}
-        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-      >
-        ✕
-      </button>
-      {/* Heading */}
-      <h2 className="text-2xl font-semibold text-gray-800 text-center">
-        Enter OTP
-      </h2>
-      <p className="text-gray-500 text-center mt-1 mb-5">
-        Please enter the 6-digit code sent to your email.
-      </p>
+      {otpModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md relative">
+            {/* Close Button */}
+            <button
+              onClick={() => { setOtpModal(false), setOtp(["", "", "", "", "", ""]) }}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+            {/* Heading */}
+            <h2 className="text-2xl font-semibold text-gray-800 text-center">
+              {t("Enter OTP")}
+            </h2>
+            <p className="text-gray-500 text-center mt-1 mb-5">
+              {t("Please enter the 6-digit code sent to your email.")}
+            </p>
 
-      {/* OTP Input Boxes */}
-      <div className="flex justify-between gap-2">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <input
-            key={index}
-            type="text"
-            maxLength={1}
-            ref={(el) => (inputRefs.current[index] = el)}
-            value={otp[index] || ""}
-            onChange={(e) => handleOtpChange(e, index)}
-            onKeyDown={(e) => handleOtpKeyDown(e, index)}
-            className="w-10 h-10 md:w-12 md:h-12 border border-gray-300 rounded-lg text-center text-xl font-semibold focus:border-[#206D69] focus:ring-1 focus:ring-[#206D69] outline-none"
-          />
-        ))}
-      </div>
+            {/* OTP Input Boxes */}
+            <div className="flex justify-between gap-2">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  maxLength={1}
+                  ref={(el) => (inputRefs.current[index] = el)}
+                  value={otp[index] || ""}
+                  onChange={(e) => handleOtpChange(e, index)}
+                  onKeyDown={(e) => handleOtpKeyDown(e, index)}
+                  className="w-10 h-10 md:w-12 md:h-12 border border-gray-300 rounded-lg text-center text-xl font-semibold focus:border-[#206D69] focus:ring-1 focus:ring-[#206D69] outline-none"
+                />
+              ))}
+            </div>
 
-      {/* Verify Button */}
-      <button
-        onClick={verifyOtp}
-        disabled={otpLoading}
-        className="mt-6 w-full bg-[#206D69] hover:bg-[#1b5a56] text-white py-3 rounded-lg font-semibold transition-all"
-      >
-      {otpLoading ? "Verifying..." : "Verify OTP"}  
-      </button>
-    </div>
-  </div>
-)}
+            {/* Verify Button */}
+            <button
+              onClick={verifyOtp}
+              disabled={otpLoading}
+              className="mt-6 w-full bg-[#206D69] hover:bg-[#1b5a56] text-white py-3 rounded-lg font-semibold transition-all"
+            >
+              {otpLoading ? "Verifying..." : "Verify OTP"}
+            </button>
+          </div>
+        </div>
+      )}
 
 
     </section>

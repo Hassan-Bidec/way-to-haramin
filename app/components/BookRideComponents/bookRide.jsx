@@ -381,7 +381,7 @@ const addOneDay = (date) => {
           customer_id: user?.id,
           hotel_id: selectedHotelId ? Number(selectedHotelId) : null,
           vehicle_id: selectedVehicle || 1,
-          partner_id: selectedVendor?.id || 1,
+          partner_id: selectedVendor,
           pickup_address: fromAddress || "Dummy Address",
           departure_city_id: fromCity?.id || 1,
           destination_city_id: toCity?.id || 3,

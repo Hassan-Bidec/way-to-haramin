@@ -5,12 +5,19 @@ import { FaUserCircle } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/useAuthStore";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next"
+import "../../lib/i18n";
 
 export default function Hero() {
+const { t, i18n } = useTranslation();
+
   const { user } = useAuthStore();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [gtReady, setGtReady] = useState(false);
   const router = useRouter();
+
+
+  
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -40,13 +47,11 @@ export default function Hero() {
     }
   }, []);
 
+
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
-    const select = document.querySelector(".goog-te-combo");
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event("change"));
-    }
+    i18n.changeLanguage(lang); // now this works
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr"; // handle RTL
   };
 
   return (
@@ -70,8 +75,8 @@ export default function Hero() {
         <div className="relative w-32 md:w-40">
           <select
             className="w-full h-10 px-4 text-sm font-medium text-gray-800 bg-white border border-gray-300 rounded-full shadow-sm cursor-pointer appearance-none transition-all hover:border-green-400 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-green-300"
-            onChange={handleLanguageChange}
-            disabled={!gtReady}
+           onChange={handleLanguageChange}
+            value={i18n.language}
           >
             <option value="en">English</option>
             <option value="ar">Arabic</option>
@@ -90,13 +95,13 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 text-white flex flex-col items-center md:items-start text-center md:text-left">
-        <p className="tracking-widest uppercase text-sm mb-2">~Seamless~</p>
+        <p className="tracking-widest uppercase text-sm mb-2">{t("~Seamless~")}</p>
         <h1 className="text-4xl md:text-6xl mb-4">
-          Hajj & Umrah <br /> Transportation Booking
+         {t("Hajj & Umrah")}<br /> {t("Transportation Booking")}
         </h1>
         <span className="mb-6 max-w-md md:max-w-2xl text-gray-300">
-          Book verified vehicles between Makkah, Madinah, and <br />
-          <span className="">Jeddah</span> with trusted service providers
+          {t("Book verified vehicles between Makkah, Madinah, and")} <br />
+          <span className="">{t("Jeddah")}</span> {t("with trusted service providers")}
         </span>
 
         <div className="flex flex-col md:flex-row items-center gap-2 mb-6 mt-5">
