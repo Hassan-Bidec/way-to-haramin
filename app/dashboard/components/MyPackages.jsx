@@ -49,18 +49,20 @@ const fetchPackage = async () => {
     const allPackages = response || [];
 
     // Format Packages According To API
-    const formatted = allPackages.map((item) => ({
-      id: item.id,
-      title: item.title,
-      description: item.description,
-      duration: `${item.duration_days} Days`,
-      price: item.price,
-      capacity: item.no_of_people,
-      transportation: item.type,
-      image: item.package_image,
-      partnerName: item.full_name,
-      status: item.status,
-    }));
+const formatted = allPackages.map((item) => ({
+  bookingId: item.id,          // booking id
+  packageId: item.package_id,  // ✅ REAL package id
+  title: item.title,
+  description: item.description,
+  duration: `${item.duration_days} Days`,
+  price: item.price,
+  capacity: item.no_of_people,
+  transportation: item.type,
+  image: item.package_image,
+  partnerName: item.full_name,
+  status: item.status,
+}));
+
 
     // setRides(formatted);
      const upcoming = formatted.filter(r => [1, 2].includes(r.status));
@@ -79,46 +81,14 @@ console.log("Completed Rides:", completed);
 
     fetchPackage();
   }, [user?.id]);
+  console.log("user id in my packages:", user?.customer_id);
 
-const fetchPackage = async () => {
-  try {
-    const response = await getUserPackages(user?.customer_id);
-
-    if (!response.status) {
-      // toast.error(response.message || "Failed to fetch packages");
-      return;
-    }
-
-    const allPackages = response.data.reverse() || [];
-
-    // ================================
-    // Format Packages According To API
-    // ================================
-    const formatted = allPackages.map((item) => ({
-      id: item.id,
-      title: item.title,
-      description: item.description,
-      duration: `${item.duration_days} Days`,
-      price: item.price,
-      capacity: item.no_of_people,
-      transportation: item.type,
-      image: item.package_image,
-      partnerName: item.full_name,
-    }));
-
-    setRides(formatted);
-  } catch (err) {
-    toast.error("Something went wrong");
-  } finally {
-    setLoading(false);
-  }
-};
 
 
 const navigate = useRouter()
 
 const handleFeedback = (ride, rideName) => {
-  setSelectedRideId(ride?.id);
+  setSelectedRideId(ride?.bookingId);
   setSelectedRide(rideName);
   setReviewModalOpen(true);
 };
@@ -322,7 +292,7 @@ const handleConfirmCancel = async () => {
                                              {/* Actions */}
           <div className="flex gap-3">
           {ride?.status == 1 &&  <Button variant="outline" onClick={() => 
-              handleCancelClick(ride.id)
+              handleCancelClick(ride.bookingId)
               } className="flex-1">
               Cancel
             </Button>}
@@ -333,12 +303,13 @@ const handleConfirmCancel = async () => {
                 >
                   View Details
                 </Button> */}
-                                   <Link href={`/PackageDetails/${ride.id}`}>
-  <Button className="bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white hover:shadow-lg transition-all whitespace-nowrap">
+                        <Link href={`/PackageDetails/${ride.packageId}`}>
+  <Button className="bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white">
     View Details
     <ArrowRight className="ml-2 w-4 h-4" />
   </Button>
 </Link>
+
 
                                    </div>
                                  </div>
