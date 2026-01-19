@@ -63,14 +63,14 @@ const Travelers = () => {
           </p>
 
           {/* Navigation Arrows */}
-          <div className="flex justify-end gap-4 pt-4 text-gray-600">
+          {/* <div className="flex justify-end gap-4 pt-4 text-gray-600">
             <button className="p-2 rounded-full hover:bg-gray-100 transition">
               <IoArrowBackOutline size={18} />
             </button>
             <button className="p-2 rounded-full hover:bg-gray-100 transition">
               <IoArrowForwardOutline size={18} />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

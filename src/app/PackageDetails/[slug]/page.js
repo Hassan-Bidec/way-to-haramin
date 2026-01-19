@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify'
 
 const page = () => {
   const {slug} = useParams()
+  console.log("Slug in package details page:", slug);
   return (
     <>
  <PackageComponent packageSlug={slug} />

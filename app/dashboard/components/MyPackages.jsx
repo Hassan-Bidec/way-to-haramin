@@ -326,19 +326,19 @@ const handleConfirmCancel = async () => {
               } className="flex-1">
               Cancel
             </Button>}
-  <Button
+  {/* <Button
                                     onClick={() => router.back()}
                   size="sm"
                   className="bg-[#0E3C2F] text-white px-4 py-1 rounded-md hover:bg-[#124f3d]"
                 >
                   View Details
-                </Button>
-                                   {/* <Link href={`/PackageDetails/${ride.id}`}>
+                </Button> */}
+                                   <Link href={`/PackageDetails/${ride.id}`}>
   <Button className="bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white hover:shadow-lg transition-all whitespace-nowrap">
     View Details
     <ArrowRight className="ml-2 w-4 h-4" />
   </Button>
-</Link> */}
+</Link>
 
                                    </div>
                                  </div>
