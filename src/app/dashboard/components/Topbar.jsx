@@ -3,14 +3,17 @@
 import { ArrowRight, Bell, Menu, User } from 'lucide-react';
 import Image from 'next/image';
 import OffersBanner from './OffersBanner';
+
 import { FeatureCard } from './FeatureCard';
 import QuickActions from './QuickActionCard';
 import { UpcomingRideCard } from './UpcomingRideCard';
 import { Button } from '../ui/button';
 import { Card } from '../ui/Card';
 import { PackageCard } from './PackageCard';
+
 import { Award } from 'lucide-react';
 import { DashboardQuickBooking } from './DashboardQuickBooking';
+
 import { useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSubContent, DropdownMenuTrigger } from '../ui/DropdownMenuTrigger';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/Avatar';
@@ -21,15 +24,12 @@ import { ReviewModal } from '../ui/ReviewModal';
 import { toast } from 'react-toastify';
 // import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import "../../../lib/i18n";
-
-
+import i18n from '@/lib/i18n';
 
 export default function Topbar() {
   const { logout, user } = useAuthStore();
   // const router = useRouter()
- const { t } = useTranslation();
-
+  const { t } = useTranslation();
   const [banner, setBanner] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [getRecentRides, setGetRecentRides] = useState([]);
@@ -126,13 +126,15 @@ const statusText = {
   }
   };
 
-  
+  const isRTL = i18n.language?.startsWith("ar");
+
 
   return (
     <>
-      <div className="md:ml-64 ml-0">
+     <div className={`${isRTL ? "md:mr-64 ml-0" : "md:ml-64 ml-0"}`} dir={isRTL ? "rtl" : "ltr"}>
+
         <header className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
++ <div className={`flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             {/* Left Side - Menu Button + Welcome Text */}
             <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
               {/* Hamburger Menu Button (Mobile Only) */}
@@ -145,9 +147,9 @@ const statusText = {
 
 
               {/* Welcome Text */}
-              <div className="min-w-0 ml-2">
+<div className={`min-w-0 ${isRTL ? "text-right ml-0 mr-2" : "text-left ml-2"}`}>
                 <h1 className="text-lg sm:text-xl lg:text-2xl text-[#0E3C2F] truncate">
-                  {t("Welcome back,")} {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}!
+{t("Welcome back")}, {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : t("User")}
 
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 hidden sm:block truncate">{currentDate}</p>
@@ -188,8 +190,7 @@ const statusText = {
               {/* User Profile */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 sm:gap-3 hover:bg-gray-50 rounded-full p-1 pr-2 sm:pr-3 transition-colors">
-                    {/* <Avatar className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-[#C7A76C]">
+<button className={`flex items-center gap-2 sm:gap-3 hover:bg-gray-50 rounded-full p-1 pr-2 sm:pr-3 transition-colors ${isRTL ? "flex-row-reverse" : ""}`}>                    {/* <Avatar className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-[#C7A76C]">
                       <AvatarImage src="https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjMxMjEyNzJ8MA&ixlib=rb-4.1.0&q=80&w=400" />
                       <AvatarFallback className="bg-[#C7A76C] text-white text-xs sm:text-sm">
                         A
@@ -203,9 +204,9 @@ const statusText = {
                                       {/* Remove dicebear & keep empty if you want fallback always */}
                                       <AvatarFallback><AvatarImage src="/dummy.png" /> </AvatarFallback>
                                     </Avatar>
-                    <div className="text-left hidden md:block">
+<div className={`text-left hidden md:block ${isRTL ? "text-right" : ""}`}>
                       <p className="text-xs sm:text-sm text-[#0E3C2F]">{user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}</p>
-                      <p className="text-xs text-gray-500">{t("Premium Member")}</p>
+                      <p className="text-xs text-gray-500">Premium Member</p>
                     </div>
                   </button>
                 </DropdownMenuTrigger>
@@ -238,7 +239,7 @@ const statusText = {
               {upcoming && upcoming.filter(item => item !== null && item.length !== 0).length > 0 && (
               <section>
                 <div className="flex items-center justify-between mb-6">
-                  <h1 className="text-[#0E3C2F] font-bold mt-5">{t("Upcoming Journey")}</h1>
+                  <h1 className="text-[#0E3C2F] font-bold mt-5">Upcoming Journey</h1>
                   {/* <h2 className="text-[#1B2A3D] font-bold"></h2> */}
                 </div>
                 <UpcomingRideCard upcomingData={upcoming} />
@@ -249,15 +250,17 @@ const statusText = {
             {getRecentRides && getRecentRides.length > 0 && (
               <section>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-[#0E3C2F]">{t("Recent Rides")}</h2>
+                  <h2 className="text-[#0E3C2F]">Recent Rides</h2>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-[#0E3C2F] hover:bg-[#F2EDE3]/30"
                     onClick={() => navigate.push('/myrides')}
                   >
-                    {t("View All")}
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    View All
+                    {/* <ArrowRight className="ml-2 w-4 h-4" /> */}
+                    <ArrowRight className={isRTL ? "mr-2 ml-0" : "ml-2"} />
+
                   </Button>
                 </div>
                 <div className="space-y-4">
@@ -269,7 +272,7 @@ const statusText = {
 
   return (
     <Card key={ride.id} className="p-4 shadow-sm rounded-2xl bg-white">
-      <div className="flex justify-between items-center">
+      <div className={`flex justify-between items-center ${isRTL ? "flex-row-reverse" : ""}`}>
         <p className="text-[#0E3C2F] font-semibold text-base">
           {detail.departure_city_name || "N/A"} → {detail.destination_city_name || "N/A"}
         </p>
@@ -308,16 +311,16 @@ const statusText = {
 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 
 0 002.25 8.25v9A2.25 2.25 0 004.5 19.5z" />
         </svg>
-        <p>{t(detail.date || ride.booking_date)}</p>
+        <p>{detail.date || ride.booking_date}</p>
       </div>
 
       {/* Vehicle + Price Row */}
       <div className="flex justify-between items-center text-gray-700">
         <p className="text-xs">
-          <span className="font-medium text-gray-600">{t("Vehicle")}:</span> {t(ride.vehicle_name)}
+          <span className="font-medium text-gray-600">Vehicle:</span> {ride.vehicle_name}
         </p>
 
-        <p className="text-[#0E3C2F] text-sm font-medium">{t("SAR")} {t(ride.charges || "N/A")}</p>
+        <p className="text-[#0E3C2F] text-sm font-medium">SAR {ride.charges || "N/A"}</p>
       </div>
 
       {/* Divider */}
@@ -338,7 +341,7 @@ const statusText = {
 1.81l-5.59 4.06 2.122 6.564c.3.921-.755 
 1.688-1.54 1.118l-5.59-4.06-5.59 4.06c-.784.57-1.838-.197-1.539-1.118l2.122-6.564-5.59-4.06c-.783-.57-.38-1.81.588-1.81h6.908l2.122-6.564z" />
         </svg>
-        {t("Leave Review")}
+        Leave Review
       </div>
     </Card>
   );
@@ -391,7 +394,7 @@ const statusText = {
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                   </div>
-                  <h3 className="text-white mb-2">{t("Need Help?")}</h3>
+                  <h3 className="text-white mb-2">Need Help?</h3>
                   <p className="text-white/80 text-sm mb-4">
                     {t("Chat with us on WhatsApp for instant support")}
                   </p>
@@ -399,7 +402,7 @@ const statusText = {
                     className="w-full bg-white text-[#0E3C2F] hover:bg-white/90"
                     // onClick={() => navigate.push('/support')}
                     onClick={() => {
-    const phone = "0538500266"; // <-- Saudi number
+    const phone = "966500000000"; // <-- Saudi number
     const msg = encodeURIComponent("Hello, I need support.");
     window.location.href = `https://wa.me/${phone}?text=${msg}`;
   }}

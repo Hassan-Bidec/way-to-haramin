@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next"; // 1️⃣
+import { useTranslation } from "react-i18next";
 import "../../../src/lib/i18n"; // Ensure path correct
 
 import {
@@ -23,7 +23,9 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { logout } = useAuthStore();
-  const { t } = useTranslation(); // 2️⃣
+  const { t, i18n } = useTranslation();
+
+  const isRTL = i18n.language?.startsWith("ar"); // 🔹 Check if Arabic
 
   const menu = [
     { label: t("Dashboard"), href: "/dashboard", icon: <MdDashboard size={20} /> },
@@ -43,17 +45,24 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* Hamburger Button */}
       {!open && (
         <button
           className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg text-gray-700 hover:bg-gray-100"
           onClick={() => setOpen(true)}
-          style={{ background: "transparent" }}
         >
           <MdMenu size={22} />
         </button>
       )}
 
-      <div className={`w-64 bg-gray-50 h-screen p-6 flex flex-col justify-between fixed top-0 left-0 z-40 transition-transform duration-300 md:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+      {/* Sidebar */}
+     <div
+  dir={isRTL ? "rtl" : "ltr"}
+  className={`w-64 bg-gray-50 h-screen p-6 flex flex-col justify-between fixed top-0 ${isRTL ? "right-0" : "left-0"} z-40 transition-transform duration-300 ${
+    open ? "translate-x-0" : isRTL ? "translate-x-full md:translate-x-0" : "-translate-x-full md:translate-x-0"
+  }`}
+>
+
         {/* Close Button */}
         <button
           className="md:hidden absolute top-4 right-4 text-gray-600 bg-transparent hover:bg-transparent shadow-none outline-none"
@@ -75,7 +84,7 @@ export default function Sidebar() {
           </div>
 
           {/* Menu */}
-          <nav className="flex flex-col space-y-2">
+          <nav className={`flex flex-col space-y-2 ${isRTL ? "text-right" : "text-left"}`}>
             {menu.map((item, i) => {
               const isActive = pathname === item.href;
 
@@ -84,11 +93,11 @@ export default function Sidebar() {
                   key={i}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all
-                    ${isActive
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all ${
+                    isActive
                       ? "bg-white shadow text-[#206D69]"
-                      : "text-gray-600 hover:bg-white hover:shadow hover:text-[#206D69]"}`
-                  }
+                      : "text-gray-600 hover:bg-white hover:shadow hover:text-[#206D69]"
+                  }`}
                 >
                   <span>{item.icon}</span>
                   <p>{item.label}</p>
@@ -98,15 +107,21 @@ export default function Sidebar() {
           </nav>
         </div>
 
-        <button onClick={handleLogout} className="flex items-center gap-2 text-red-500 hover:text-red-700 text-sm cursor-pointer">
-          <MdLogout size={20} />
-          {t("Logout")}
-        </button>
+        {/* Logout */}
+        <button
+  onClick={handleLogout}
+  className={`flex items-center gap-2 text-red-500 hover:text-red-700 text-sm cursor-pointer ${
+    isRTL ? "flex-row-reverse ml-auto" : ""
+  }`}
+>
+  <MdLogout size={20} />
+  {t("Logout")}
+</button>
+
       </div>
 
-      {open && (
-        <div className="fixed inset-0 bg-black/30 md:hidden z-30" onClick={() => setOpen(false)} />
-      )}
+      {/* Overlay */}
+      {open && <div className="fixed inset-0 bg-black/30 md:hidden z-30" onClick={() => setOpen(false)} />}
     </>
   );
 }

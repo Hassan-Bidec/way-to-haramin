@@ -60,6 +60,7 @@ const fetchPackage = async () => {
       transportation: item.type,
       image: item.package_image,
       partnerName: item.full_name,
+      // partner_
       status: item.status,
     }));
 

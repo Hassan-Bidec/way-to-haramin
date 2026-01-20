@@ -24,7 +24,9 @@ import { getBookingParams, getPartnersWithPackages } from "@/lib/api";
 import { Image_URL } from "@/config/constants";
 import Loading from "../components/Loading";
 import { useTranslation } from "react-i18next";
-
+import i18n from "../../../lib/i18n";
+// import "../../../src/lib/i18n";
+// import i18n from "../../../src/lib/i18n";
 export default function VendorDetail({ vendorId }) {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -82,11 +84,13 @@ export default function VendorDetail({ vendorId }) {
       }
       console.log(vendor);
     };
+    
 
     
 
     fetchPartners();
   }, [vendorId]);
+      const isArabic = i18n.language?.startsWith("ar");
 
   if (loading) {
   return <Loading text="Fetching vendor details..." />;
@@ -111,8 +115,9 @@ export default function VendorDetail({ vendorId }) {
     <div className="min-h-screen bg-background">
       {/* Sticky Header */}
       <div className="sticky top-0 z-10 bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/95 border-b border-[#C7A76C]/20 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4 ${isArabic ? 'flex-row-reverse' : ''}`}
+>
+          <div className={`flex items-center gap-4 ${isArabic ? 'flex-row-reverse' : ''}`}>
             {/* Vendor Logo */}
             <div className="w-14 h-14 rounded-xl overflow-hidden bg-white/10 flex-shrink-0 border-2 border-white/20">
               <ImageWithFallback
@@ -149,7 +154,7 @@ export default function VendorDetail({ vendorId }) {
           </div>
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-2">
+          <div className={`flex flex-wrap gap-2 ${isArabic ? 'justify-end' : ''}`}>
             {vendorDetail.badges.map((badge, index) => (
               <Badge
                 key={index}
@@ -167,7 +172,8 @@ export default function VendorDetail({ vendorId }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <button
           onClick={() => router.push("/Service")}
-          className="flex items-center gap-2 text-gray-600 hover:text-[#0E3C2F] mb-6 transition-colors group"
+          className={`flex items-center gap-2 text-gray-600 hover:text-[#0E3C2F] mb-6 transition-colors group ${isArabic ? 'flex-row-reverse' : ''}`}
+
         >
           <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
           <span>{t("Back to Service Providers")}</span>
@@ -193,7 +199,7 @@ export default function VendorDetail({ vendorId }) {
               className="border border-gray-200 hover:shadow-lg transition-all"
             >
               <CardContent className="p-6">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className={`flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 ${isArabic ? 'lg:flex-row-reverse' : ''}`}>
                   <div className="flex-1 space-y-3">
                     <h3 className="text-lg font-medium text-[#1B2A3D] mb-2">
                       {pkg.title}
@@ -251,7 +257,7 @@ export default function VendorDetail({ vendorId }) {
                     className="hidden lg:block h-32"
                   />
 
-                  <div className="flex lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 lg:min-w-[200px]">
+                  <div className={`flex lg:flex-col items-center justify-between gap-4 ${isArabic ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}`}>
                     <div className="text-left lg:text-right">
                       <p className="text-sm text-gray-500 mb-1">
                         {t("Starting from")}
@@ -287,7 +293,7 @@ export default function VendorDetail({ vendorId }) {
           className="mt-8 border-none shadow-sm bg-gradient-to-br from-[#F2EDE3] to-white cursor-pointer"
           onClick={() => router.push(`/packages/${vendorDetail.id}`)}
         >
-          <CardContent className="p-8 text-center">
+          <CardContent className={`p-8 text-center ${isArabic ? 'text-right' : 'text-left'}`}>
             <Phone className="w-12 h-12 mx-auto mb-4 text-[#C7A76C]" />
             <h3 className="text-xl font-medium text-[#1B2A3D] mb-2">
               {t("Need Special Services?")}

@@ -24,6 +24,7 @@ import { ReviewModal } from '../ui/ReviewModal';
 import { toast } from 'react-toastify';
 // import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import i18n from '@/lib/i18n';
 
 export default function Topbar() {
   const { logout, user } = useAuthStore();
@@ -125,13 +126,15 @@ const statusText = {
   }
   };
 
-  
+  const isRTL = i18n.language?.startsWith("ar");
+
 
   return (
     <>
-      <div className="md:ml-64 ml-0">
+     <div className={`${isRTL ? "md:mr-64 ml-0" : "md:ml-64 ml-0"}`} dir={isRTL ? "rtl" : "ltr"}>
+
         <header className="sticky top-0 z-30 bg-white border-b border-gray-200 shadow-sm">
-          <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+<div className={`flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4 ${isRTL ? "flex-row-reverse" : ""} gap-3 sm:gap-4`}>
             {/* Left Side - Menu Button + Welcome Text */}
             <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
               {/* Hamburger Menu Button (Mobile Only) */}
@@ -144,7 +147,7 @@ const statusText = {
 
 
               {/* Welcome Text */}
-              <div className="min-w-0 ml-2">
+<div className={`min-w-0 ${isRTL ? "text-right ml-0 mr-2" : "text-left ml-2"}`}>
                 <h1 className="text-lg sm:text-xl lg:text-2xl text-[#0E3C2F] truncate">
 {t("Welcome back")}, {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : t("User")}
 
@@ -187,8 +190,7 @@ const statusText = {
               {/* User Profile */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-2 sm:gap-3 hover:bg-gray-50 rounded-full p-1 pr-2 sm:pr-3 transition-colors">
-                    {/* <Avatar className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-[#C7A76C]">
+<button className={`flex items-center gap-2 sm:gap-3 hover:bg-gray-50 rounded-full p-1 pr-2 sm:pr-3 transition-colors ${isRTL ? "flex-row-reverse" : ""}`}>                    {/* <Avatar className="w-8 h-8 sm:w-10 sm:h-10 border-2 border-[#C7A76C]">
                       <AvatarImage src="https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjMxMjEyNzJ8MA&ixlib=rb-4.1.0&q=80&w=400" />
                       <AvatarFallback className="bg-[#C7A76C] text-white text-xs sm:text-sm">
                         A
@@ -202,7 +204,7 @@ const statusText = {
                                       {/* Remove dicebear & keep empty if you want fallback always */}
                                       <AvatarFallback><AvatarImage src="/dummy.png" /> </AvatarFallback>
                                     </Avatar>
-                    <div className="text-left hidden md:block">
+<div className={`text-left hidden md:block ${isRTL ? "text-right" : ""}`}>
                       <p className="text-xs sm:text-sm text-[#0E3C2F]">{user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}</p>
                       <p className="text-xs text-gray-500">Premium Member</p>
                     </div>
@@ -256,7 +258,9 @@ const statusText = {
                     onClick={() => navigate.push('/myrides')}
                   >
                     View All
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    {/* <ArrowRight className="ml-2 w-4 h-4" /> */}
+                    <ArrowRight className={isRTL ? "mr-2 ml-0" : "ml-2"} />
+
                   </Button>
                 </div>
                 <div className="space-y-4">
@@ -268,7 +272,7 @@ const statusText = {
 
   return (
     <Card key={ride.id} className="p-4 shadow-sm rounded-2xl bg-white">
-      <div className="flex justify-between items-center">
+      <div className={`flex justify-between items-center ${isRTL ? "flex-row-reverse" : ""}`}>
         <p className="text-[#0E3C2F] font-semibold text-base">
           {detail.departure_city_name || "N/A"} → {detail.destination_city_name || "N/A"}
         </p>

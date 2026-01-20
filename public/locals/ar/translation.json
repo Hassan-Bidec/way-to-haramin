@@ -56,7 +56,7 @@
   "Travel Date": "تاريخ السفر",
 
   "Departure": "مغادرة",
-  "Departure City": "مدينة الانطلاق",
+  "Departure City": "مدینۃ المغادرۃ",
 
 
   "Destination": "الوصول",
@@ -71,8 +71,8 @@
   "Continue to Vehicle Selection": "تابع لاختيار المركبة",
  "Profile": "الملف الشخصي",
  "Way To Haramain Logo": "شعار طريق الحرمين",
-  "How It Works": "كيف تعمل",
-  "Vehicle Categories": "فئات المركبات",
+  "How It Works": "کیف یعمل",
+  "Vehicle Categories": "فئات السیارات",
   "Why Choose Us": "لماذا تختارنا",
   "Copyright": "حقوق الطبع والنشر",
   "Way To Haramain": "طريق الحرمين",
@@ -82,7 +82,7 @@
   "We're here to help with any questions or issues": "نحن هنا لمساعدتك في أي أسئلة أو مشكلات",
 
   "WhatsApp Support": "دعم واتساب",
-  "Chat with us instantly": "تحدث معنا فورًا",
+  "Chat with us instantly": "تواصل معنا فورًا عبر الدردشة",
 
 
   "Call Support": "اتصل بالدعم",
@@ -101,8 +101,10 @@
 
   "Submit Issue": "إرسال المشكلة",
   "Frequently Asked Questions": "الأسئلة الشائعة",
-  "Service Providers": "موفروا الخدمات",
+  "Service Providers": "مقدمي الخدمة",
   "Trusted Partners": "الشركاء الموثوقون",
+  "Top Rated Providers" : "أفضل المزودين تقييمًا",
+  
 
   "Choose from our verified transport partners for your spiritual journey": "اختر من شركائنا الموثوقين لرحلتك الروحية",
 
@@ -110,12 +112,15 @@
   "Average Rating": "تقييم متوسط",
   "Happy Customers": "عملاء سعداء",
 
-  "Browse All Providers": "تصفح جميع الموفرين",
-  "Search and filter to find the perfect partner for your journey": "ابحث وقم بالتصفية لإيجاد الشريك المثالي لرحلتك",
+  "Browse All Providers": "تصفح جميع المزودين",
+  "Search and filter to find the perfect partner for your journey": "بحث واستخدم الفلتر لتجد الشريك المثالي لرحلتك",
 
-  "Search vendors by name": "ابحث عن الموفرين بالاسم",
+  "Search vendors by name": "ابحث عن المزودين بالاسم",
+  "Filters" : "الفلاتر",
+  "Showing" : "عرض",
 
-  "Can't find the right provider?": "لم تجد الموفر المناسب؟",
+
+  "Can't find the right provider?": "ما حصلت مزود الخدمة المناسب؟",
   "Our support team is here to help you find the perfect transport partner for your journey": "فريق الدعم لدينا موجود لمساعدتك في العثور على شريك النقل المناسب لرحلتك",
 
   "Contact Support": "الاتصال بالدعم",
@@ -156,8 +161,8 @@
   "Confirm Cancellation": "تأكيد الإلغاء",
   "Back to Dashboard": "الرجوع إلى لوحة التحكم",
 
-  "My Packages": "طرودي",
-  "View and manage your packages bookings": "عرض وإدارة حجوزات طرودك",
+  "My Packages": "باقاتي",
+  "View and manage your packages bookings": "استعرض وأدر حجوزات باقاتك",
 
   "Upcoming": "القادمة",
   "Completed": "مكتمل",
@@ -169,7 +174,7 @@
   "Starting from": "ابتداءً من",
   "Cancel": "إلغاء",
   "View Details": "عرض التفاصيل",
-  "Seamless": "سلس وسهل",
+  "~Seamless~": "سلس",
   "Hajj & Umrah": "الحج والعمرة",
   "Transportation Booking": "حجز النقل",
    "Book verified vehicles between Makkah, Madinah, and": "احجز مركبات موثوقة بين مكة والمدينة و",
@@ -187,7 +192,7 @@
   "Booking": "الحجز",
   "Register as Vendor": "التسجيل كبائع",
    "~ Choose The Right ~": "~ اختر الأنسب ~",
-  "Vehicle For Your Journey": "المركبة المناسبة لرحلتك",
+  "Vehicle For Your Journey": "السیارۃ لرحلتك",
   "From luxury sedans to spacious coasters, select the ride that best suits your comfort and group size.": "من السيارات الفاخرة إلى الحافلات الواسعة، اختر الرحلة التي تناسب راحتك وحجم مجموعتك.",
   "Coaster": "كوستر",
   "GMC": "جي إم سي",
@@ -195,9 +200,9 @@
   "Staria": "ستاريا",
   "~ Why Haramain ~": "~ لماذا الحرمين ~",
   "Trust Way To Haramain": "طريقة موثوقة إلى الحرمين",
-  "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive.": "في Way To Haramain، يتم التعامل مع كل رحلة بالاحترام والرعاية التي تستحقها. نحن نجمع بين التكنولوجيا ومزودي الخدمات الموثوقين والدعم البشري لضمان أن يحظى الحجاج براحة البال من لحظة الحجز حتى لحظة الوصول.",
-  "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless.": "من السائقين المختارين بعناية إلى الحجز الآمن عبر الإنترنت والدعم على مدار الساعة، تم تصميم كل تفصيل لجعل رحلتك المقدسة خالية من التوتر وسلسة.",
+  "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive.": "في Way To Haramain، نحرص على أن تُعامل كل رحلة بالاحترام والرعاية التي تستحقها. نجمع بين التقنية، ومزودي الخدمة الموثوقين، والدعم البشري لضمان راحة الحجاج من لحظة الحجز حتى وصولهم.",
   "Pilgrims in front of hotel": "الحجاج أمام الفندق",
+  "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless.":"من السائقين المختارين بعناية إلى الحجز الإلكتروني الآمن والدعم المتواصل على مدار الساعة، كل التفاصيل مصممة لجعل رحلتك المقدسة خالية من التوتر وسلسة تمامًا",
   "~ For Travel ~": "~ للسفر ~",
   "Agents Group": "مجموعة الوكلاء",
   "Organizers": "المنظمون",
@@ -211,13 +216,13 @@
   "Ahmed R., Jeddah": "أحمد ر., جدة",
   "Umrah Traveler": "مسافر عمرة",
   "Kaaba": "الكعبة",
-  "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks.": "اعثر على مسارك المثالي بين مكة والمدينة وجدة ببضع نقرات.",
+  "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks.": "اختر مسارك المثالي بين مكة والمدينة وجدة بسهولة",
  
-  "Choose the vehicle that suits your comfort and group size.": "اختر المركبة التي تناسب راحتك وحجم مجموعتك.",
+  "Choose the vehicle that suits your comfort and group size.": "اختر السيارة المناسبة لراحتك وعدد أفراد مجموعتك",
 
   "Enjoy reliable travel with trusted drivers and instant WhatsApp updates.": "استمتع بالسفر الموثوق مع سائقين موثوقين وتحديثات فورية عبر واتساب.",
 
-  "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments.": "تأكيد الرحلة الفوري مع مدفوعات آمنة عبر مدى، فيزا، وآبل باي.",
+  "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments.": "تأكيد الرحلة فورًا مع الدفع الآمن عبر مدى، التاشیرۃ، وApple Pay",
 
   "Travel with Ease": "سافر بسهولة",
   "Makkah & Madinah in 4 Simple Steps": "مكة والمدينة في أربع خطوات بسيطة",
@@ -227,7 +232,7 @@
   "Find your ideal route between Makkah": "اعثر على مسارك المثالي بين مكة",
 "Review Your Booking": "مراجعة حجزك",
   "Please verify all details before confirming": "يرجى التحقق من جميع التفاصيل قبل التأكيد",
-  "Select Vehicle": "اختر المركبة",
+  "Select Vehicle": "اختر السیارۃ",
   "Book This Package": "احجز هذه الباقة",
   "per person": "لكل شخص",
    "Group Size": "حجم المجموعة",
@@ -237,7 +242,7 @@
 "Need help? Contact our support team for assistance.": "هل تحتاج مساعدة؟ تواصل مع فريق الدعم الخاص بنا للمساعدة.",
   "Travel Comfortably": "سافر براحة",
   "Enjoy reliable travel with trusted drivers and instant": "استمتع برحلة موثوقة مع سائقين معتمدين وتحديثات فورية عبر واتساب",
-
+"Our most trusted and highly rated partners" : "شركاؤنا الأكثر ثقة والأعلى تقييمً",
   "Book & Pay": "احجز وادفع",
   "Instant ride confirmation with secure Mada, Visa,": "تأكيد الرحلة الفوري مع مدع، فيزا،","way to Harmain": "الطريق إلى الحرمين",
   "Welcome back": "أهلاً بعودتك",
@@ -251,7 +256,7 @@
   "Family Package Bonanza": "عرض العائلة المميز",
   "Save more when you travel together": "وفر أكثر عند السفر معًا",
   "Limited Time Offer": "عرض لفترة محدودة",
-  "Umrah Season Special": "موسم العمرة المميز",
+  "Umrah Season Special": "عرض خاص لموسم العمرة",
   "Book your spiritual journey with exclusive rates": "احجز رحلتك الروحية بأسعار حصرية",
 
   "Logout": "تسجيل الخروج",
@@ -265,7 +270,7 @@
   "Quick Booking": "حجز سريع",
 
   "From": "من",
-  "Select departure city": "اختر مدينة الانطلاق",
+  "Select departure city": "اختر مدینۃ المغادرۃ",
   "To": "إلى",
   "Select destination city": "اختر مدينة الوصول",
   "Date": "التاريخ",
@@ -278,5 +283,5 @@
   "Special Offer": "عرض خاص",
   "Winter Package Sale": "عرض باقة الشتاء",
   "View Offers": "شاهد العروض",
-  "View All": "شاهد الكل"
+  "View All": "عرض الکل"
 }

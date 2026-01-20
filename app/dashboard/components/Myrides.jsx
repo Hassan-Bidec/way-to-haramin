@@ -122,7 +122,7 @@ const [otherReason, setOtherReason] = useState('');
 
       // Divide by status
       const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
-      const completed = formattedRides.filter(r => r.status === 5);
+      const completed = formattedRides.filter(r => r.status === 7);
 
       setUpcomingRides(upcoming);
       setCompletedRides(completed);

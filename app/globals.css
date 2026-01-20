@@ -42,11 +42,54 @@
 @media (prefers-color-scheme: dark) {}
 
 
-/* ===== GLOBAL FONT — ONLY ARIAL ===== */
-body, *, h1, h2, h3, h4, h5, h6, p, span, button, input, select, textarea {
-  font-family: Arial, Helvetica, sans-serif !important;
+/* ===== TAJAWAL FONT FAMILY ===== */
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Tajawal';
+  src: url('/fonts/Tajawal-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
 
+/* Apply globally */
+body, *, h1, h2,  h4, h5, h6, p, span, button, input, select, textarea {
+  font-family: 'Tajawal', Arial, Helvetica, sans-serif !important;
+}
 
 /* ---- REMOVE ALL CUSTOM FONTS ---- */
 /* SaudiRiyal, Amiri, Poppins removed completely */

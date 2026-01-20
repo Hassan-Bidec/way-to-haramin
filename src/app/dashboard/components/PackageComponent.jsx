@@ -66,6 +66,7 @@ export default function PackageComponent({ packageSlug }) {
         }
         console.log("Selected Package:", selectedPackage);
         const formatted = {
+          partner_id: selectedPackage?.package?.partner_id || "",
           image: selectedPackage.package?.package_image || "",
           title: selectedPackage.package?.title || "Package",
           description: selectedPackage.package?.description || "No description available",
@@ -106,8 +107,10 @@ export default function PackageComponent({ packageSlug }) {
   }, [packageSlug]);
 
   const handleBook = async () => {
+    console.log("Booking package with slug:", packageDetail);
     try {
       const payload = {
+        partner_id: packageDetail.partner_id,
         package_id: packageSlug,
         user_id: user?.customer_id ?? null,
       };

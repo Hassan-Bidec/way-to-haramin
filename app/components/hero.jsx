@@ -42,32 +42,28 @@ export default function Hero() {
       style={{ backgroundImage: "url('/bg.png')" }}
     >
       <div className="absolute top-6 right-6 z-20 flex items-center gap-4">
-        <div className="relative w-36 md:w-44">
-          <select
-            className="w-full h-12 pl-4 pr-10 text-sm md:text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-[#0E3C2F] focus:border-[#0E3C2F] cursor-pointer transition-all"
-            onChange={handleLanguageChange}
-            value={i18n.language?.split("-")[0] || "en"}
-          >
-            <option value="en">English</option>
-            <option value="ar">Arabic</option>
-          </select>
+        <div className="relative w-28 md:w-32">
+  <select
+    value={i18n.language?.split("-")[0] || "en"}
+    onChange={handleLanguageChange}
+    className="
+      w-full h-10
+      px-3
+      text-sm
+      text-gray-700
+      bg-white
+      border border-gray-300
+      rounded-md
+      focus:outline-none
+      focus:border-[#0E3C2F]
+      cursor-pointer
+    "
+  >
+    <option value="en">English</option>
+    <option value="ar">Arabic</option>
+  </select>
+</div>
 
-          <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {/* <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M19 9l-7 7-7-7"
-      /> */}
-            </svg>
-          </div>
-        </div>
 
 
         {isLoggedIn && (
@@ -124,19 +120,32 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-row gap-4 justify-center md:justify-start flex-nowrap overflow-x-auto">
-          <button
-            onClick={() => router.push("/Book")}
-            className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]"
-          >
-            {t("Booking")}
-          </button>
-          <Link
-            href="/auth"
-            className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
-          >
-            {t("Register as Vendor")} <LuMoveRight />
-          </Link>
-        </div>
+  <button
+    onClick={() => router.push("/Book")}
+    className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]"
+  >
+    {t("Booking")}
+  </button>
+
+  {user?.id ? (
+    // Agar user authenticated hai
+    <Link
+      href="/dashboard"
+      className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+    >
+      {t("Dashboard")} <LuMoveRight />
+    </Link>
+  ) : (
+    // Agar user unauthenticated hai
+    <Link
+      href="/auth"
+      className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+    >
+      {t("Register as Vendor")} <LuMoveRight />
+    </Link>
+  )}
+</div>
+
       </div>
     </div>
   );

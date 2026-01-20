@@ -68,10 +68,10 @@ export default function Simple() {
               </div>
               <div className="p-4 text-center">
                 <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
-                  {vehicle.name}
+                  {t(vehicle.name)}
                 </h3>
                 <span className="text-xs sm:text-sm md:text-base w-full line-clamp-4 text-gray-700">
-                  {vehicle.description}
+                  {t(vehicle.description)}
                 </span>
               </div>
             </div>

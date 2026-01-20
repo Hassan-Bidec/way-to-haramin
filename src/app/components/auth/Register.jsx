@@ -651,22 +651,26 @@ console.log("Passport Value:", value);
           )}
         </form>
       </div>
-    {otpModal && (
+   {otpModal && (
   <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md relative">
+    <div
+      className="bg-white p-6 rounded-2xl shadow-xl w-[90%] max-w-md relative"
+      dir="ltr" // 🔴 Force LTR for modal content
+    >
       {/* Close Button */}
       <button
-        onClick={() => {setOtpModal(false) , setOtp(["", "", "", "", "", ""])}}
+        onClick={() => { setOtpModal(false); setOtp(["", "", "", "", "", ""]); }}
         className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
       >
         ✕
       </button>
+
       {/* Heading */}
       <h2 className="text-2xl font-semibold text-gray-800 text-center">
-        Enter OTP
+        {t("Enter OTP")}
       </h2>
       <p className="text-gray-500 text-center mt-1 mb-5">
-        Please enter the 6-digit code sent to your email.
+        {t("Please enter the 6-digit code sent to your email.")}
       </p>
 
       {/* OTP Input Boxes */}
@@ -681,6 +685,8 @@ console.log("Passport Value:", value);
             onChange={(e) => handleOtpChange(e, index)}
             onKeyDown={(e) => handleOtpKeyDown(e, index)}
             className="w-10 h-10 md:w-12 md:h-12 border border-gray-300 rounded-lg text-center text-xl font-semibold focus:border-[#206D69] focus:ring-1 focus:ring-[#206D69] outline-none"
+            dir="ltr" // 🔴 Force LTR for each input
+            inputMode="numeric" // 🔴 ensures numeric keypad on mobile
           />
         ))}
       </div>
@@ -691,11 +697,12 @@ console.log("Passport Value:", value);
         disabled={otpLoading}
         className="mt-6 w-full bg-[#206D69] hover:bg-[#1b5a56] text-white py-3 rounded-lg font-semibold transition-all"
       >
-      {otpLoading ? "Verifying..." : "Verify OTP"}  
+        {otpLoading ? t("Verifying...") : t("Verify OTP")}
       </button>
     </div>
   </div>
 )}
+
 
 
     </section>

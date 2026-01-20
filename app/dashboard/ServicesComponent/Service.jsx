@@ -21,6 +21,7 @@ import { Image_URL } from '@/config/constants';
 import { ImageWithFallback } from './ImageWithFallback';
 import Loading from '../components/Loading';
 import "../../../src/lib/i18n"; // Ensure path correct
+import i18n from '../../../src/lib/i18n';
 
 
 
@@ -95,9 +96,10 @@ export function Packages({ vendorId }) {
   }
   if (errorMsg) return <div className="flex justify-center items-center h-screen text-red-600 text-xl">{errorMsg}</div>;
 
+      const isArabic = i18n.language?.startsWith("ar");
 
   return (
-    <div className="md:ml-64 ml-0 ">
+     <div className={`${isArabic ? "md:mr-64 ml-0" : "md:ml-64 ml-0"}`} dir={isArabic ? "rtl" : "ltr"}>
       <Sidebar />
 
       <div className="flex-1 bg-gray-100 min-h-screen ">
@@ -149,7 +151,7 @@ export function Packages({ vendorId }) {
               </Badge>
 
               {/* Title */}
-              <div className="flex flex-col md:flex-row items-center gap-4 mb-4">
+             <div className={`flex flex-col md:flex-row items-center gap-4 mb-4 ${isArabic ? 'md:flex-row-reverse' : ''}`}>
                 <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center">
                   <Building2 className="w-8 h-8 text-white" />
                 </div>
@@ -208,14 +210,14 @@ export function Packages({ vendorId }) {
           <section>
             <div className="mb-6">
               <h2 className="text-[#0E3C2F] mb-2">{t("Browse All Providers")}</h2>
-              <p className="text-gray-600 text-sm">{t("Search and filter to find the perfect partner for your journey")}</p>
+              <p className={`text-gray-600 text-sm ${isArabic ? 'text-right' : 'text-left'}`}>{t("Search and filter to find the perfect partner for your journey")}</p>
             </div>
 
             <Card className="border-none shadow-lg p-6 bg-white">
 
               <div className="flex gap-3 mb-6">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Search className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 ${isArabic ? 'right-4 left-auto' : 'left-4 right-auto'}`} />
                   <Input
                     type="text"
                     placeholder="Search vendors by name"
@@ -395,7 +397,7 @@ export function Packages({ vendorId }) {
       transition={{ duration: 0.2 }}
     >
       <div
-        className="flex items-center gap-4 p-4 bg-white border rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
+        className={`flex items-center gap-4 p-4 bg-white border rounded-xl shadow-sm hover:shadow-md transition cursor-pointer ${isArabic ? 'flex-row-reverse' : 'flex-row'}`}
         onClick={() => router.push(`/ServiceProvider/${vendor.id}`)}
       >
         {/* Image Left */}
@@ -437,7 +439,7 @@ export function Packages({ vendorId }) {
           </div>
 
           {/* Bookings + Button */}
-          <div className="flex items-center justify-between">
+          <div className={`flex items-center justify-between ${isArabic ? 'flex-row-reverse' : 'flex-row'}`}>
             <span className="text-sm text-gray-600">
               {vendor.bookings.toLocaleString()} {t("bookings")}
             </span>
@@ -529,7 +531,7 @@ export function Packages({ vendorId }) {
 
             {/* Right Side Info */}
             <div className="flex flex-col gap-1 flex-1">
-              <h3 className="text-[#0E3C2F] text-lg font-semibold truncate">
+              <h3 className={`text-[#0E3C2F] text-lg font-semibold truncate ${isArabic ? 'text-right' : 'text-left'}`}>
                 {vendor.name}
               </h3>
 
