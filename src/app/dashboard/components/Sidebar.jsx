@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
 
 // Icons
 import {
@@ -21,6 +23,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
    const { logout } = useAuthStore();
+ const { t } = useTranslation();
 
   const menu = [
     { label: "Dashboard", href: "/dashboard", icon: <MdDashboard size={20} /> },
@@ -102,8 +105,8 @@ export default function Sidebar() {
                       : "text-gray-600 hover:bg-white hover:shadow hover:text-[#206D69]"
                     }`}
                 >
-                  <span>{item.icon}</span>
-                  <p>{item.label}</p>
+                  <span>{t(item.icon)}</span>
+                  <p>{t(item.label)}</p>
                 </Link>
               );
             })}
@@ -112,7 +115,7 @@ export default function Sidebar() {
 
         <button onClick={handleLogout} className="flex items-center gap-2 text-red-500 hover:text-red-700 text-sm cursor-pointer">
           <MdLogout size={20} />
-          Logout
+          {t("Logout")}
         </button>
       </div>
 

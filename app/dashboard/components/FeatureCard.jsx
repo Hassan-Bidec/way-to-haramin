@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Shield } from "lucide-react"; // Fixed dummy icon
-
+import "../../../src/lib/i18n"; 
 export function FeatureCard() {
   return (
     <div className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-secondary/10 overflow-hidden">

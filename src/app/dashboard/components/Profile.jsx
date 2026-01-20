@@ -11,8 +11,13 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { editProfile, getUserProfile } from '@/lib/api';
 import { useAuthStore } from '@/lib/useAuthStore';
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
+
 const Profile = () => {
   const { user, updateUser } = useAuthStore();
+      const { t } = useTranslation();
+  
     const navigate = useRouter();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [whatsappUpdates, setWhatsappUpdates] = useState(true);
@@ -95,7 +100,7 @@ const handleSaveProfile = async () => {
           className="flex items-center gap-2 text-gray-600 hover:text-[#C7A76C] mb-8 transition-colors group"
         >
           <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Dashboard</span>
+          <span>{t("Back to Dashboard")}</span>
         </button>
 
         {/* Header */}
@@ -103,8 +108,8 @@ const handleSaveProfile = async () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#C7A76C]/10 rounded-full -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#C7A76C]/10 rounded-full -ml-24 -mb-24"></div>
           <div className="relative">
-            <h1 className="text-3xl text-white mb-2">Profile & Settings</h1>
-            <p className="text-white/70">Manage your account and preferences</p>
+            <h1 className="text-3xl text-white mb-2">{t("Profile & Settings")}</h1>
+            <p className="text-white/70">{t("Manage your account and preferences")}</p>
           </div>
         </div>
 
@@ -112,7 +117,7 @@ const handleSaveProfile = async () => {
           {/* Profile Information */}
           <Card className="border-none shadow-lg">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-[#1B2A3D]">Profile Information</CardTitle>
+              <CardTitle className="text-[#1B2A3D]">{t("Profile Information")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-center gap-4">
@@ -126,7 +131,7 @@ const handleSaveProfile = async () => {
                 <div>
                   <h3>{profileData.name}</h3>
                   <Badge variant="secondary" className="mt-1">
-                    Verified User
+                    {t("Verified User")}
                   </Badge>
                 </div>
               </div>
@@ -135,7 +140,7 @@ const handleSaveProfile = async () => {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
                     <User className="w-4 h-4 text-[#C7A76C]" />
-                    Full Name
+                    {t("Full Name")}
                   </label>
                   <input
                     type="text"
@@ -149,9 +154,9 @@ const handleSaveProfile = async () => {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
                     <Phone className="w-4 h-4 text-[#C7A76C]" />
-                    Phone Number
+                    {t("Phone Number")}
                     <Badge className="ml-auto text-xs bg-green-100 text-green-700 hover:bg-green-100">
-                      Verified
+                      {t("Verified")}
                     </Badge>
                   </label>
                   <input
@@ -166,7 +171,7 @@ const handleSaveProfile = async () => {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
                     <Mail className="w-4 h-4 text-[#C7A76C]" />
-                    Email Address
+                    {t("Email Address")}
                   </label>
                   <input
                     type="email"
@@ -180,7 +185,7 @@ const handleSaveProfile = async () => {
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
                     <Globe className="w-4 h-4 text-[#C7A76C]" />
-                    Preferred Language
+                    {t("Preferred Language")}
                   </label>
                   <select
                     value={profileData.language}
@@ -197,15 +202,15 @@ const handleSaveProfile = async () => {
               <div className="flex gap-3">
                 {!isEditing ? (
                   <Button onClick={() => setIsEditing(true)} className="w-full bg-gradient-to-r from-[#C7A76C] to-[#C7A76C]/90 text-white hover:shadow-lg transition-all">
-                    Edit Profile
+                    {t("Edit Profile")}
                   </Button>
                 ) : (
                   <>
                     <Button variant="outline" onClick={() => setIsEditing(false)} className="flex-1 border-2 border-gray-200 hover:border-[#C7A76C] hover:bg-[#F2EDE3]/30">
-                      Cancel
+                      {t("Cancel")}
                     </Button>
                     <Button onClick={handleSaveProfile} className="flex-1 bg-gradient-to-r from-[#C7A76C] to-[#C7A76C]/90 text-white hover:shadow-lg transition-all">
-                      Save Changes
+                      {t("Save Changes")}
                     </Button>
                   </>
                 )}
@@ -216,16 +221,16 @@ const handleSaveProfile = async () => {
           {/* Settings */}
           <Card className="border-none shadow-lg">
             <CardHeader className="border-b border-gray-100">
-              <CardTitle className="text-[#1B2A3D]">Settings</CardTitle>
+              <CardTitle className="text-[#1B2A3D]">{t("Settings")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between p-4 bg-[#F7F7F9] border border-gray-200 rounded-xl hover:border-[#C7A76C] transition-colors">
                 <div className="flex items-center gap-3">
                   <Bell className="w-5 h-5 text-[#C7A76C]" />
                   <div>
-                    <p>Push Notifications</p>
+                    <p>{t("Push Notifications")}</p>
                     <p className="text-sm text-muted-foreground">
-                      Receive updates about your bookings
+                      {t("Receive updates about your bookings")}
                     </p>
                   </div>
                 </div>
@@ -239,9 +244,9 @@ const handleSaveProfile = async () => {
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-5 h-5 text-[#C7A76C]" />
                   <div>
-                    <p>WhatsApp Updates</p>
+                    <p>{t("WhatsApp Updates")}</p>
                     <p className="text-sm text-muted-foreground">
-                      Get booking confirmations via WhatsApp
+                      {t("Get booking confirmations via WhatsApp")}
                     </p>
                   </div>
                 </div>

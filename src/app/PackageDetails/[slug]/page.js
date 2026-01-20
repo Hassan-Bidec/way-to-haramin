@@ -1,5 +1,5 @@
 "use client"
-import PackageComponent from '@/app/dashboard/components/PackageComponent'
+import PackageComponent from '../../dashboard/components/PackageComponent'
 import { useParams } from 'next/navigation'
 
 import React from 'react'

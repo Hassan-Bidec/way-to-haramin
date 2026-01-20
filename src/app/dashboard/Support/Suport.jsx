@@ -5,6 +5,8 @@ import { MessageCircle, Phone, HelpCircle, Send, ArrowRight } from 'lucide-react
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/Textarea';
+import { useTranslation } from "react-i18next";
+
 import {
   Accordion,
   AccordionContent,
@@ -23,6 +25,8 @@ import { useAuthStore } from '@/lib/useAuthStore';
 import { toast } from 'react-toastify';
 
 export function Support() {
+   const { t } = useTranslation();
+
   const navigate = useRouter();
   const { user } = useAuthStore();
   const [issueType, setIssueType] = useState('');
@@ -93,7 +97,7 @@ const handleSubmitIssue = async () => {
           className="flex items-center gap-2 text-gray-600 hover:text-[#C7A76C] mb-8 transition-colors group"
         >
           <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Dashboard</span>
+          <span>{t("Back to Dashboard")}</span>
         </button>
 
         {/* Header */}
@@ -101,9 +105,9 @@ const handleSubmitIssue = async () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#C7A76C]/10 rounded-full -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#C7A76C]/10 rounded-full -ml-24 -mb-24"></div>
           <div className="relative">
-            <h1 className="text-3xl text-white mb-2">Support Center</h1>
+            <h1 className="text-3xl text-white mb-2">{t("Support Center")}</h1>
             <p className="text-white/70">
-              We're here to help with any questions or issues
+              {t("We're here to help with any questions or issues")}
             </p>
           </div>
         </div>
@@ -115,15 +119,15 @@ const handleSubmitIssue = async () => {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <MessageCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="mb-2 text-[#1B2A3D]">WhatsApp Support</h3>
+              <h3 className="mb-2 text-[#1B2A3D]">{t("WhatsApp Support")}</h3>
               <p className="text-sm text-gray-500 mb-4">
-                Chat with us instantly 
+                {t("Chat with us instantly")}
               </p>
               <Button
                 onClick={handleWhatsApp}
                 className="w-full bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all"
               >
-                Open WhatsApp
+                {t("Open WhatsApp")}
               </Button>
             </CardContent>
           </Card>
@@ -134,9 +138,9 @@ const handleSubmitIssue = async () => {
               <div className="w-16 h-16 bg-[#C7A76C]/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <Phone className="w-8 h-8 text-[#C7A76C]" />
               </div>
-              <h3 className="mb-2 text-[#1B2A3D]">Call Support</h3>
+              <h3 className="mb-2 text-[#1B2A3D]">{t("Call Support")}</h3>
               <p className="text-sm text-gray-500 mb-4">
-                Speak directly with our team
+                {t("Speak directly with our team")}
               </p>
               <Button
                 onClick={handleCall}
@@ -153,9 +157,9 @@ const handleSubmitIssue = async () => {
               <div className="w-16 h-16 bg-[#F2EDE3] rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                 <HelpCircle className="w-8 h-8 text-[#C7A76C]" />
               </div>
-              <h3 className="mb-2 text-[#1B2A3D]">FAQ</h3>
+              <h3 className="mb-2 text-[#1B2A3D]">{t("FAQ")}</h3>
               <p className="text-sm text-gray-500 mb-4">
-                Find answers to common questions
+                {t("Find answers to common questions")}
               </p>
               <Button
                 variant="outline"
@@ -166,7 +170,7 @@ const handleSubmitIssue = async () => {
                     ?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Browse FAQs
+                {t("Browse FAQs")}
               </Button>
             </CardContent>
           </Card>
@@ -175,26 +179,26 @@ const handleSubmitIssue = async () => {
         {/* Issue Report Form */}
         <Card className="mb-8 border-none shadow-lg">
           <CardHeader className="border-b border-gray-100">
-            <CardTitle className="text-[#1B2A3D]">Report an Issue</CardTitle>
+            <CardTitle className="text-[#1B2A3D]">{t("Report an Issue")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm text-[#1B2A3D] font-medium">Issue Type</label>
+              <label className="text-sm text-[#1B2A3D] font-medium">{t("Issue Type")}</label>
               <Select value={issueType} onValueChange={setIssueType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select issue type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Ride Issue">Ride Issue</SelectItem>
-                  <SelectItem value="Payment Issue">Payment Issue</SelectItem>
-                  <SelectItem value="Package Issue">Package Issue</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
+                  <SelectItem value="Ride Issue">{t("Ride Issue")}</SelectItem>
+                  <SelectItem value="Payment Issue">{t("Payment Issue")}</SelectItem>
+                  <SelectItem value="Package Issue">{t("Package Issue")}</SelectItem>
+                  <SelectItem value="Other">{t("Other")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm text-[#1B2A3D] font-medium">Describe Your Issue</label>
+              <label className="text-sm text-[#1B2A3D] font-medium">{t("Describe Your Issue")}</label>
               <Textarea
                 placeholder="Please provide as much detail as possible..."
                 value={message}
@@ -212,7 +216,7 @@ const handleSubmitIssue = async () => {
   {submitting ? "Submitting..." : (
     <>
       <Send className="mr-2 w-4 h-4" />
-      Submit Issue
+      {t("Submit Issue")}
     </>
   )}
 </Button>
@@ -223,7 +227,7 @@ const handleSubmitIssue = async () => {
         {/* FAQ Section */}
         <Card id="faq-section" className="border-none shadow-lg">
           <CardHeader className="border-b border-gray-100">
-            <CardTitle className="text-[#1B2A3D]">Frequently Asked Questions</CardTitle>
+            <CardTitle className="text-[#1B2A3D]">{t("Frequently Asked Questions")}</CardTitle>
           </CardHeader>
           <CardContent>
             {/* <Accordion type="single" collapsible className="w-full">
@@ -235,9 +239,9 @@ const handleSubmitIssue = async () => {
               ))}
             </Accordion> */}
             {loadingFaqs ? (
-  <p className="text-center py-4 text-gray-500">Loading FAQs...</p>
+  <p className="text-center py-4 text-gray-500">{t("Loading FAQs...")}</p>
 ) : faqs.length === 0 ? (
-  <p className="text-center py-4 text-gray-500">No FAQs found.</p>
+  <p className="text-center py-4 text-gray-500">{t("No FAQs found.")}</p>
 ) : (
   <Accordion type="single" collapsible className="w-full">
     {faqs.map((faq, index) => (

@@ -24,7 +24,8 @@
 
   "Already have an account?": "Already have an account?",
   "Register": "Register",
-
+  "Book verified vehicles between Makkah, Madinah, and Jeddah with trusted service providers": "Book verified vehicles between Makkah, Madinah, and Jeddah with trusted service providers",
+"Support": "Support",
   "Back to home": "Back to home",
   "Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from experts.": "Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from experts.",
 
@@ -35,15 +36,29 @@
   "Don't have an account?": "Don't have an account?",
 
   "Trip Details": "Trip Details",
-
+ "Return Date": "Return Date",
   "Confirm": "Confirm",
-
+  "Departure Date": "Departure Date",
+"Return Time": "Return Time",
   "Plan Your Journey": "Plan Your Journey",
   "Select your route and preferred travel time": "Select your route and preferred travel time",
-
+ "Choose Your Vehicle": "Choose Your Vehicle",
   "Trip Type": "Trip Type",
+  "Group Size": "Group Size",
+  "Language": "Language",
   "One Way": "One Way",
+   "Selected": "Selected",
+  "Continue": "Continue",
+  "per person": "per person",
+  
+"Book This Package": "Book This Package",
+"Need help? Contact our support team for assistance.": "Need help? Contact our support team for assistance.",
+  "Review Your Booking": "Review Your Booking",
+  "Please verify all details before confirming": "Please verify all details before confirming",
+    "Driver Assignment": "Driver Assignment",
+     "Confirm Booking": "Confirm Booking",
   "Round Trip": "Round Trip",
+   "Select a comfortable vehicle for your journey": "Select a comfortable vehicle for your journey",
 
   "Travel Date": "Travel Date",
 
@@ -59,8 +74,49 @@
   "AM/PM": "AM/PM",
 
   "Continue to Vehicle Selection": "Continue to Vehicle Selection",
+ "Book verified vehicles between Makkah, Madinah, and": "Book verified vehicles between Makkah, Madinah, and",
+  "Jeddah": "Jeddah",
+  "~ Travel with Ease ~": "~ Travel with Ease ~",
+ 
+  "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks.": "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks.",
 
+  "Choose the vehicle that suits your comfort and group size.": "Choose the vehicle that suits your comfort and group size.",
+  
+  "Enjoy reliable travel with trusted drivers and instant WhatsApp updates.": "Enjoy reliable travel with trusted drivers and instant WhatsApp updates.",
+ 
+  "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments.": "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments.",
+    "~ Choose The Right ~": "~ Choose The Right ~",
+  "Vehicle For Your Journey": "Vehicle For Your Journey",
+  "From luxury sedans to spacious coasters, select the ride that best suits your comfort and group size.": "From luxury sedans to spacious coasters, select the ride that best suits your comfort and group size.",
+  "Coaster": "Coaster",
+  "GMC": "GMC",
+  "Lexus": "Lexus",
+  "Staria": "Staria",
+  "~ Why Haramain ~": "~ Why Haramain ~",
+  "Trust Way To Haramain": "Trust Way To Haramain",
+  "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive.": "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive.",
+  "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless.": "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless.",
+  "Pilgrims in front of hotel": "Pilgrims in front of hotel",
+   "~ For Travel ~": "~ For Travel ~",
+  "Agents Group": "Agents Group",
+  "Organizers": "Organizers",
+  "Whether you handle small groups or large delegations, our platform simplifies coordination, payments, and communication — all in one place.": "Whether you handle small groups or large delegations, our platform simplifies coordination, payments, and communication — all in one place.",
+  "Join an Agent": "Join an Agent",
+  "Background Banner": "Background Banner",
+  "Agent": "Agent",
+   "~ What Our ~": "~ What Our ~",
+  "Travelers Say": "Travelers Say",
+  "Trusted by pilgrims for safe, comfortable, and reliable travel between Makkah, Madinah, and Jeddah, with verified vehicles and instant WhatsApp confirmations.": "Trusted by pilgrims for safe, comfortable, and reliable travel between Makkah, Madinah, and Jeddah, with verified vehicles and instant WhatsApp confirmations.",
+  "Ahmed R., Jeddah": "Ahmed R., Jeddah",
+  "Umrah Traveler": "Umrah Traveler",
+  "Kaaba": "Kaaba",
+  "with trusted service providers": "with trusted service providers",
+  "Trusted by": "Trusted by",
+  "500+ clients": "500+ clients",
+  "all over the world": "all over the world",
   "Support Center": "Support Center",
+  "Hajj & Umrah": "Hajj & Umrah",
+  "Transportation Booking": "Transportation Booking",
 
   "We're here to help with any questions or issues": "We're here to help with any questions or issues",
 
@@ -101,10 +157,16 @@
   "Our support team is here to help you find the perfect transport partner for your journey": "Our support team is here to help you find the perfect transport partner for your journey",
 
   "Contact Support": "Contact Support",
-
+"Profile": "Profile",
   "Profile & Settings": "Profile & Settings",
   "Manage your account and preferences": "Manage your account and preferences",
-
+ "Way To Haramain Logo": "Way To Haramain Logo",
+  "How It Works": "How It Works",
+  "Vehicle Categories": "Vehicle Categories",
+  "Why Choose Us": "Why Choose Us",
+  "Copyright": "Copyright",
+  "Way To Haramain": "Way To Haramain",
+  "support_email": "support@waytoharamain.com",
   "Profile Information": "Profile Information",
   "Verified User": "Verified User",
 
@@ -186,10 +248,11 @@
   "Limited Time Offer": "Limited Time Offer",
   "Umrah Season Special": "Umrah Season Special",
   "Book your spiritual journey with exclusive rates": "Book your spiritual journey with exclusive rates",
-
+"Recommended Packages": "Recommended Packages",
   "Logout": "Logout",
   "Quick Actions": "Quick Actions",
   "Book a Ride": "Book a Ride",
+  "Get up to 25% off on selected tour packages this month": "Get up to 25% off on selected tour packages this month",
   "Schedule your next journey": "Schedule your next journey",
   "View My Rides": "View My Rides",
   "Track all your bookings": "Track all your bookings",

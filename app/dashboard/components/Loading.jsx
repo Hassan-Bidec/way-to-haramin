@@ -1,6 +1,6 @@
 // components/Loading.jsx
 import React from "react";
-
+import "../../../src/lib/i18n"; 
 export default function Loading({ text = "Loading..." }) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">

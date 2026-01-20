@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Gift, Star, Clock, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
 
 const offers = [
   {
@@ -45,6 +47,7 @@ const offers = [
 
 export default function OffersBanner() {
   const [currentIndex, setCurrentIndex] = useState(0);
+ const { t } = useTranslation();
 
   // Automatic slideshow
   useEffect(() => {
@@ -66,11 +69,11 @@ export default function OffersBanner() {
 
       {/* Banner Text */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 lg:px-16">
-        <p className="text-white text-lg lg:text-xl mb-3">{currentOffer.subtitle}</p>
+        <p className="text-white text-lg lg:text-xl mb-3">{t(currentOffer.subtitle)}</p>
         <h1 className="text-white text-4xl lg:text-6xl mb-4 font-bold leading-tight">
-          {currentOffer.title}
+          {t(currentOffer.title)}
         </h1>
-        <p className="text-white text-lg lg:text-xl max-w-xl">{currentOffer.description}</p>
+        <p className="text-white text-lg lg:text-xl max-w-xl">{t(currentOffer.description)}</p>
       </div>
     </div>
   );

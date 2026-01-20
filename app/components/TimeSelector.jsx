@@ -3,12 +3,14 @@
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/app/dashboard/ui/sellect";
 import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import {useTranslation} from 'react-i18next';
+
 
 export default function TimeSelector({ selectedDate, timeSlot, setTimeSlot }) {
   const [allowedHours, setAllowedHours] = useState([]);
   const [allowedMinutes, setAllowedMinutes] = useState(['00', '15', '30', '45']);
   const [allowedPeriods, setAllowedPeriods] = useState(['AM', 'PM']);
-
+  const {t} = useTranslation();
   useEffect(() => {
     updateAllowedTime();
   }, [selectedDate]);
@@ -81,78 +83,79 @@ export default function TimeSelector({ selectedDate, timeSlot, setTimeSlot }) {
 
   return (
     <div className="space-y-2">
-      <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
-        <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
-        Start Time
-      </label>
+  <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
+    <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
+    {t("Start Time")}
+  </label>
 
-      <div className="grid grid-cols-3 gap-2">
-        {/* Hour */}
-        <Select
-          value={timeSlot.split(":")[0] || ""}
-          onValueChange={(hour) => {
-            const minute = timeSlot.split(":")[1]?.split(" ")[0] || "00";
-            const period = timeSlot.split(" ")[1] || "AM";
-            handleTimeSelect(hour, minute, period);
-          }}
-        >
-          <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
-            <SelectValue placeholder="Hour" />
-          </SelectTrigger>
+  <div className="grid grid-cols-3 gap-2">
+    {/* Hour */}
+    <Select
+      value={timeSlot.split(":")[0] || ""}
+      onValueChange={(hour) => {
+        const minute = timeSlot.split(":")[1]?.split(" ")[0] || "00";
+        const period = timeSlot.split(" ")[1] || "AM";
+        handleTimeSelect(hour, minute, period);
+      }}
+    >
+      <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
+        <SelectValue placeholder={t("Hour")} />
+      </SelectTrigger>
 
-          <SelectContent>
-            {allowedHours.map((hour) => (
-              <SelectItem key={hour} value={hour}>
-                {hour}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <SelectContent>
+        {allowedHours.map((hour) => (
+          <SelectItem key={hour} value={hour}>
+            {hour}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
 
-        {/* Minute */}
-        <Select
-          value={timeSlot.split(":")[1]?.split(" ")[0] || ""}
-          onValueChange={(minute) => {
-            const hour = timeSlot.split(":")[0] || allowedHours[0] || "01";
-            const period = timeSlot.split(" ")[1] || allowedPeriods[0] || "AM";
-            setTimeSlot(`${hour}:${minute} ${period}`);
-          }}
-        >
-          <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
-            <SelectValue placeholder="Min" />
-          </SelectTrigger>
+    {/* Minute */}
+    <Select
+      value={timeSlot.split(":")[1]?.split(" ")[0] || ""}
+      onValueChange={(minute) => {
+        const hour = timeSlot.split(":")[0] || allowedHours[0] || "01";
+        const period = timeSlot.split(" ")[1] || allowedPeriods[0] || "AM";
+        setTimeSlot(`${hour}:${minute} ${period}`);
+      }}
+    >
+      <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
+        <SelectValue placeholder={t("Min")} />
+      </SelectTrigger>
 
-          <SelectContent>
-            {allowedMinutes.map((minute) => (
-              <SelectItem key={minute} value={minute}>
-                {minute}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <SelectContent>
+        {allowedMinutes.map((minute) => (
+          <SelectItem key={minute} value={minute}>
+            {minute}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
 
-        {/* AM / PM */}
-        <Select
-          value={timeSlot.split(" ")[1] || ""}
-          onValueChange={(period) => {
-            const hour = timeSlot.split(":")[0] || allowedHours[0] || "01";
-            const minute = timeSlot.split(":")[1]?.split(" ")[0] || "00";
-            setTimeSlot(`${hour}:${minute} ${period}`);
-          }}
-        >
-          <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
-            <SelectValue placeholder="AM/PM" />
-          </SelectTrigger>
+    {/* AM / PM */}
+    <Select
+      value={timeSlot.split(" ")[1] || ""}
+      onValueChange={(period) => {
+        const hour = timeSlot.split(":")[0] || allowedHours[0] || "01";
+        const minute = timeSlot.split(":")[1]?.split(" ")[0] || "00";
+        setTimeSlot(`${hour}:${minute} ${period}`);
+      }}
+    >
+      <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C]">
+        <SelectValue placeholder={t("AM/PM")} />
+      </SelectTrigger>
 
-          <SelectContent>
-            {allowedPeriods.map((p) => (
-              <SelectItem key={p} value={p}>
-                {p}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
+      <SelectContent>
+        {allowedPeriods.map((p) => (
+          <SelectItem key={p} value={p}>
+            {p}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  </div>
+</div>
+
   );
 }

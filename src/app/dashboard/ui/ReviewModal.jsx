@@ -6,15 +6,17 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
+} from "./dialog";
 import { toast } from "sonner";
 import { Button } from "./button";
 import { Textarea } from "./Textarea";
+import { useTranslation } from "react-i18next";
 
 export function ReviewModal({ open, onClose, rideName, onSubmit, loading }) {
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState("");
+ const { t } = useTranslation();
 
   useEffect(() => {
     if (!open) {
@@ -36,7 +38,7 @@ export function ReviewModal({ open, onClose, rideName, onSubmit, loading }) {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Leave Feedback</DialogTitle>
+          <DialogTitle>{t("Leave Feedback")}</DialogTitle>
           <DialogDescription>
             {rideName ? `How was your ride ${rideName}?` : "How was your ride?"}
           </DialogDescription>
@@ -45,7 +47,7 @@ export function ReviewModal({ open, onClose, rideName, onSubmit, loading }) {
         <div className="space-y-6 py-4">
           {/* Star Rating */}
           <div className="flex flex-col items-center gap-4">
-            <p>Rate your experience</p>
+            <p>{t("Rate your experience")}</p>
 
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -71,10 +73,10 @@ export function ReviewModal({ open, onClose, rideName, onSubmit, loading }) {
 
           {/* Comment Box */}
           <div className="space-y-2">
-            <label htmlFor="comment">Additional Comments</label>
+            <label htmlFor="comment">{t("Additional Comments")}</label>
             <Textarea
               id="comment"
-              placeholder="Tell us more about your experience..."
+              placeholder={t("Tell us more about your experience...")}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               rows={4}
@@ -84,7 +86,7 @@ export function ReviewModal({ open, onClose, rideName, onSubmit, loading }) {
           {/* Actions */}
           <div className="flex gap-3">
             <Button variant="outline" onClick={onClose} className="flex-1">
-              Cancel
+              {t("Cancel")}
             </Button>
 
             <Button

@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import "../../../lib/i18n";
+
 import {
   ArrowRight,
   ArrowLeft,
@@ -21,13 +23,15 @@ import Link from "next/link";
 import { getBookingParams, getPartnersWithPackages } from "@/lib/api";
 import { Image_URL } from "@/config/constants";
 import Loading from "../components/Loading";
-
+import { useTranslation } from "react-i18next";
+import "../../../src/lib/i18n";
 export default function VendorDetail({ vendorId }) {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
   const [vendorDetail, setVendorDetail] = useState(null);
+ const { t } = useTranslation();
 
   useEffect(() => {
     const fetchPartners = async () => {
@@ -92,9 +96,9 @@ export default function VendorDetail({ vendorId }) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-500 mb-4">Vendor not found</p>
+          <p className="text-gray-500 mb-4">{t("Vendor not found")}</p>
           <Button onClick={() => router.push("/Service")}>
-            Back to Vendors
+            {t("Back to Vendors")}
           </Button>
         </div>
       </div>
@@ -166,14 +170,14 @@ export default function VendorDetail({ vendorId }) {
           className="flex items-center gap-2 text-gray-600 hover:text-[#0E3C2F] mb-6 transition-colors group"
         >
           <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Service Providers</span>
+          <span>{t("Back to Service Providers")}</span>
         </button>
 
         {/* Vendor Description */}
         <Card className="mb-8 border-none shadow-sm">
           <CardContent className="p-6">
             <h2 className="text-lg font-medium text-[#1B2A3D] mb-3">
-              About {vendorDetail.name}
+              {t("About")} {vendorDetail.name}
             </h2>
             <p className="text-gray-600 leading-relaxed">
               {vendorDetail.description}
@@ -250,7 +254,7 @@ export default function VendorDetail({ vendorId }) {
                   <div className="flex lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 lg:min-w-[200px]">
                     <div className="text-left lg:text-right">
                       <p className="text-sm text-gray-500 mb-1">
-                        Starting from
+                        {t("Starting from")}
                       </p>
                       <div className="flex items-center gap-1 justify-start lg:justify-end">
                         {/* <DollarSign className="w-5 h-5 text-[#C7A76C]" /> */}
@@ -267,7 +271,7 @@ export default function VendorDetail({ vendorId }) {
                                             `}
                     >
                       <Button className="bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white hover:shadow-lg transition-all whitespace-nowrap">
-                        View Details
+                        {t("View Details")}
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
                     </Link>
@@ -286,10 +290,10 @@ export default function VendorDetail({ vendorId }) {
           <CardContent className="p-8 text-center">
             <Phone className="w-12 h-12 mx-auto mb-4 text-[#C7A76C]" />
             <h3 className="text-xl font-medium text-[#1B2A3D] mb-2">
-              Need Special Services?
+              {t("Need Special Services?")}
             </h3>
             <p className="text-gray-600 mb-4">
-              Contact {vendorDetail.name} directly for customized arrangements
+              {t("Contact")} {vendorDetail.name} {t("directly for customized arrangements")}
             </p>
             <Button
               variant="outline"
@@ -300,7 +304,7 @@ export default function VendorDetail({ vendorId }) {
               }}
             >
               <Phone className="mr-2 w-4 h-4" />
-              Call {vendorDetail.phone}
+              {t("Call")} {vendorDetail.phone}
             </Button>
           </CardContent>
         </Card>

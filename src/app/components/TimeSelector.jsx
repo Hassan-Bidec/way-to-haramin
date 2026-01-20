@@ -1,6 +1,6 @@
 "use client";
 
-import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "@/app/dashboard/ui/sellect";
+import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from "../dashboard/ui/sellect";
 import { CalendarIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 

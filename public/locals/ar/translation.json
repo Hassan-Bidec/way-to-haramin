@@ -12,40 +12,47 @@
 
   "City": "المدينة",
   "Select city": "اختر المدينة",
+  "Book verified vehicles between Makkah, Madinah, and Jeddah with trusted service providers":"احجز مركبات موثوقة بين مكة والمدينة وجدة مع مزودي خدمة موثوقين",
 
   "Residential Address": "العنوان السكني",
 
   "Passport Number": "رقم جواز السفر",
   "Passport Expiry Date": "تاريخ انتهاء جواز السفر",
-
+  "Don’t have an account":"ما عندك حساب؟",
   "Email": "البريد الإلكتروني",
   "Password": "كلمة المرور",
   "Confirm password": "تأكيد كلمة المرور",
+  "Register now and manage your travel bookings, payments, and groups all in one place.": "سجّل الآن وأدِر حجوزاتك للسفر والمدفوعات والمجموعات جميعها في مكان واحد",
 
   "Already have an account?": "هل لديك حساب؟",
-  "Register": "التسجيل",
-
-  "Back to home": "الرجوع إلى الرئيسية",
+  "Register":"التسجيل",
+  "Back to home":"الرجوع إلى الرئيسية",
   "Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from experts.": "لنصنع شيئًا استثنائيًا معًا. ابدأ خطوتك الأولى نحو التحول الرقمي مع استشارة مجانية من الخبراء",
-
-  "Welcome Back!": "مرحبًا بعودتك!",
+ "Recommended Packages": "الباقات الموصى بها",
+  "Welcome Back!": "مرحبًا بعودتك",
   "Login to manage your travel bookings, payments, and groups all in one place.": "سجّل الدخول لإدارة حجوزات سفرك، ومدفوعاتك، ومجموعاتك كل ذلك في مكان واحد",
-
+"Get up to 25% off on selected tour packages this month": "احصل على خصم يصل إلى 25٪ على باقات الرحلات المختارة هذا الشهر",
   "Login": "تسجيل الدخول",
   "Don't have an account?": "ليس لديك حساب؟",
+   "Selected": "تم الاختيار",
+  "Continue": "متابعة",
  
 
   "Trip Details": "تفاصيل الرحلة",
 
   "Confirm": "تأكيد",
-
+  "Choose Your Vehicle": "اختر مركبتك",
+  "Select a comfortable vehicle for your journey": "اختر مركبة مريحة لرحلتك",
+ "Return Date": "تاريخ العودة",
   "Plan Your Journey": "خطّط رحلتك",
   "Select your route and preferred travel time": "اختر مسارك ووقت السفر المفضل",
-
+ "Departure Date": "تاريخ المغادرة",
+"Return Time": "وقت العودة",
   "Trip Type": "نوع الرحلة",
   "One Way": "ذهاب فقط",
+  "Driver Assignment": "تعيين السائق",
   "Round Trip": "ذهاب وعودة",
-
+"Confirm Booking": "تأكيد الحجز",
   "Travel Date": "تاريخ السفر",
 
   "Departure": "مغادرة",
@@ -62,8 +69,15 @@
   "AM/PM": "ص / م",
 
   "Continue to Vehicle Selection": "تابع لاختيار المركبة",
- 
-  "Support Center": "مركز الدعم",
+ "Profile": "الملف الشخصي",
+ "Way To Haramain Logo": "شعار طريق الحرمين",
+  "How It Works": "كيف تعمل",
+  "Vehicle Categories": "فئات المركبات",
+  "Why Choose Us": "لماذا تختارنا",
+  "Copyright": "حقوق الطبع والنشر",
+  "Way To Haramain": "طريق الحرمين",
+  "support_email": "support@waytoharamain.com",
+  "Support": "الدعم",
 
   "We're here to help with any questions or issues": "نحن هنا لمساعدتك في أي أسئلة أو مشكلات",
 
@@ -156,6 +170,15 @@
   "Cancel": "إلغاء",
   "View Details": "عرض التفاصيل",
   "Seamless": "سلس وسهل",
+  "Hajj & Umrah": "الحج والعمرة",
+  "Transportation Booking": "حجز النقل",
+   "Book verified vehicles between Makkah, Madinah, and": "احجز مركبات موثوقة بين مكة والمدينة و",
+  "Jeddah": "جدة",
+  "Trusted by": "موثوق من قبل",
+  "500+ clients": "أكثر من 500 عميل",
+  "all over the world": "حول العالم",
+   "~ Travel with Ease ~": "~ سافر بسهولة ~",
+  "with trusted service providers": "مع مزودي خدمة موثوقين",
 
   "Hajj & Umrah Transportation Booking": "حج وعمرہ – حجز النقل",
   "Book verified vehicles between Makkah, Madinah, and Jeddah with trusted service providers": "احجز سيارات موثوقة بين مكة، المدينة وجدة مع مزوّدي خدمة معتمدين",
@@ -163,6 +186,38 @@
 
   "Booking": "الحجز",
   "Register as Vendor": "التسجيل كبائع",
+   "~ Choose The Right ~": "~ اختر الأنسب ~",
+  "Vehicle For Your Journey": "المركبة المناسبة لرحلتك",
+  "From luxury sedans to spacious coasters, select the ride that best suits your comfort and group size.": "من السيارات الفاخرة إلى الحافلات الواسعة، اختر الرحلة التي تناسب راحتك وحجم مجموعتك.",
+  "Coaster": "كوستر",
+  "GMC": "جي إم سي",
+  "Lexus": "لكزس",
+  "Staria": "ستاريا",
+  "~ Why Haramain ~": "~ لماذا الحرمين ~",
+  "Trust Way To Haramain": "طريقة موثوقة إلى الحرمين",
+  "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive.": "في Way To Haramain، يتم التعامل مع كل رحلة بالاحترام والرعاية التي تستحقها. نحن نجمع بين التكنولوجيا ومزودي الخدمات الموثوقين والدعم البشري لضمان أن يحظى الحجاج براحة البال من لحظة الحجز حتى لحظة الوصول.",
+  "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless.": "من السائقين المختارين بعناية إلى الحجز الآمن عبر الإنترنت والدعم على مدار الساعة، تم تصميم كل تفصيل لجعل رحلتك المقدسة خالية من التوتر وسلسة.",
+  "Pilgrims in front of hotel": "الحجاج أمام الفندق",
+  "~ For Travel ~": "~ للسفر ~",
+  "Agents Group": "مجموعة الوكلاء",
+  "Organizers": "المنظمون",
+  "Whether you handle small groups or large delegations, our platform simplifies coordination, payments, and communication — all in one place.": "سواء كنت تتعامل مع مجموعات صغيرة أو وفود كبيرة، فإن منصتنا تُبسّط التنسيق والمدفوعات والتواصل — كل ذلك في مكان واحد.",
+  "Join an Agent": "انضم إلى وكيل",
+  "Background Banner": "لافتة خلفية",
+  "Agent": "وكيل",
+   "~ What Our ~": "~ آراء الحجاج ~",
+  "Travelers Say": "ماذا يقول المسافرون",
+  "Trusted by pilgrims for safe, comfortable, and reliable travel between Makkah, Madinah, and Jeddah, with verified vehicles and instant WhatsApp confirmations.": "موثوق من الحجاج للسفر الآمن والمريح بين مكة والمدينة وجدة، مع مركبات موثوقة وتأكيدات فورية عبر الواتساب.",
+  "Ahmed R., Jeddah": "أحمد ر., جدة",
+  "Umrah Traveler": "مسافر عمرة",
+  "Kaaba": "الكعبة",
+  "Find your ideal route between Makkah, Madinah, and Jeddah in a few clicks.": "اعثر على مسارك المثالي بين مكة والمدينة وجدة ببضع نقرات.",
+ 
+  "Choose the vehicle that suits your comfort and group size.": "اختر المركبة التي تناسب راحتك وحجم مجموعتك.",
+
+  "Enjoy reliable travel with trusted drivers and instant WhatsApp updates.": "استمتع بالسفر الموثوق مع سائقين موثوقين وتحديثات فورية عبر واتساب.",
+
+  "Instant ride confirmation with secure Mada, Visa, and Apple Pay payments.": "تأكيد الرحلة الفوري مع مدفوعات آمنة عبر مدى، فيزا، وآبل باي.",
 
   "Travel with Ease": "سافر بسهولة",
   "Makkah & Madinah in 4 Simple Steps": "مكة والمدينة في أربع خطوات بسيطة",
@@ -170,10 +225,16 @@
 
   "Search Your Route": "ابحث عن مسارك",
   "Find your ideal route between Makkah": "اعثر على مسارك المثالي بين مكة",
-
+"Review Your Booking": "مراجعة حجزك",
+  "Please verify all details before confirming": "يرجى التحقق من جميع التفاصيل قبل التأكيد",
   "Select Vehicle": "اختر المركبة",
+  "Book This Package": "احجز هذه الباقة",
+  "per person": "لكل شخص",
+   "Group Size": "حجم المجموعة",
+    "Support Center": "مركز الدعم",
+  "Language": "اللغة",
   "Choose the vehicle that suits your comfort and group size": "اختر المركبة التي تناسب راحتك وعدد أفراد مجموعتك.",
-
+"Need help? Contact our support team for assistance.": "هل تحتاج مساعدة؟ تواصل مع فريق الدعم الخاص بنا للمساعدة.",
   "Travel Comfortably": "سافر براحة",
   "Enjoy reliable travel with trusted drivers and instant": "استمتع برحلة موثوقة مع سائقين معتمدين وتحديثات فورية عبر واتساب",
 

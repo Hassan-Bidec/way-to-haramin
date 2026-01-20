@@ -2,6 +2,7 @@ import { Calendar, MapPin, Car, User as UserIcon, ArrowRight, Repeat } from "luc
 import { Card, CardContent } from "./Card";
 import { Badge } from "./badgeVariants";
 import { Button } from "./button";
+import { useTranslation } from "react-i18next";
 
 
 export function RideCard({
@@ -18,6 +19,7 @@ export function RideCard({
   onConfirm,
   type
 }) {
+  const { t } = useTranslation();
 
   // Define mapping for status text
 const statusText = {
@@ -76,12 +78,12 @@ const statusColors = {
 
         <div className="grid grid-cols-2 gap-4 pt-4 border-t">
           <div>
-            <p className="text-sm text-muted-foreground mb-1">Vehicle</p>
+            <p className="text-sm text-muted-foreground mb-1">{t("Vehicle")}</p>
             <p>{vehicleType}</p>
           </div>
 
           <div>
-            <p className="text-sm text-muted-foreground mb-1">Driver</p>
+            <p className="text-sm text-muted-foreground mb-1">{t("Driver")}</p>
             <div className="flex items-center gap-1">
               <UserIcon className="w-4 h-4" />
               <span>{driverName || "To be assigned"}</span>
@@ -89,7 +91,7 @@ const statusColors = {
           </div>
 { price > 0 &&
           <div>
-  <p className="text-sm text-muted-foreground mb-1">Offered Price</p>
+  <p className="text-sm text-muted-foreground mb-1">{t("Offered Price")}</p>
   <p className="font-semibold text-[#0E3C2F]">
     {price ? `SAR ${price}` : "Not Available"}
   </p>
@@ -100,7 +102,7 @@ const statusColors = {
         {status == 5 && onFeedback && (
           <div className="mt-4">
             <Button variant="outline" className="w-full" onClick={onFeedback}>
-              Leave Feedback
+              {t("Leave Feedback")}
             </Button>
           </div>
         )}
@@ -113,7 +115,7 @@ const statusColors = {
               className="w-full bg-[#FF0000] text-white textdestructive"
               onClick={onCancel}
             >
-              Cancel Ride
+              {t("Cancel Ride")}
             </Button>
           </div>
         )}
@@ -124,7 +126,7 @@ const statusColors = {
       className="w-full bg-[#0E3C2F] hover:bg-[#0E3C2F]/90 text-white"
       onClick={onConfirm}
     >
-      Confirm Ride
+      {t("Confirm Ride")}
     </Button>
   </div>
 )}

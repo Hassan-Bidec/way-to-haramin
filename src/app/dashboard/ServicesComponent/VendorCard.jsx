@@ -4,6 +4,8 @@ import { Star, Phone, Building2 } from "lucide-react";
 import { Card, CardContent } from "../ui/Card";
 import { Badge } from "../ui/badgeVariants";
 import { ImageWithFallback } from "./ImageWithFallback";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
 
 
 export default function VendorCard({
@@ -15,6 +17,8 @@ export default function VendorCard({
   badges = [],
   onClick,
 }) {
+  
+  const { t } = useTranslation();
   return (
     <Card
       className="overflow-hidden cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02] border border-gray-200 -mb-2"
@@ -51,7 +55,7 @@ export default function VendorCard({
                 </span>
               </div>
               <span className="text-xs text-gray-500">
-                ({reviews} reviews)
+                ({reviews} {t("reviews")})
               </span>
             </div>
 

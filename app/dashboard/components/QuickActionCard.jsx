@@ -4,44 +4,46 @@ import React from "react";
 import { Calendar, Car, Map, MessageCircle } from "lucide-react";
 import { Card } from "../ui/Card";
 import { useRouter } from "next/navigation";
-
-const quickActionsData = [
-  {
-    title: "Book a Ride",
-    description: "Schedule your next journey",
-    icon: Car,
-    gradient: "bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80",
-    path: "/Book",
-  },
-  {
-    title: "View My Rides",
-    description: "Track all your bookings",
-    icon: Calendar,
-    gradient: "bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80",
-    path: "/myrides",
-  },
-  {
-    title: "Services Provider",
-    description: "Explore tour packages",
-    icon: Map,
-    gradient: "bg-gradient-to-br from-[#8B7355] to-[#8B7355]/80",
-    path: "/Service",
-  },
-  // {
-  //   title: "Custom Package",
-  //   description: "Build your own journey",
-  //   icon: MessageCircle,
-  //   gradient: "bg-gradient-to-br from-[#6B9080] to-[#6B9080]/80",
-  //   path: "/custom-package",
-  // },
-];
+import { useTranslation } from "react-i18next"; // ✅
 
 export default function QuickActions() {
   const router = useRouter();
+  const { t } = useTranslation(); // ✅
+
+  const quickActionsData = [
+    {
+      title: t("Book a Ride"),
+      description: t("Schedule your next journey"),
+      icon: Car,
+      gradient: "bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80",
+      path: "/Book",
+    },
+    {
+      title: t("View My Rides"),
+      description: t("Track all your bookings"),
+      icon: Calendar,
+      gradient: "bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80",
+      path: "/myrides",
+    },
+    {
+      title: t("Services Provider"),
+      description: t("Explore tour packages"),
+      icon: Map,
+      gradient: "bg-gradient-to-br from-[#8B7355] to-[#8B7355]/80",
+      path: "/Service",
+    },
+    // {
+    //   title: t("Custom Package"),
+    //   description: t("Build your own journey"),
+    //   icon: MessageCircle,
+    //   gradient: "bg-gradient-to-br from-[#6B9080] to-[#6B9080]/80",
+    //   path: "/custom-package",
+    // },
+  ];
 
   return (
     <section>
-      <h1 className="text-[#0E3C2F] mb-6">Quick Actions</h1>
+      <h1 className="text-[#0E3C2F] mb-6">{t("Quick Actions")}</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
                    gap-y-6 justify-items-center gap-10">
@@ -76,7 +78,5 @@ export default function QuickActions() {
         })}
       </div>
     </section>
-
-
   );
 }

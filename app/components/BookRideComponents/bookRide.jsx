@@ -2,6 +2,7 @@
 import { Button } from '@/app/dashboard/ui/button';
 import { Calendar } from '@/app/dashboard/ui/Calendar';
 import { Card, CardContent } from '@/app/dashboard/ui/Card';
+import {useTranslation} from 'react-i18next';
 import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent } from '@/app/dashboard/ui/sellect';
 // import { SelectContent } from '@radix-ui/react-select';
 import { ArrowRight, Building2, CalendarIcon, Check, Filter, MapPin, Repeat, Search, Star } from 'lucide-react';
@@ -9,6 +10,8 @@ import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useMemo, useState } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../../../src/lib/i18n";
+
 import "./datepicker.css"
 import { Input } from '@/app/dashboard/ui/Input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/app/dashboard/ui/popover';
@@ -51,6 +54,7 @@ const [selectedVehicleImage, setSelectedVehicleImage] = useState("");
   const [hotels, setHotels] = useState([]);
   const [places, setPlaces] = useState([]);
   const [vehicles, setVehicles] = useState([]);
+  const { t} = useTranslation();
 
   // const cities = ['Makkah', 'Madinah', 'Jeddah', 'Jeddah Airport', 'Madinah Airport'];
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -458,67 +462,72 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
   return (
     <div className="min-h-screen bg-background py-4 sm:py-6 lg:py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Back Button */}
-        <button
-          onClick={() => router.push('/dashboard')}
-          className="flex items-center gap-2 text-gray-600 hover:text-[#0E3C2F] mb-6 sm:mb-8 transition-colors group"
-        >
-          <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm sm:text-base">Back to Dashboard</span>
-        </button>
+       {/* Back Button */}
+<button
+  onClick={() => router.push('/dashboard')}
+  className="flex items-center gap-2 text-gray-600 hover:text-[#0E3C2F] mb-6 sm:mb-8 transition-colors group"
+>
+  <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
+  <span className="text-sm sm:text-base">{t("Back to Dashboard")}</span>
+</button>
 
-        {/* Progress Steps */}
-        <div className="mb-6 sm:mb-8 lg:mb-10">
-          <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4">
-            {['Trip Details', 'Select Vehicle', 'Confirm'].map((label, index) => (
-              <div key={label} className="flex items-center">
-                <div className="flex flex-col items-center">
-                  <div
-                    className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 ${step > index + 1
-                      ? 'bg-[#0E3C2F] text-white shadow-lg'
-                      : step === index + 1
-                        ? 'bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80 text-white shadow-xl scale-110'
-                        : 'bg-white border-2 border-gray-200 text-gray-400'
-                      }`}
-                  >
-                    {step > index + 1 ? (
-                      <Check className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-                    ) : (
-                      <span className="text-xs sm:text-sm font-medium">{index + 1}</span>
-                    )}
-                  </div>
-                  <span
-                    className={`mt-1.5 sm:mt-2 text-[10px] sm:text-xs font-medium whitespace-nowrap ${step >= index + 1 ? 'text-[#0E3C2F]' : 'text-gray-400'
-                      }`}
-                  >
-                    {label}
-                  </span>
-                </div>
-                {index < 2 && (
-                  <div
-                    className={`w-8 sm:w-16 lg:w-24 h-0.5 sm:h-1 mx-2 sm:mx-3 lg:mx-4 rounded-full transition-all duration-300 ${step > index + 1 ? 'bg-[#0E3C2F]' : 'bg-gray-200'
-                      }`}
-                  />
-                )}
-              </div>
-            ))}
+{/* Progress Steps */}
+<div className="mb-6 sm:mb-8 lg:mb-10">
+  <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4">
+    {['Trip Details', 'Select Vehicle', 'Confirm'].map((label, index) => (
+      <div key={label} className="flex items-center">
+        <div className="flex flex-col items-center">
+          <div
+            className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 ${
+              step > index + 1
+                ? 'bg-[#0E3C2F] text-white shadow-lg'
+                : step === index + 1
+                  ? 'bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/80 text-white shadow-xl scale-110'
+                  : 'bg-white border-2 border-gray-200 text-gray-400'
+            }`}
+          >
+            {step > index + 1 ? (
+              <Check className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
+            ) : (
+              <span className="text-xs sm:text-sm font-medium">{index + 1}</span>
+            )}
           </div>
+          <span
+            className={`mt-1.5 sm:mt-2 text-[10px] sm:text-xs font-medium whitespace-nowrap ${
+              step >= index + 1 ? 'text-[#0E3C2F]' : 'text-gray-400'
+            }`}
+          >
+            {t(label)}
+          </span>
         </div>
+        {index < 2 && (
+          <div
+            className={`w-8 sm:w-16 lg:w-24 h-0.5 sm:h-1 mx-2 sm:mx-3 lg:mx-4 rounded-full transition-all duration-300 ${
+              step > index + 1 ? 'bg-[#0E3C2F]' : 'bg-gray-200'
+            }`}
+          />
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+
+
 
         {/* Step 1: Trip Details (Route + Date & Time) */}
         {step === 1 && (
           <Card className="border-none shadow-lg bg-white">
             <CardContent className="p-4 sm:p-6 lg:p-8">
               <div className="mb-6 sm:mb-8">
-                <h2 className="text-xl sm:text-2xl text-[#1B2A3D] mb-2">Plan Your Journey</h2>
-                <p className="text-sm sm:text-base text-gray-500">Select your route and preferred travel time</p>
+                <h2 className="text-xl sm:text-2xl text-[#1B2A3D] mb-2">{t("Plan Your Journey")}</h2>
+                <p className="text-sm sm:text-base text-gray-500">{t("Select your route and preferred travel time")}</p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 <div className="space-y-6">
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
-                      Trip Type
+                      {t("Trip Type")}
                     </label>
                     <div className="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-xl">
                       <button
@@ -530,7 +539,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                           }`}
                       >
                         <ArrowRight className="w-4 h-4" />
-                        One Way
+                        {t("One Way")}
                       </button>
                       <button
                         type="button"
@@ -541,7 +550,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                           }`}
                       >
                         <Repeat className="w-4 h-4" />
-                        Round Trip
+                        {t("Round Trip")}
                       </button>
                     </div>
                   </div>
@@ -550,14 +559,14 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm text-gray-600">
                       <MapPin className="w-4 h-4 text-[#C7A76C]" />
-                      Departure
+                      {t("Departure")}
                     </label>
                      <label className="block text-sm text-gray-600 mb-1.5">
-                        Departure City
+                        {t("Departure City")}
                       </label>
                     <Select value={from} onValueChange={setFrom}>
                       <SelectTrigger className="h-11 bg-[#F7F7F9] border-gray-200">
-                        <SelectValue placeholder="Select departure city" />
+                        <SelectValue placeholder={t("Select departure city")} />
                       </SelectTrigger>
                       <SelectContent className="bg-white p-2">
                         {/* Search bar inside dropdown */}
@@ -581,7 +590,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   {from && (
                     <div className="mt-3">
                       <label className="block text-sm text-gray-600 mb-1.5">
-                        Departure Full Address
+                        {t("Departure Full Address")}
                       </label>
                       <Input
                         type="text"
@@ -597,14 +606,14 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   <div className="space-y-2">
                     <label className="flex items-center gap-2 text-sm text-gray-600">
                       <MapPin className="w-4 h-4 text-[#C7A76C]" />
-                      Destination
+                      {t("Destination")}
                     </label>
                      <label className="block text-sm text-gray-600 mb-1.5">
-                      Destination City
+                      {t("Destination City")}
                       </label>
                     <Select value={to} onValueChange={setTo}>
                       <SelectTrigger className="h-11 bg-[#F7F7F9] border-gray-200">
-                        <SelectValue placeholder="Select destination city" />
+                        <SelectValue placeholder={t("Select destination city")} />
                       </SelectTrigger>
                       <SelectContent className="bg-white p-2">
                         {/* Search bar inside dropdown */}
@@ -741,193 +750,190 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
   timeSlot={timeSlot}
   setTimeSlot={setTimeSlot}
 />
-  {tripType === 'round-trip' && (
+ {tripType === 'round-trip' && (
   <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
-                          <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
-                          Return Time
-                        </label>
-                        <div className="grid grid-cols-3 gap-2">
-                          <Select
-                            value={returnTimeSlot.split(':')[0] || ''}
-                            onValueChange={(hour) => {
-                              const minute = returnTimeSlot.split(':')[1]?.split(' ')[0] || '00';
-                              const period = returnTimeSlot.split(' ')[1] || 'AM';
-                              setReturnTimeSlot(`${hour}:${minute} ${period}`);
-                            }}
-                          >
-                            <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
-                              <SelectValue placeholder="Hour" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {Array.from({ length: 12 }, (_, i) => i + 1).map((hour) => (
-                                <SelectItem key={hour} value={hour.toString().padStart(2, '0')}>
-                                  {hour.toString().padStart(2, '0')}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <Select
-                            value={returnTimeSlot.split(':')[1]?.split(' ')[0] || ''}
-                            onValueChange={(minute) => {
-                              const hour = returnTimeSlot.split(':')[0] || '01';
-                              const period = returnTimeSlot.split(' ')[1] || 'AM';
-                              setReturnTimeSlot(`${hour}:${minute} ${period}`);
-                            }}
-                          >
-                            <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
-                              <SelectValue placeholder="Min" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {['00', '15', '30', '45'].map((minute) => (
-                                <SelectItem key={minute} value={minute}>
-                                  {minute}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <Select
-                            value={returnTimeSlot.split(' ')[1] || ''}
-                            onValueChange={(period) => {
-                              const hour = returnTimeSlot.split(':')[0] || '01';
-                              const minute = returnTimeSlot.split(':')[1]?.split(' ')[0] || '00';
-                              setReturnTimeSlot(`${hour}:${minute} ${period}`);
-                            }}
-                          >
-                            <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
-                              <SelectValue placeholder="AM/PM" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="AM">AM</SelectItem>
-                              <SelectItem value="PM">PM</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-  )}
+    <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
+      <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
+      {t("Return Time")}
+    </label>
+    <div className="grid grid-cols-3 gap-2">
+      <Select
+        value={returnTimeSlot.split(':')[0] || ''}
+        onValueChange={(hour) => {
+          const minute = returnTimeSlot.split(':')[1]?.split(' ')[0] || '00';
+          const period = returnTimeSlot.split(' ')[1] || 'AM';
+          setReturnTimeSlot(`${hour}:${minute} ${period}`);
+        }}
+      >
+        <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
+          <SelectValue placeholder={t("Hour")} />
+        </SelectTrigger>
+        <SelectContent>
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((hour) => (
+            <SelectItem key={hour} value={hour.toString().padStart(2, '0')}>
+              {hour.toString().padStart(2, '0')}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select
+        value={returnTimeSlot.split(':')[1]?.split(' ')[0] || ''}
+        onValueChange={(minute) => {
+          const hour = returnTimeSlot.split(':')[0] || '01';
+          const period = returnTimeSlot.split(' ')[1] || 'AM';
+          setReturnTimeSlot(`${hour}:${minute} ${period}`);
+        }}
+      >
+        <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
+          <SelectValue placeholder={t("Min")} />
+        </SelectTrigger>
+        <SelectContent>
+          {['00', '15', '30', '45'].map((minute) => (
+            <SelectItem key={minute} value={minute}>
+              {minute}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select
+        value={returnTimeSlot.split(' ')[1] || ''}
+        onValueChange={(period) => {
+          const hour = returnTimeSlot.split(':')[0] || '01';
+          const minute = returnTimeSlot.split(':')[1]?.split(' ')[0] || '00';
+          setReturnTimeSlot(`${hour}:${minute} ${period}`);
+        }}
+      >
+        <SelectTrigger className="h-12 bg-[#F7F7F9] border-gray-200 hover:border-[#C7A76C] transition-colors">
+          <SelectValue placeholder={t("AM/PM")} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="AM">{t("AM")}</SelectItem>
+          <SelectItem value="PM">{t("PM")}</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  </div>
+)}
+
                   {/* Route error */}
-                  {from && to && (
-                    <div className="p-6 bg-gradient-to-br from-[#F2EDE3] to-[#F7F7F9] rounded-2xl border border-[#C7A76C]/20">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 bg-[#C7A76C] rounded-full"></div>
-                          <span className="text-[#1B2A3D] font-medium">{from}</span>
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-[#C7A76C]" />
-                        <div className="flex items-center gap-3">
-                          <span className="text-[#1B2A3D] font-medium">{to}</span>
-                          <div className="w-3 h-3 bg-[#C7A76C] rounded-full"></div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <p className="text-gray-500 mb-1">From</p>
-                          <p className="text-[#1B2A3D] font-medium">{fromAddress}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-500 mb-1">to</p>
-                          <p className="text-[#1B2A3D] font-medium">{toAddress}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                 {from && to && (
+  <div className="p-6 bg-gradient-to-br from-[#F2EDE3] to-[#F7F7F9] rounded-2xl border border-[#C7A76C]/20">
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-3">
+        <div className="w-3 h-3 bg-[#C7A76C] rounded-full"></div>
+        <span className="text-[#1B2A3D] font-medium">{from}</span>
+      </div>
+      <ArrowRight className="w-5 h-5 text-[#C7A76C]" />
+      <div className="flex items-center gap-3">
+        <span className="text-[#1B2A3D] font-medium">{to}</span>
+        <div className="w-3 h-3 bg-[#C7A76C] rounded-full"></div>
+      </div>
+    </div>
+    <div className="grid grid-cols-2 gap-4 text-sm">
+      <div>
+        <p className="text-gray-500 mb-1">{t("From")}</p>
+        <p className="text-[#1B2A3D] font-medium">{fromAddress}</p>
+      </div>
+      <div>
+        <p className="text-gray-500 mb-1">{t("To")}</p>
+        <p className="text-[#1B2A3D] font-medium">{toAddress}</p>
+      </div>
+    </div>
+  </div>
+)}
+
                 </div>
 
                 {/* Right Column - Date */}
                 <div className="space-y-6">
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
-                      <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
-                      {tripType === 'round-trip' ? 'Departure Date' : 'Travel Date'}
-                    </label>
-                    <div className="bg-[#F7F7F9] p-4 rounded-2xl max-w-[320px]">
-                      <DatePicker
-                        selected={date}
-                        onChange={(date) => setDate(date)}
-                        minDate={new Date(new Date().setHours(0, 0, 0, 0))}
-                        inline
-                        calendarClassName="custom-datepicker"
-                        dayClassName={() => "custom-day"}
-                        renderCustomHeader={({ monthDate, decreaseMonth, increaseMonth }) => (
-                          <div className="flex justify-between items-center px-2 mb-2">
-                            <button
-                              onClick={decreaseMonth}
-                              className="text-gray-500 hover:text-gray-700 mt-1" // <-- arrow slightly lower
-                            >
-                              {"<"}
-                            </button>
-                            <span className="text-gray-700 font-medium">
-                              {monthDate.toLocaleString("default", {
-                                month: "long",
-                                year: "numeric",
-                              })}
-                            </span>
-                            <button
-                              onClick={increaseMonth}
-                              className="text-gray-500 hover:text-gray-700 mt-1" // <-- arrow slightly lower
-                            >
-                              {">"}
-                            </button>
-                          </div>
-                        )}
-                      />
-                    </div>
+  <div className="space-y-2">
+    <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
+      <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
+      {tripType === 'round-trip' ? t('Departure Date') : t('Travel Date')}
+    </label>
+    <div className="bg-[#F7F7F9] p-4 rounded-2xl max-w-[320px]">
+      <DatePicker
+        selected={date}
+        onChange={(date) => setDate(date)}
+        minDate={new Date(new Date().setHours(0, 0, 0, 0))}
+        inline
+        calendarClassName="custom-datepicker"
+        dayClassName={() => "custom-day"}
+        renderCustomHeader={({ monthDate, decreaseMonth, increaseMonth }) => (
+          <div className="flex justify-between items-center px-2 mb-2">
+            <button
+              onClick={decreaseMonth}
+              className="text-gray-500 hover:text-gray-700 mt-1"
+            >
+              {"<"}
+            </button>
+            <span className="text-gray-700 font-medium">
+              {monthDate.toLocaleString("default", {
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
+            <button
+              onClick={increaseMonth}
+              className="text-gray-500 hover:text-gray-700 mt-1"
+            >
+              {">"}
+            </button>
+          </div>
+        )}
+      />
+    </div>
+  </div>
 
-                  </div>
+  {tripType === 'round-trip' && (
+    <div className="space-y-2">
+      <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
+        <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
+        {t('Return Date')}
+      </label>
+      <div className="bg-[#F7F7F9] p-4 rounded-2xl max-w-[320px]">
+        <DatePicker
+          selected={returnDate}
+          onChange={(date) => setReturnDate(date)}
+          minDate={returnDate || tomorrow}
+          inline
+          calendarClassName="custom-datepicker"
+          dayClassName={(day) => {
+            if (day < (date || new Date(new Date().setHours(0, 0, 0, 0)))) {
+              return "custom-day disabled-day";
+            }
+            return "custom-day";
+          }}
+          renderCustomHeader={({ monthDate, decreaseMonth, increaseMonth }) => (
+            <div className="flex justify-between items-center px-2 mb-2">
+              <button
+                onClick={decreaseMonth}
+                className="text-gray-500 hover:text-gray-700 mt-1"
+              >
+                {"<"}
+              </button>
+              <span className="text-gray-700 font-medium">
+                {monthDate.toLocaleString("default", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
+              <button
+                onClick={increaseMonth}
+                className="text-gray-500 hover:text-gray-700 mt-1"
+              >
+                {">"}
+              </button>
+            </div>
+          )}
+        />
+      </div>
+    </div>
+  )}
+</div>
 
-                  {tripType === 'round-trip' && (
-                    <>
-                      <div className="space-y-2">
-                        <label className="flex items-center gap-2 text-sm text-[#1B2A3D] font-medium">
-                          <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
-                          Return Date
-                        </label>
-                        <div className="bg-[#F7F7F9] p-4 rounded-2xl max-w-[320px]">
-                          <DatePicker
-                            selected={returnDate}
-                            onChange={(date) => setReturnDate(date)}
-                            minDate={returnDate || tomorrow}
-                            inline
-                            calendarClassName="custom-datepicker"
-                            dayClassName={(day) => {
-                              // disable color check
-                              if (day < (date || new Date(new Date().setHours(0, 0, 0, 0)))) {
-                                return "custom-day disabled-day";
-                              }
-                              return "custom-day";
-                            }}
-                            renderCustomHeader={({ monthDate, decreaseMonth, increaseMonth }) => (
-                              <div className="flex justify-between items-center px-2 mb-2">
-                                <button
-                                  onClick={decreaseMonth}
-                                  className="text-gray-500 hover:text-gray-700 mt-1"
-                                >
-                                  {"<"}
-                                </button>
-                                <span className="text-gray-700 font-medium">
-                                  {monthDate.toLocaleString("default", {
-                                    month: "long",
-                                    year: "numeric",
-                                  })}
-                                </span>
-                                <button
-                                  onClick={increaseMonth}
-                                  className="text-gray-500 hover:text-gray-700 mt-1"
-                                >
-                                  {">"}
-                                </button>
-                              </div>
-                            )}
-                          />
-
-                        </div>
-
-                      </div>
-
-                    
-                    </>
-                  )}
-                </div>
               </div>
 
               <div className="mt-8">
@@ -942,7 +948,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                     (tripType === 'round-trip' && (!returnDate || !returnTimeSlot))
                   }
                 >
-                  Continue to Vehicle Selection
+                  {t('Continue to Vehicle Selection')}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </div>
@@ -955,8 +961,8 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
           <div className="space-y-4 sm:space-y-6">
             <Card className="border-none shadow-sm bg-white p-4 sm:p-6">
               <div className="mb-4 sm:mb-6">
-                <h2 className="text-xl sm:text-2xl text-[#1B2A3D] mb-2">Choose Your Vehicle</h2>
-                <p className="text-sm sm:text-base text-gray-500">Select a comfortable vehicle for your journey</p>
+                <h2 className="text-xl sm:text-2xl text-[#1B2A3D] mb-2">{t('Choose Your Vehicle')}</h2>
+                <p className="text-sm sm:text-base text-gray-500">{t('Select a comfortable vehicle for your journey')}</p>
               </div>
 
               {/* Search & Filter */}
@@ -980,7 +986,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                       className="h-11 sm:h-12 px-4 sm:px-6 rounded-xl border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30 relative"
                     >
                       <Filter className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                      <span className="text-sm sm:text-base">Filters</span>
+                      <span className="text-sm sm:text-base">{t('Filters')}</span>
                       {vehicleRatingFilter !== 'all' && (
                         <Badge className="ml-2 bg-[#C7A76C] hover:bg-[#C7A76C]/90 text-white">1</Badge>
                       )}
@@ -990,33 +996,34 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   <PopoverContent className="w-[280px] sm:w-80 p-3 sm:p-4" align="end">
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">
-                        Filter by Rating
+                        {t('Filter by Rating')}
                       </p>
 
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2  ">
-                        {ratingOptions.map((rate) => (
-                          <Button
-                            key={rate.value}
-                            size="sm"
-                            onClick={() => setVehicleRatingFilter(rate.value)}
-                            variant={vehicleRatingFilter === rate.value ? "default" : "outline"}
-                            className={`rounded-full ${vehicleRatingFilter === rate.value
-                              ? "bg-[#0E3C2F] text-white hover:bg-[#0E3C2F]/90"
-                              : "border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30 "
-                              }`}
-                          >
-                            {rate.value === "all" ? (
-                              rate.label
-                            ) : (
-                              <>
-                                <Star className="w-3.5 h-3.5 mr-1.5" />
-                                {rate.label}
-                              </>
-                            )}
-                          </Button>
-                        ))}
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+  {ratingOptions.map((rate) => (
+    <Button
+      key={rate.value}
+      size="sm"
+      onClick={() => setVehicleRatingFilter(rate.value)}
+      variant={vehicleRatingFilter === rate.value ? "default" : "outline"}
+      className={`rounded-full ${
+        vehicleRatingFilter === rate.value
+          ? "bg-[#0E3C2F] text-white hover:bg-[#0E3C2F]/90"
+          : "border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30 "
+      }`}
+    >
+      {rate.value === "all" ? (
+        t(rate.label) // <-- i18n translation
+      ) : (
+        <>
+          <Star className="w-3.5 h-3.5 mr-1.5" />
+          {t(rate.label)} {/* i18n translation */}
+        </>
+      )}
+    </Button>
+  ))}
+</div>
 
-                      </div>
                     </div>
                   </PopoverContent>
                 </Popover>
@@ -1025,7 +1032,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
               {/* Results count */}
               <div className="pt-4 border-t border-gray-200">
                 <p className="text-sm text-gray-600">
-                  Showing <span className="font-semibold text-[#0E3C2F]">{filteredVehicles.length}</span> vehicle
+                  {t('Showing')} <span className="font-semibold text-[#0E3C2F]">{filteredVehicles.length}</span> {t('vehicle')}
                   {filteredVehicles.length !== 1 ? "s" : ""}
                 </p>
               </div>
@@ -1063,7 +1070,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   continueButton={
                     selectedVehicle === vehicle.id ? (
                       <Button onClick={handleNext} className="w-full bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white hover:shadow-lg cursor-pointer">
-                        Continue
+                        {t('Continue')}
                       </Button>
 
                     ) : null
@@ -1095,7 +1102,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                 className="flex-1 h-12 border-2 border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30"
               >
                 <ArrowRight className="mr-2 w-5 h-5 rotate-180" />
-                Back
+                {t('Back')}
               </Button>
 
               {/* <Button
@@ -1115,8 +1122,8 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
           <Card className="border-none shadow-lg bg-white">
             <CardContent className="p-8">
               <div className="mb-8">
-                <h2 className="text-2xl text-[#1B2A3D] mb-2">Review Your Booking</h2>
-                <p className="text-gray-500">Please verify all details before confirming</p>
+                <h2 className="text-2xl text-[#1B2A3D] mb-2">{t('Review Your Booking')}</h2>
+                <p className="text-gray-500">{t('Please verify all details before confirming')}</p>
               </div>
 
               <div className="space-y-4">
@@ -1128,7 +1135,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                 <div className="p-6 bg-gradient-to-br from-[#F2EDE3] to-white rounded-2xl border border-[#C7A76C]/20">
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="text-sm text-gray-500 mb-2">Journey Route</p>
+                      <p className="text-sm text-gray-500 mb-2">{t('Journey Route')}</p>
                       <div className="flex items-center gap-3">
                         <span className="text-[#1B2A3D] font-medium">{from}</span>
                         {tripType === 'round-trip' ? (
@@ -1167,7 +1174,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   <div className="p-6 bg-[#F7F7F9] rounded-2xl border border-gray-200">
                     <div className="flex items-start justify-between">
                       <div>
-                        <p className="text-sm text-gray-500 mb-2">Return Schedule</p>
+                        <p className="text-sm text-gray-500 mb-2">{t('Return Schedule')}</p>
                         <p className="text-[#1B2A3D] font-medium">
                           {returnDate?.toLocaleDateString('en-US', {
                             weekday: 'long',
@@ -1185,7 +1192,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
 
                 {/* Vehicle Card */}
                 <div className="p-6 bg-[#F7F7F9] rounded-2xl border border-gray-200">
-                  <p className="text-sm text-gray-500 mb-2">Selected Vehicle</p>
+                  <p className="text-sm text-gray-500 mb-2">{t('Selected Vehicle')}</p>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-4">
                       <div className="w-20 h-20 rounded-2xl flex items-center justify-center">
@@ -1224,7 +1231,7 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                       <div className="pt-4 border-t border-gray-200">
                         <div className="flex items-center gap-2 mb-2">
                           <Building2 className="w-4 h-4 text-[#0E3C2F]" />
-                          <p className="text-xs text-gray-500">Service Provider</p>
+                          <p className="text-xs text-gray-500">{t('Service Provider')}</p>
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-sm font-medium text-[#0E3C2F]">{vendor.name}</p>
@@ -1244,9 +1251,9 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                 <div className="p-6 bg-gradient-to-br from-[#0E3C2F] to-[#0E3C2F]/90 rounded-2xl text-white">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <p className="text-sm text-white/80">Driver Assignment</p>
+                    <p className="text-sm text-white/80">{t('Driver Assignment')}</p>
                   </div>
-                  <p className="font-medium">Professional driver will be assigned 24 hours before your trip</p>
+                  <p className="font-medium">{t('Professional driver will be assigned after booking')}</p>
                 </div>
 
                 {/* Payment error */}
@@ -1275,14 +1282,14 @@ return_date: formatDate(addOneDay(returnDate)) || "2025-11-22",
                   className="flex-1 h-12 border-2 border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30"
                 >
                   <ArrowRight className="mr-2 w-5 h-5 rotate-180" />
-                  Back
+                  {t('Back')}
                 </Button>
                 <Button
                   onClick={handleConfirm}
                   className="flex-1 h-12 bg-gradient-to-r from-[#0E3C2F] to-[#0E3C2F]/90 text-white hover:shadow-xl transition-all cursor-pointer"
                 >
                   <Check className="mr-2 w-5 h-5" />
-                  Confirm Booking
+                  {t('Confirm Booking')}
                 </Button>
               </div>
             </CardContent>

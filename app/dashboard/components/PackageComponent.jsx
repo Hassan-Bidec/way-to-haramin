@@ -22,6 +22,8 @@ import { bookPackage, getPartnersWithPackages } from "@/lib/api";
 import Loading from "./Loading";
 import { useAuthStore } from "@/lib/useAuthStore";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import "../../../src/lib/i18n"; // Ensure path correct
 
 export default function PackageComponent({ packageSlug }) {
   const { user } = useAuthStore();
@@ -29,7 +31,7 @@ export default function PackageComponent({ packageSlug }) {
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-
+ const { t } = useTranslation();
   const router = useRouter();
 
   useEffect(() => {
@@ -166,7 +168,7 @@ export default function PackageComponent({ packageSlug }) {
               onClick={() => router.back()}
             >
               <ArrowLeft className="mr-2 w-4 h-4" />
-              Back to Packages
+              {t("Back to Packages")}
             </Button>
           </div>
 
@@ -202,7 +204,7 @@ export default function PackageComponent({ packageSlug }) {
             {/* Description */}
             <Card className="border-none shadow-lg">
               <CardContent className="p-8">
-                <h2 className="mb-4 text-[#1B2A3D]">Overview</h2>
+                <h2 className="mb-4 text-[#1B2A3D]">{t("Overview")}</h2>
                 <p className="text-gray-600 leading-relaxed text-lg">
                   {packageDetail.description}
                 </p>
@@ -211,7 +213,7 @@ export default function PackageComponent({ packageSlug }) {
 
             {/* Itinerary */}
             <div className="space-y-4">
-              <h2 className="text-[#1B2A3D]">Complete Journey Itinerary</h2>
+              <h2 className="text-[#1B2A3D]">{t("Complete Journey Itinerary")}</h2>
 
               {packageDetail.itinerary.map((cityItinerary, index) => (
                 <Card
@@ -226,10 +228,10 @@ export default function PackageComponent({ packageSlug }) {
                       </div>
 
                       <h3 className="flex-1 text-[#1B2A3D]">
-                        {cityItinerary.city} Journey
+                        {cityItinerary.city} {t("Journey")}
                       </h3>
 
-                      <Badge className="bg-[#0E3C2F] text-white">City {index + 1}</Badge>
+                      <Badge className="bg-[#0E3C2F] text-white">{t("City")} {index + 1}</Badge>
                     </div>
 
                     {/* Services */}
@@ -274,7 +276,7 @@ export default function PackageComponent({ packageSlug }) {
                       <div>
                         <h4 className="flex items-center gap-2 text-[#0E3C2F] mb-2 text-sm">
                           <MapPinned className="w-4 h-4 text-[#C7A76C]" />
-                          Historical Places to Visit
+                          {t("Historical Places to Visit")}
                         </h4>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -313,37 +315,37 @@ export default function PackageComponent({ packageSlug }) {
           <div className="lg:col-span-1">
             <Card className="sticky top-20">
               <CardContent className="p-6">
-                <p className="text-sm mb-2 text-muted-foreground">Starting from</p>
+                <p className="text-sm mb-2 text-muted-foreground">{t("Starting from")}</p>
 
                 <p className="text-secondary text-4xl font-semibold">
                   {packageDetail.price}
                 </p>
 
-                <p className="text-sm text-muted-foreground">per person</p>
+                <p className="text-sm text-muted-foreground">{t("per person")}</p>
 
-                <Button onClick={handleBook} className="w-full bg-[#0E3C2F] hover:bg-[#0E3C2F]/90 text-white mt-2">Book This Package</Button>
+                <Button onClick={handleBook} className="w-full bg-[#0E3C2F] hover:bg-[#0E3C2F]/90 text-white mt-2">{t("Book This Package")}</Button>
 
                 {/* Details */}
                 <div className="border-t pt-4 space-y-3 text-sm mt-4">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Duration</span>
+                    <span className="text-muted-foreground">{t("Duration")}</span>
                     <span>{packageDetail.duration}</span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Group Size</span>
+                    <span className="text-muted-foreground">{t("Group Size")}</span>
                     <span>{packageDetail?.capacity || "0"}</span>
                   </div>
 
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Language</span>
+                    <span className="text-muted-foreground">{t("Language")}</span>
                     <span>English, Arabic</span>
                   </div>
                 </div>
 
                 <div className="mt-6 p-4 bg-muted rounded-lg">
                   <p className="text-sm">
-                    Need help? Contact our support team for assistance.
+                    {t("Need help? Contact our support team for assistance.")}
                   </p>
 
                   <Button
@@ -351,7 +353,7 @@ export default function PackageComponent({ packageSlug }) {
                     className="w-full mt-3"
                     onClick={() => router.push("/support")}
                   >
-                    Contact Support
+                    {t("Contact Support")}
                   </Button>
                 </div>
               </CardContent>

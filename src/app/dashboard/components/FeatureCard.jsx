@@ -2,8 +2,12 @@
 
 import React from "react";
 import { Shield } from "lucide-react"; // Fixed dummy icon
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
 
 export function FeatureCard() {
+      const { t } = useTranslation();
+  
   return (
     <div className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 border border-secondary/10 overflow-hidden">
       
@@ -24,12 +28,12 @@ export function FeatureCard() {
 
       {/* Fixed Title */}
       <h3 className="text-primary mb-3 group-hover:text-secondary transition-colors duration-300">
-        Secure Booking
+        {t("Secure Booking")}
       </h3>
 
       {/* Fixed Description */}
       <p className="text-muted-foreground leading-relaxed">
-        Your bookings are protected with advanced security.
+        {t("Your bookings are protected with advanced security.")}
       </p>
 
       {/* Accent Line */}

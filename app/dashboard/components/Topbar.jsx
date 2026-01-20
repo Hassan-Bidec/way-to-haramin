@@ -23,11 +23,12 @@ import { addReviewRating, Dashboard } from '@/lib/api';
 import { ReviewModal } from '../ui/ReviewModal';
 import { toast } from 'react-toastify';
 // import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function Topbar() {
   const { logout, user } = useAuthStore();
   // const router = useRouter()
-
+  const { t } = useTranslation();
   const [banner, setBanner] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [getRecentRides, setGetRecentRides] = useState([]);
@@ -145,7 +146,7 @@ const statusText = {
               {/* Welcome Text */}
               <div className="min-w-0 ml-2">
                 <h1 className="text-lg sm:text-xl lg:text-2xl text-[#0E3C2F] truncate">
-                  Welcome back,  {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}!
+{t("Welcome back")}, {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : t("User")}
 
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 hidden sm:block truncate">{currentDate}</p>
@@ -351,14 +352,14 @@ const statusText = {
              {packages && packages.length > 0 && (
               <section>
                 <div className="flex items-center justify-between mt-2 mb-6">
-                  <h2 className="text-[#0E3C2F]">Recommended Packages</h2>
+                  <h2 className="text-[#0E3C2F]">{t("Recommended Packages")}</h2>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-[#0E3C2F] hover:bg-[#F2EDE3]/30"
                     onClick={() => navigate.push('/Service')}
                   >
-                    View All
+                    {t("View All")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>
@@ -391,7 +392,7 @@ const statusText = {
                   </div>
                   <h3 className="text-white mb-2">Need Help?</h3>
                   <p className="text-white/80 text-sm mb-4">
-                    Chat with us on WhatsApp for instant support
+                    {t("Chat with us on WhatsApp for instant support")}
                   </p>
                   <Button
                     className="w-full bg-white text-[#0E3C2F] hover:bg-white/90"
@@ -402,7 +403,7 @@ const statusText = {
     window.location.href = `https://wa.me/${phone}?text=${msg}`;
   }}
                   >
-                    Open WhatsApp
+                    {t("Open WhatsApp")}
                   </Button>
                 </div>
               </Card>
@@ -411,18 +412,18 @@ const statusText = {
                 <div className="p-6 relative z-10">
                   <div className="inline-flex items-center gap-2 bg-[#0E3C2F] text-white px-3 py-1 rounded-full text-xs mb-3">
                     <Award className="w-3 h-3" />
-                    Special Offer
+                    {t("Special Offer")}
                   </div>
-                  <h3 className="text-[#0E3C2F] mb-2">Winter Package Sale</h3>
+                  <h3 className="text-[#0E3C2F] mb-2">{t("Winter Package Sale")}</h3>
                   <p className="text-sm text-gray-600 mb-4">
-                    Get up to 25% off on selected tour packages this month
+                    {t("Get up to 25% off on selected tour packages this month")}
                   </p>
                   <Button
                     size="sm"
                     className="bg-[#0E3C2F] text-white hover:bg-[#0E3C2F]/90"
                     onClick={() => navigate.push('/Service')}
                   >
-                    View Offers
+                    {t("View Offers")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>

@@ -303,7 +303,7 @@ export default function AuthPage() {
             className="h-20 md:h-24 object-contain"
           />
           <p className="mt-2 text-white text-center md:text-2xl">
-            {t("Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from  experts. ")}
+            {t("Let's Build Something Exceptional Together. Take the first step toward your digital transformation with a free consultation from experts.")}
           </p>
         </div>
 
@@ -654,7 +654,7 @@ px-6 md:px-12 py-10">
               </button>
 
               <p className="text-sm text-gray-600 text-center">
-                Don’t have an account?{" "}
+                {t("Don’t have an account?")}{" "}
                 <button
                   type="button"
                   onClick={() => setIsLogin(false)}

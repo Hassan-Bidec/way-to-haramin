@@ -13,6 +13,8 @@ import {
   SelectValue,
 } from "../ui/sellect";
 import { getBookingParams } from "@/lib/api";
+import "../../../src/lib/i18n"; 
+import { useTranslation } from "react-i18next"; // 1️⃣
 
 export function DashboardQuickBooking() {
   const router = useRouter();
@@ -21,7 +23,7 @@ export function DashboardQuickBooking() {
   const [date, setDate] = useState("");
   const [fromSearch, setFromSearch] = useState("");
   const [toSearch, setToSearch] = useState("");
-
+    const { t } = useTranslation(); // 2️⃣
   const citie = ["Makkah", "Madinah", "Jeddah", "Jeddah Airport", "Madinah Airport"];
      const [cities, setCities] = useState([]);
 
@@ -62,19 +64,19 @@ const minDate = tomorrow.toISOString().split("T")[0];
   return (
     <Card className="border-none shadow-sm ">
       <div className="p-6">
-        <h3 className="text-[#0E3C2F] mb-6">Quick Booking</h3>
+        <h3 className="text-[#0E3C2F] mb-6">{t("Quick Booking")}</h3>
 
         <div className="space-y-4">
           {/* From */}
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4 text-[#C7A76C]" />
-              From
+              {t("From")}
             </label>
             <Select value={from} onValueChange={setFrom}>
               <SelectTrigger className="h-11 bg-[#F7F7F9] border-gray-200">
-                <SelectValue placeholder="Select departure city" />
-              </SelectTrigger>
+  <SelectValue placeholder={t("Select departure city")} />
+</SelectTrigger>
               <SelectContent className="bg-white p-2">
                 {/* Search bar inside dropdown */}
                 <input
@@ -99,17 +101,17 @@ const minDate = tomorrow.toISOString().split("T")[0];
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4 text-[#C7A76C]" />
-              To
+              {t("To")}
             </label>
             <Select value={to} onValueChange={setTo}>
               <SelectTrigger className="h-11 bg-[#F7F7F9] border-gray-200">
-                <SelectValue placeholder="Select destination city" />
+                <SelectValue placeholder={t("Select destination city")} />
               </SelectTrigger>
               <SelectContent className="bg-white p-2">
                 {/* Search bar inside dropdown */}
                 <input
                   type="text"
-                  placeholder="Search city..."
+                  placeholder={t("Search city...")}
                   value={toSearch}
                   onChange={(e) => setToSearch(e.target.value)}
                   className="w-full mb-2 h-9 px-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#C7A76C]"
@@ -130,7 +132,7 @@ const minDate = tomorrow.toISOString().split("T")[0];
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <CalendarIcon className="w-4 h-4 text-[#C7A76C]" />
-              Date
+              {t("Date")}
             </label>
             <input
               type="date"
@@ -147,7 +149,7 @@ const minDate = tomorrow.toISOString().split("T")[0];
             onClick={handleContinue}
             disabled={!from || !to}
           >
-            Continue Booking
+            {t("Continue Booking")}
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
         </div>

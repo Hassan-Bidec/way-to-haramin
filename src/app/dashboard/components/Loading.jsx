@@ -1,7 +1,10 @@
 // components/Loading.jsx
 import React from "react";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
 
 export default function Loading({ text = "Loading..." }) {
+    const { t } = useTranslation();
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">
         <div className="w-10 h-10 relative animate-spinLoader mx-auto">
@@ -35,7 +38,7 @@ export default function Loading({ text = "Loading..." }) {
       `}</style>
     </div>
       <div className="flex flex-col items-center">
-        <p className="mt-4 text-gray-500 text-lg">{text}</p>
+        <p className="mt-4 text-gray-500 text-lg">{t(text)}</p>
       </div>
     </div>
   );

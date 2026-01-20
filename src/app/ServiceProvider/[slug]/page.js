@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import ServicesProvider from "@/app/dashboard/ServicesComponent/ServicesProvider";
-import VendorDetail from '@/app/dashboard/ServicesComponent/ServicesProvider';
+import ServicesProvider from "../../dashboard/ServicesComponent/ServicesProvider";
+import VendorDetail from '../../dashboard/ServicesComponent/ServicesProvider';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

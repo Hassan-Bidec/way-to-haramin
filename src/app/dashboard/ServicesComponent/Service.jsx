@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, ArrowRight, Building2, TrendingUp, Award, Star, Filter, Sparkles, Users, Shield, Crown, Phone } from 'lucide-react';
+import { useTranslation } from "react-i18next";
 
 import { motion } from "framer-motion";
 
@@ -19,11 +20,13 @@ import { getPartnersWithPackages } from '@/lib/api';
 import { Image_URL } from '@/config/constants';
 import { ImageWithFallback } from './ImageWithFallback';
 import Loading from '../components/Loading';
+import "../../../lib/i18n";
 
 
 
 
 export function Packages({ vendorId }) {
+  const { t } = useTranslation();
   const router = useRouter();
   const navigate = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
@@ -142,7 +145,7 @@ export function Packages({ vendorId }) {
               {/* Badge */}
               <Badge className="bg-white/20 backdrop-blur-md text-white border-white/30 px-4 py-2 mb-4 inline-flex items-center gap-2">
                 <Sparkles className="w-4 h-4" />
-                Trusted Partners
+                {t("Trusted Partners")}
               </Badge>
 
               {/* Title */}
@@ -151,9 +154,9 @@ export function Packages({ vendorId }) {
                   <Building2 className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-4xl md:text-5xl text-white mb-2">Service Providers</h1>
+                  <h1 className="text-4xl md:text-5xl text-white mb-2">{t("Service Providers")}</h1>
                   <p className="text-white/80 text-lg">
-                    Choose from our verified transport partners for your spiritual journey
+                    {t("Choose from our verified transport partners for your spiritual journey")}
                   </p>
                 </div>
               </div>
@@ -168,7 +171,7 @@ export function Packages({ vendorId }) {
                     <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                       <Shield className="w-5 h-5 text-white" />
                     </div>
-                    <span className="text-white/70 text-sm">Verified Partners</span>
+                    <span className="text-white/70 text-sm">{t("Verified Partners")}</span>
                   </div>
                   <p className="text-3xl text-white">{totalVendors}+</p>
                 </motion.div>
@@ -181,7 +184,7 @@ export function Packages({ vendorId }) {
                     <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                       <Users className="w-5 h-5 text-white" />
                     </div>
-                    <span className="text-white/70 text-sm">Happy Customers</span>
+                    <span className="text-white/70 text-sm">{t("Happy Customers")}</span>
                   </div>
                   <p className="text-3xl text-white">{totalBookings.toLocaleString()}+</p>
                 </motion.div>
@@ -194,7 +197,7 @@ export function Packages({ vendorId }) {
                     <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                       <Star className="w-5 h-5 text-white fill-white" />
                     </div>
-                    <span className="text-white/70 text-sm">Average Rating</span>
+                    <span className="text-white/70 text-sm">{t("Average Rating")}</span>
                   </div>
                   <p className="text-3xl text-white">{avgRating} / 5.0</p>
                 </motion.div>
@@ -204,8 +207,8 @@ export function Packages({ vendorId }) {
 
           <section>
             <div className="mb-6">
-              <h2 className="text-[#0E3C2F] mb-2">Browse All Providers</h2>
-              <p className="text-gray-600 text-sm">Search and filter to find the perfect partner for your journey</p>
+              <h2 className="text-[#0E3C2F] mb-2">{t("Browse All Providers")}</h2>
+              <p className="text-gray-600 text-sm">{t("Search and filter to find the perfect partner for your journey")}</p>
             </div>
 
             <Card className="border-none shadow-lg p-6 bg-white">
@@ -230,7 +233,7 @@ export function Packages({ vendorId }) {
                       className="h-14 px-6 rounded-xl border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30 relative"
                     >
                       <Filter className="w-5 h-5 mr-2" />
-                      Filters
+                      {t("Filters")}
                       {ratingFilter !== 'all' && (
                         <Badge className="ml-2 bg-[#C7A76C] hover:bg-[#C7A76C]/90 text-white">1</Badge>
                       )}
@@ -238,7 +241,7 @@ export function Packages({ vendorId }) {
                   </PopoverTrigger>
                   <PopoverContent className="w-80 p-4" align="end">
                     <div>
-                      <p className="text-sm font-medium text-gray-700 mb-3">Filter by Rating</p>
+                      <p className="text-sm font-medium text-gray-700 mb-3">{t("Filter by Rating")}</p>
                       <div className="flex flex-wrap gap-2">
                         <Button
                           variant={ratingFilter === 'all' ? 'default' : 'outline'}
@@ -249,7 +252,7 @@ export function Packages({ vendorId }) {
                               : 'border-gray-200 hover:border-[#0E3C2F] hover:bg-[#F2EDE3]/30'
                             }`}
                         >
-                          All Vendors
+                          {t("All Vendors")}
                         </Button>
                         <Button
                           variant={ratingFilter === '4' ? 'default' : 'outline'}
@@ -261,7 +264,7 @@ export function Packages({ vendorId }) {
                             }`}
                         >
                           <Star className="w-3.5 h-3.5 mr-1.5" />
-                          4.0+ Stars
+                          {t("4.0+ Stars")}
                         </Button>
                         <Button
                           variant={ratingFilter === '4.5' ? 'default' : 'outline'}
@@ -273,7 +276,7 @@ export function Packages({ vendorId }) {
                             }`}
                         >
                           <Star className="w-3.5 h-3.5 mr-1.5" />
-                          4.5+ Stars
+                          {t("4.5+ Stars")}
                         </Button>
                         <Button
                           variant={ratingFilter === '5' ? 'default' : 'outline'}
@@ -285,7 +288,7 @@ export function Packages({ vendorId }) {
                             }`}
                         >
                           <Star className="w-3.5 h-3.5 mr-1.5" />
-                          5.0 Stars
+                          {t("5.0 Stars")}
                         </Button>
                       </div>
                     </div>
@@ -295,7 +298,7 @@ export function Packages({ vendorId }) {
 
               <div className="pt-4 border-t border-gray-200">
                 <p className="text-sm text-gray-600">
-                  Showing <span className="font-semibold text-[#0E3C2F]">{filteredAndSortedVendors.length}</span> service provider{filteredAndSortedVendors.length !== 1 ? 's' : ''}
+                  {t("Showing")} <span className="font-semibold text-[#0E3C2F]">{filteredAndSortedVendors.length}</span> service provider{filteredAndSortedVendors.length !== 1 ? 's' : ''}
                 </p>
               </div>
             </Card>
@@ -305,8 +308,8 @@ export function Packages({ vendorId }) {
           <section>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-[#0E3C2F] mb-2">🏆 Top Rated Providers</h2>
-                <p className="text-gray-600 text-sm">Our most trusted and highly rated partners</p>
+                <h2 className="text-[#0E3C2F] mb-2">🏆 {t("Top Rated Providers")}</h2>
+                <p className="text-gray-600 text-sm">{t("Our most trusted and highly rated partners")}</p>
               </div>
             </div>
 
@@ -417,7 +420,7 @@ export function Packages({ vendorId }) {
               <span className="text-sm">{vendor.rating.toFixed(1)}</span>
             </div>
             <span className="text-xs text-gray-500">
-              ({vendor.reviews} reviews)
+              ({vendor.reviews} {t("reviews")})
             </span>
           </div>
 
@@ -436,14 +439,14 @@ export function Packages({ vendorId }) {
           {/* Bookings + Button */}
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600">
-              {vendor.bookings.toLocaleString()} bookings
+              {vendor.bookings.toLocaleString()} {t("bookings")}
             </span>
 
             <Button
               size="sm"
               className="bg-[#0E3C2F] text-white px-4 py-1 rounded-md hover:bg-[#124f3d]"
             >
-              View Details
+              {t("View Details")}
             </Button>
           </div>
         </div>
@@ -557,7 +560,7 @@ export function Packages({ vendorId }) {
 
               {/* Bookings */}
               <span className="text-sm text-gray-600 mt-1">
-                {vendor.bookings.toLocaleString()} bookings completed
+                {vendor.bookings.toLocaleString()} {t("bookings completed")}
               </span>
               <span className="text-sm text-gray-600 mt-1 flex gap-2  ">
                 <Phone className='w-3.5 h-3.5 text-[#0E3C2F] '/>
@@ -579,8 +582,8 @@ export function Packages({ vendorId }) {
         >
           <Building2 className="w-10 h-10 text-[#C7A76C]" />
         </motion.div>
-        <h3 className="text-[#0E3C2F] mb-2">No vendors found</h3>
-        <p className="text-gray-500 text-sm mb-6">Try adjusting your search or filters</p>
+        <h3 className="text-[#0E3C2F] mb-2">{t("No vendors found")}</h3>
+        <p className="text-gray-500 text-sm mb-6">{t("Try adjusting your search or filters")}</p>
         <Button
           className="bg-gradient-to-r from-[#0E3C2F] to-[#1A5540] text-white hover:shadow-lg transition-all"
           onClick={() => {
@@ -589,7 +592,7 @@ export function Packages({ vendorId }) {
             setSortBy('rating');
           }}
         >
-          Clear All Filters
+          {t("Clear All Filters")}
         </Button>
       </div>
     </Card>
@@ -611,16 +614,16 @@ export function Packages({ vendorId }) {
                     <Award className="w-10 h-10 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-white mb-2">Can't find the right provider?</h3>
+                    <h3 className="text-white mb-2">{t("Can't find the right provider?")}</h3>
                     <p className="text-white/80 text-sm mb-4">
-                      Our support team is here to help you find the perfect transport partner for your journey
+                      {t("Our support team is here to help you find the perfect transport partner for your journey")}
                     </p>
                     <Button
                       size="lg"
                       className="bg-white text-[#0E3C2F] hover:bg-white/90 shadow-xl"
                       onClick={() => navigate('/support')}
                     >
-                      Contact Support
+                      {t("Contact Support")}
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
                   </div>

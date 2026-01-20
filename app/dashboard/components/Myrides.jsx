@@ -1,9 +1,10 @@
 "use client"
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../dashboard/ui/Tabs'
-import { RideCard } from '../../dashboard/ui/RideCard'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/Tabs'
+import { RideCard } from '../ui/RideCard'
 import { ReviewModal } from '../ui/ReviewModal'
+import "../../../src/lib/i18n";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/sellect'
 import { Textarea } from '../ui/Textarea'
@@ -13,10 +14,12 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { addReviewRating, cancelRide, confirmRide, getUserRideView } from '@/lib/api'
 import { useAuthStore } from '@/lib/useAuthStore'
+import { useTranslation } from "react-i18next";
 
 
 const Myrides = () => {
     const router = useRouter();
+ const { t } = useTranslation();
 
   const { user } = useAuthStore();   
 const [reviewLoading, setReviewLoading] = useState(false);
@@ -38,17 +41,21 @@ const [otherReason, setOtherReason] = useState('');
   // 🔥 Fetch Rides from API on mount
   // =====================================================
   useEffect(() => {
-  const fetchRides = async () => {
-    try {
-      const response = await getUserRideView(user?.customer_id);
-      if (!response.status) {
-        toast.error(response.message || "Failed to fetch rides");
-        return;
-      }
 
-      const allRides = response.data.reverse() || [];
+    const fetchRides = async () => {
+      try {
+        const response = await getUserRideView(user?.customer_id);
 
+        if (!response.status) {
+          toast.error(response.message || "Failed to fetch rides");
+          return;
+        }
+
+        const allRides = response.data.reverse() || [];
+
+// Format rides for UI
       const formattedRides = allRides.map(ride => {
+        // Pick first detail as main trip info
         const mainDetail = ride.details?.[0] || {};
         return {
           ...ride,
@@ -58,30 +65,32 @@ const [otherReason, setOtherReason] = useState('');
           time: mainDetail.time,
           vehicleType: ride.vehicle_name,
           driverName: ride.driver_name,
-          status: Number(ride.status),  // ensure number
+          status: ride.status, 
           price: ride?.charges || 0,
           type: ride?.booking_type || '',
         };
       });
 
+      // Divide by status
       const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
-      const completed = formattedRides.filter(r => r.status === 7); // completed
-      const cancelled = formattedRides.filter(r => r.status === 4);
-
-      console.log("Upcoming:", upcoming, "Completed:", completed, "Cancelled:", cancelled);
+      const completed = formattedRides.filter(r => r.status === 5);
 
       setUpcomingRides(upcoming);
       setCompletedRides(completed);
-    } catch (err) {
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+      const cancelled = allRides.filter(ride => ride.status == 4);
 
-  fetchRides();
-}, [user?.customer_id]);
+      // setUpcomingRides(upcoming);
+      // setCompletedRides(completed);
+      // setCancelledRides(cancelled);
+      } catch (err) {
+        toast.error("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchRides();
+  }, [user?.id]);
 
    const fetchRides = async () => {
       try {
@@ -113,9 +122,8 @@ const [otherReason, setOtherReason] = useState('');
 
       // Divide by status
       const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
-     const completed = formattedRides.filter(r => Number(r.status) === 7);
+      const completed = formattedRides.filter(r => r.status === 5);
 
-console.log("All formatted rides:", formattedRides);
       setUpcomingRides(upcoming);
       setCompletedRides(completed);
       const cancelled = allRides.filter(ride => ride.status == 4);
@@ -253,7 +261,7 @@ const handleConfirmRide = async (ride_id) => {
           className="flex items-center gap-2 text-gray-600 hover:text-[#C7A76C] mb-8 transition-colors group"
         >
           <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Dashboard</span>
+          <span>{t("Back to Dashboard")}</span>
         </button>
 
         {/* Header */}
@@ -261,8 +269,8 @@ const handleConfirmRide = async (ride_id) => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#C7A76C]/10 rounded-full -mr-32 -mt-32"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#C7A76C]/10 rounded-full -ml-24 -mb-24"></div>
           <div className="relative">
-            <h1 className="text-3xl text-white mb-2">My Rides</h1>
-            <p className="text-white/70">View and manage your ride bookings</p>
+            <h1 className="text-3xl text-white mb-2">{t("My Rides")}</h1>
+            <p className="text-white/70">{t("View and manage your ride bookings")}</p>
           </div>
         </div>
 
@@ -273,14 +281,14 @@ const handleConfirmRide = async (ride_id) => {
               className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#C7A76C] data-[state=active]:to-[#C7A76C]/90 data-[state=active]:text-white data-[state=active]:shadow-lg py-3 transition-all"
             >
               <Calendar className="w-4 h-4 mr-2" />
-              Upcoming
+              {t("Upcoming")}
             </TabsTrigger>
             <TabsTrigger 
               value="completed"
               className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#C7A76C] data-[state=active]:to-[#C7A76C]/90 data-[state=active]:text-white data-[state=active]:shadow-lg py-3 transition-all"
             >
               <Clock className="w-4 h-4 mr-2" />
-              Completed
+              {t("Completed")}
             </TabsTrigger>
           </TabsList>
 
@@ -299,8 +307,8 @@ const handleConfirmRide = async (ride_id) => {
                 <div className="w-20 h-20 mx-auto mb-4 bg-[#C7A76C]/10 rounded-full flex items-center justify-center">
                   <Calendar className="w-10 h-10 text-[#C7A76C]" />
                 </div>
-                <p className="text-[#1B2A3D] font-medium mb-1">No upcoming rides</p>
-                <p className="text-gray-500 text-sm">Book your next journey to see it here</p>
+                <p className="text-[#1B2A3D] font-medium mb-1">{t("No upcoming rides")}</p>
+                <p className="text-gray-500 text-sm">{t("Book your next journey to see it here")}</p>
               </div>
             )}
           </TabsContent>
@@ -319,8 +327,8 @@ const handleConfirmRide = async (ride_id) => {
                 <div className="w-20 h-20 mx-auto mb-4 bg-[#C7A76C]/10 rounded-full flex items-center justify-center">
                   <Clock className="w-10 h-10 text-[#C7A76C]" />
                 </div>
-                <p className="text-[#1B2A3D] font-medium mb-1">No completed rides</p>
-                <p className="text-gray-500 text-sm">Your ride history will appear here</p>
+                <p className="text-[#1B2A3D] font-medium mb-1">{t("No completed rides")}</p>
+                <p className="text-gray-500 text-sm">{t("Your ride history will appear here")}</p>
               </div>
             )}
           </TabsContent>
@@ -343,19 +351,20 @@ const handleConfirmRide = async (ride_id) => {
         >
           <AlertDialogContent className="bg-white max-w-lg">
             <AlertDialogHeader>
-              <AlertDialogTitle className="text-[#0E3C2F]">Cancel This Ride?</AlertDialogTitle>
+              <AlertDialogTitle className="text-[#0E3C2F]">{t("Cancel This Ride?")}</AlertDialogTitle>
               <AlertDialogDescription className="text-gray-600">
                 {rideToCancel !== null && upcomingRides[rideToCancel] && (
                   <>
-                    You are about to cancel your ride from{' '}
+                    {t("Are you sure you want to cancel your ride from")}{' '}
+                
                     <span className="font-medium text-[#0E3C2F]">
                       {upcomingRides[rideToCancel].from}
                     </span>{' '}
-                    to{' '}
+                    {t("to")}{' '}
                     <span className="font-medium text-[#0E3C2F]">
                       {upcomingRides[rideToCancel].to}
                     </span>{' '}
-                    on {upcomingRides[rideToCancel].date} at {upcomingRides[rideToCancel].time}.
+                    {t("on")} {upcomingRides[rideToCancel].date} {t("at")} {upcomingRides[rideToCancel].time}.
                   </>
                 )}
               </AlertDialogDescription>
@@ -364,22 +373,22 @@ const handleConfirmRide = async (ride_id) => {
             <div className="space-y-4 py-4">
               <div className="space-y-2">
                 <Label htmlFor="cancel-reason" className="text-[#0E3C2F]">
-                  Reason for Cancellation <span className="text-red-500">*</span>
+                  {t("Reason for Cancellation")} <span className="text-red-500">*</span>
                 </Label>
                 <Select value={cancelReason} onValueChange={setCancelReason}>
                   <SelectTrigger id="cancel-reason" className="bg-white border-gray-300">
-                    <SelectValue placeholder="Select a reason" />
+                    <SelectValue placeholder={t("Select a reason")} />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
-                    <SelectItem value="Change of plans">Change of plans</SelectItem>
+                    <SelectItem value="Change of plans">{t("Change of plans")}</SelectItem>
                     <SelectItem value="Found alternative transport">
-                      Found alternative transport
+                      {t("Found alternative transport")}
                     </SelectItem>
-                    <SelectItem value="Emergency">Emergency</SelectItem>
-                    <SelectItem value="Weather conditions">Weather conditions</SelectItem>
-                    <SelectItem value="Price concerns">Price concerns</SelectItem>
-                    <SelectItem value="Schedule conflict">Schedule conflict</SelectItem>
-                    <SelectItem value="Other">Other (please specify)</SelectItem>
+                    <SelectItem value="Emergency">{t("Emergency")}</SelectItem>
+                    <SelectItem value="Weather conditions">{t("Weather conditions")}</SelectItem>
+                    <SelectItem value="Price concerns">{t("Price concerns")}</SelectItem>
+                    <SelectItem value="Schedule conflict">{t("Schedule conflict")}</SelectItem>
+                    <SelectItem value="Other">{t("Other (please specify)")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -387,11 +396,11 @@ const handleConfirmRide = async (ride_id) => {
               {cancelReason === 'Other' && (
                 <div className="space-y-2">
                   <Label htmlFor="other-reason" className="text-[#0E3C2F]">
-                    Please specify <span className="text-red-500">*</span>
+                    {t("Please specify")} <span className="text-red-500">*</span>
                   </Label>
                   <Textarea
                     id="other-reason"
-                    placeholder="Enter your reason..."
+                    placeholder={t("Enter your reason...")}
                     value={otherReason}
                     onChange={(e) => setOtherReason(e.target.value)}
                     className="resize-none bg-white border-gray-300"
@@ -416,7 +425,7 @@ const handleConfirmRide = async (ride_id) => {
                 onClick={handleConfirmCancel}
                 className="bg-red-600 hover:bg-red-700 text-white"
               >
-                Confirm Cancellation
+                {t("Confirm Cancellation")}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>

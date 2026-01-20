@@ -12,8 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
+
 
 export default function QuickBookingCard() {
+ const { t } = useTranslation();
+
   const router = useRouter();
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -38,16 +43,16 @@ export default function QuickBookingCard() {
           <div className="md:col-span-3 space-y-2">
             <label className="flex items-center gap-2 text-sm text-primary">
               <MapPin className="w-4 h-4" />
-              From
+              {t("From")}
             </label>
             <Select value={from} onValueChange={setFrom}>
               <SelectTrigger className="h-12 bg-white border-secondary/20 focus:border-secondary">
-                <SelectValue placeholder="Select departure" />
+                <SelectValue placeholder={t("Select departure")} />
               </SelectTrigger>
               <SelectContent>
                 {cities.map((city) => (
                   <SelectItem key={city} value={city}>
-                    {city}
+                    {t(city)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -63,16 +68,16 @@ export default function QuickBookingCard() {
           <div className="md:col-span-3 space-y-2">
             <label className="flex items-center gap-2 text-sm text-primary">
               <MapPin className="w-4 h-4" />
-              To
+              {t("To")}
             </label>
             <Select value={to} onValueChange={setTo}>
               <SelectTrigger className="h-12 bg-white border-secondary/20 focus:border-secondary">
-                <SelectValue placeholder="Select destination" />
+                <SelectValue placeholder={t("Select destination")} />
               </SelectTrigger>
               <SelectContent>
                 {cities.filter((city) => city !== from).map((city) => (
                   <SelectItem key={city} value={city}>
-                    {city}
+                    {t(city)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -83,7 +88,7 @@ export default function QuickBookingCard() {
           <div className="md:col-span-3 space-y-2">
             <label className="flex items-center gap-2 text-sm text-primary">
               <CalendarIcon className="w-4 h-4" />
-              Date
+              {t("Date")}
             </label>
             <input
               type="date"
@@ -101,7 +106,7 @@ export default function QuickBookingCard() {
               onClick={handleContinue}
               disabled={!from || !to}
             >
-              Continue
+              {t("Continue")}
             </Button>
           </div>
         </div>

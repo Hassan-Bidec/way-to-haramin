@@ -3,10 +3,11 @@
 import React from "react";
 import { Check, Star, Building2, Users } from "lucide-react";
 
-import { Button } from "../ui/button";
+import { Button } from "./button";
 import { Badge } from "./badgeVariants";
 import { Card, CardContent } from "./Card";
 import { ImageWithFallback } from "../ServicesComponent/ImageWithFallback";
+import { useTranslation } from "react-i18next";
 
 export function VehicleCard({
   Type,
@@ -27,6 +28,7 @@ export function VehicleCard({
 }) {
   const isVIP = true;
 
+  const { t } = useTranslation();
   return (
     <Card
       className={`overflow-hidden transition-all cursor-pointer ${
@@ -83,7 +85,7 @@ export function VehicleCard({
         </div>
 
         {/* Seating */}
-        <p className="text-gray-500 text-sm mb-3">{seating_capacity} passenger</p>
+        <p className="text-gray-500 text-sm mb-3">{seating_capacity} {t("passenger")}</p>
 
         {/* Description */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -97,7 +99,7 @@ export function VehicleCard({
           <div className="mb-4 p-3 bg-gradient-to-br from-[#0E3C2F]/5 to-white rounded-xl border border-[#0E3C2F]/10">
             <div className="flex items-center gap-2 mb-1">
               <Building2 className="w-3 h-3 text-[#0E3C2F]" />
-              <p className="text-xs text-gray-500">Vendor</p>
+              <p className="text-xs text-gray-500">{t("Vendor")}</p>
             </div>
 
             <div className="flex items-center justify-between">
@@ -117,8 +119,8 @@ export function VehicleCard({
 
         {/* Pricing Section */}
         <div className="mb-4 p-3 bg-gradient-to-br from-[#F2EDE3] to-white rounded-xl border border-[#C7A76C]/20">
-          <p className="text-xs text-gray-500 mb-1">Starting from</p>
-          <p className="text-sm text-gray-600">payment will be decide by vendor </p>
+          <p className="text-xs text-gray-500 mb-1">{t("Starting from")}</p>
+          <p className="text-sm text-gray-600">{t("payment will be decide by vendor")}</p>
         </div>
 
         {/* Select / Selected Button */}
@@ -139,7 +141,7 @@ export function VehicleCard({
     {selected ? (
       <>
         <Check className="mr-2 w-4 h-4" />
-        Selected
+        {t("Selected")}
       </>
     ) : (
       "Select Vehicle"

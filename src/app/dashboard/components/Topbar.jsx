@@ -3,17 +3,14 @@
 import { ArrowRight, Bell, Menu, User } from 'lucide-react';
 import Image from 'next/image';
 import OffersBanner from './OffersBanner';
-
 import { FeatureCard } from './FeatureCard';
 import QuickActions from './QuickActionCard';
 import { UpcomingRideCard } from './UpcomingRideCard';
 import { Button } from '../ui/button';
 import { Card } from '../ui/Card';
 import { PackageCard } from './PackageCard';
-
 import { Award } from 'lucide-react';
 import { DashboardQuickBooking } from './DashboardQuickBooking';
-
 import { useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSubContent, DropdownMenuTrigger } from '../ui/DropdownMenuTrigger';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/Avatar';
@@ -23,10 +20,15 @@ import { addReviewRating, Dashboard } from '@/lib/api';
 import { ReviewModal } from '../ui/ReviewModal';
 import { toast } from 'react-toastify';
 // import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import "../../../lib/i18n";
+
+
 
 export default function Topbar() {
   const { logout, user } = useAuthStore();
   // const router = useRouter()
+ const { t } = useTranslation();
 
   const [banner, setBanner] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
@@ -145,7 +147,7 @@ const statusText = {
               {/* Welcome Text */}
               <div className="min-w-0 ml-2">
                 <h1 className="text-lg sm:text-xl lg:text-2xl text-[#0E3C2F] truncate">
-                  Welcome back,  {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}!
+                  {t("Welcome back,")} {user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}!
 
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1 hidden sm:block truncate">{currentDate}</p>
@@ -203,7 +205,7 @@ const statusText = {
                                     </Avatar>
                     <div className="text-left hidden md:block">
                       <p className="text-xs sm:text-sm text-[#0E3C2F]">{user?.name ? user.name.charAt(0).toUpperCase() + user.name.slice(1) : "User"}</p>
-                      <p className="text-xs text-gray-500">Premium Member</p>
+                      <p className="text-xs text-gray-500">{t("Premium Member")}</p>
                     </div>
                   </button>
                 </DropdownMenuTrigger>
@@ -236,7 +238,7 @@ const statusText = {
               {upcoming && upcoming.filter(item => item !== null && item.length !== 0).length > 0 && (
               <section>
                 <div className="flex items-center justify-between mb-6">
-                  <h1 className="text-[#0E3C2F] font-bold mt-5">Upcoming Journey</h1>
+                  <h1 className="text-[#0E3C2F] font-bold mt-5">{t("Upcoming Journey")}</h1>
                   {/* <h2 className="text-[#1B2A3D] font-bold"></h2> */}
                 </div>
                 <UpcomingRideCard upcomingData={upcoming} />
@@ -247,14 +249,14 @@ const statusText = {
             {getRecentRides && getRecentRides.length > 0 && (
               <section>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-[#0E3C2F]">Recent Rides</h2>
+                  <h2 className="text-[#0E3C2F]">{t("Recent Rides")}</h2>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-[#0E3C2F] hover:bg-[#F2EDE3]/30"
                     onClick={() => navigate.push('/myrides')}
                   >
-                    View All
+                    {t("View All")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>
@@ -306,16 +308,16 @@ const statusText = {
 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-15A2.25 2.25 
 0 002.25 8.25v9A2.25 2.25 0 004.5 19.5z" />
         </svg>
-        <p>{detail.date || ride.booking_date}</p>
+        <p>{t(detail.date || ride.booking_date)}</p>
       </div>
 
       {/* Vehicle + Price Row */}
       <div className="flex justify-between items-center text-gray-700">
         <p className="text-xs">
-          <span className="font-medium text-gray-600">Vehicle:</span> {ride.vehicle_name}
+          <span className="font-medium text-gray-600">{t("Vehicle")}:</span> {t(ride.vehicle_name)}
         </p>
 
-        <p className="text-[#0E3C2F] text-sm font-medium">SAR {ride.charges || "N/A"}</p>
+        <p className="text-[#0E3C2F] text-sm font-medium">{t("SAR")} {t(ride.charges || "N/A")}</p>
       </div>
 
       {/* Divider */}
@@ -336,7 +338,7 @@ const statusText = {
 1.81l-5.59 4.06 2.122 6.564c.3.921-.755 
 1.688-1.54 1.118l-5.59-4.06-5.59 4.06c-.784.57-1.838-.197-1.539-1.118l2.122-6.564-5.59-4.06c-.783-.57-.38-1.81.588-1.81h6.908l2.122-6.564z" />
         </svg>
-        Leave Review
+        {t("Leave Review")}
       </div>
     </Card>
   );
@@ -351,14 +353,14 @@ const statusText = {
              {packages && packages.length > 0 && (
               <section>
                 <div className="flex items-center justify-between mt-2 mb-6">
-                  <h2 className="text-[#0E3C2F]">Recommended Packages</h2>
+                  <h2 className="text-[#0E3C2F]">{t("Recommended Packages")}</h2>
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-[#0E3C2F] hover:bg-[#F2EDE3]/30"
                     onClick={() => navigate.push('/Service')}
                   >
-                    View All
+                    {t("View All")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>
@@ -389,9 +391,9 @@ const statusText = {
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                   </div>
-                  <h3 className="text-white mb-2">Need Help?</h3>
+                  <h3 className="text-white mb-2">{t("Need Help?")}</h3>
                   <p className="text-white/80 text-sm mb-4">
-                    Chat with us on WhatsApp for instant support
+                    {t("Chat with us on WhatsApp for instant support")}
                   </p>
                   <Button
                     className="w-full bg-white text-[#0E3C2F] hover:bg-white/90"
@@ -402,7 +404,7 @@ const statusText = {
     window.location.href = `https://wa.me/${phone}?text=${msg}`;
   }}
                   >
-                    Open WhatsApp
+                    {t("Open WhatsApp")}
                   </Button>
                 </div>
               </Card>
@@ -411,18 +413,18 @@ const statusText = {
                 <div className="p-6 relative z-10">
                   <div className="inline-flex items-center gap-2 bg-[#0E3C2F] text-white px-3 py-1 rounded-full text-xs mb-3">
                     <Award className="w-3 h-3" />
-                    Special Offer
+                    {t("Special Offer")}
                   </div>
-                  <h3 className="text-[#0E3C2F] mb-2">Winter Package Sale</h3>
+                  <h3 className="text-[#0E3C2F] mb-2">{t("Winter Package Sale")}</h3>
                   <p className="text-sm text-gray-600 mb-4">
-                    Get up to 25% off on selected tour packages this month
+                    {t("Get up to 25% off on selected tour packages this month")}
                   </p>
                   <Button
                     size="sm"
                     className="bg-[#0E3C2F] text-white hover:bg-[#0E3C2F]/90"
                     onClick={() => navigate.push('/Service')}
                   >
-                    View Offers
+                    {t("View Offers")}
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>
