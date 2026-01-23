@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/Tabs'
 import { RideCard } from '../ui/RideCard'
 import { ReviewModal } from '../ui/ReviewModal'
-import "../../../lib/i18n";
+import "../../../src/lib/i18n";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/sellect'
 import { Textarea } from '../ui/Textarea'
@@ -72,7 +72,7 @@ const [otherReason, setOtherReason] = useState('');
       });
 
       // Divide by status
-      const upcoming = formattedRides.filter(r => [1, 2, 3].includes(r.status));
+      const upcoming = formattedRides.filter(r => [1, 2, 3, 4, 6].includes(r.status));
       const completed = formattedRides.filter(r => r.status === 7);
 
       setUpcomingRides(upcoming);
