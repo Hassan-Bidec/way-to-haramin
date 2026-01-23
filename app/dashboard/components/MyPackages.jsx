@@ -135,42 +135,51 @@ const MyPackages = () => {
     }
   };
 
-  const handleCancelClick = (id) => {
-    console.log('check', id)
-    setRideToCancel(id);
-    setCancelReason('');
-    setOtherReason('');
-    setCancelDialogOpen(true);
-  };
+  const handleCancelClick = (bookingId) => {
+  setRideToCancel(bookingId);
+  setCancelReason('');
+  setOtherReason('');
+  setCancelDialogOpen(true);
+};
 
-  const handleConfirmCancel = async () => {
-    const finalReason = cancelReason === "Other" ? otherReason : cancelReason;
 
-    if (!finalReason.trim()) {
-      toast.error("Please provide a reason for cancelling this ride.");
+
+const handleConfirmCancel = async () => {
+  const finalReason = cancelReason === "Other" ? otherReason : cancelReason;
+
+  if (!finalReason.trim()) {
+    toast.error("Please provide a reason for cancelling this ride.");
+    return;
+  }
+
+  try {
+    const payload = {
+      booking_id: rideToCancel, // ✅ booking id
+      reason: finalReason
+    };
+
+    const res = await cancelPackage(payload);
+
+    if (!res.status) {
+      toast.error(res.message || "Unable to cancel ride");
       return;
     }
 
-    try {
-      const res = await cancelPackage(rideToCancel);
+    toast.success("Ride cancelled successfully!");
 
-      if (!res.status) {
-        toast.error(res.message || "Unable to cancel ride");
-        return;
-      }
+    setUpcomingRides(prev =>
+      prev.filter(ride => ride.bookingId !== rideToCancel)
+    );
 
-      toast.success("Ride cancelled successfully!");
+    setCancelDialogOpen(false);
+    setRideToCancel(null);
+    setCancelReason("");
+    setOtherReason("");
+  } catch (err) {
+    toast.error("Something went wrong");
+  }
+};
 
-      // Directly remove the cancelled ride from upcomingRides state
-      setUpcomingRides((prev) => prev.filter((ride) => ride.id !== rideToCancel));
-      setCancelDialogOpen(false);
-      setRideToCancel(null);
-      setCancelReason("");
-      setOtherReason("");
-    } catch (err) {
-      toast.error("Something went wrong");
-    }
-  };
 
 
   return (
