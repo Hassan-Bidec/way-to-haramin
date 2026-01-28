@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/useAuthStore";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import "../../src/lib/i18n";
 
 export default function Hero() {
@@ -15,6 +16,16 @@ export default function Hero() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
+  // Slider state
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Add your images here
+  const slides = [
+    "/banner1.jpg",
+    "/banner2.jpg",
+    "/banner3.jpg",
+  ];
+
   useEffect(() => {
     const savedLang = localStorage.getItem("i18nextLng") || "en";
     if (i18n && typeof i18n.changeLanguage === "function") {
@@ -22,7 +33,14 @@ export default function Hero() {
       document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
       document.documentElement.lang = savedLang;
     }
-  }, [i18n]);
+
+    // Auto slide every 5s
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [i18n, slides.length]);
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
@@ -37,34 +55,45 @@ export default function Hero() {
   const isArabic = i18n.language?.startsWith("ar"); // Arabic check
 
   return (
-    <div
-      className="relative min-h-[70vh] md:min-h-[90vh] bg-cover bg-center flex items-center justify-center md:justify-start px-6 md:px-12"
-      style={{ backgroundImage: "url('/bg.png')" }}
-    >
+    <div className="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center md:justify-start px-6 md:px-12 overflow-hidden">
+  {/* Slider */}
+  <AnimatePresence mode="wait">
+    {slides.map((slide, index) =>
+      index === currentSlide ? (
+        <motion.img
+          key={index}
+          src={slide}
+          alt={`Slide ${index}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 w-full h-full"
+        />
+      ) : null
+    )}
+  </AnimatePresence>
+  {/* Overlay */}
+<div className="absolute inset-0 bg-black/40 z-[5]"></div>
+
+
+
+
+      {/* Language + User */}
       <div className="absolute top-6 right-6 z-20 flex items-center gap-4">
         <div className="relative w-28 md:w-32">
-  <select
-    value={i18n.language?.split("-")[0] || "en"}
-    onChange={handleLanguageChange}
-    className="
-      w-full h-10
-      px-3
-      text-sm
-      text-gray-700
-      bg-white
-      border border-gray-300
-      rounded-md
-      focus:outline-none
-      focus:border-[#0E3C2F]
-      cursor-pointer
-    "
-  >
-    <option value="en">English</option>
-    <option value="ar">Arabic</option>
-  </select>
-</div>
-
-
+          <select
+            value={i18n.language?.split("-")[0] || "en"}
+            onChange={handleLanguageChange}
+            className="
+              w-full h-10 px-3 text-sm text-gray-700 bg-white border border-gray-300
+              rounded-md focus:outline-none focus:border-[#0E3C2F] cursor-pointer
+            "
+          >
+            <option value="en">English</option>
+            <option value="ar">Arabic</option>
+          </select>
+        </div>
 
         {isLoggedIn && (
           <Link
@@ -76,6 +105,7 @@ export default function Hero() {
         )}
       </div>
 
+      {/* Hero Content */}
       <div
         className={`relative z-10 text-white flex flex-col items-center md:items-start text-center md:text-left ${isArabic ? "md:items-end md:text-right" : ""
           }`}
@@ -105,7 +135,6 @@ export default function Hero() {
           )}
         </span>
 
-
         <div className="flex flex-col md:flex-row items-center gap-2 mb-6 mt-5">
           <img
             src="Ellipse.png"
@@ -120,32 +149,29 @@ export default function Hero() {
         </div>
 
         <div className="flex flex-row gap-4 justify-center md:justify-start flex-nowrap overflow-x-auto">
-  <button
-    onClick={() => router.push("/Book")}
-    className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]"
-  >
-    {t("Booking")}
-  </button>
+          <button
+            onClick={() => router.push("/Book")}
+            className="bg-white text-black px-4 py-2 rounded-md font-medium hover:bg-gray-100 transition min-w-[100px]"
+          >
+            {t("Booking")}
+          </button>
 
-  {user?.id ? (
-    // Agar user authenticated hai
-    <Link
-      href="/dashboard"
-      className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
-    >
-      {t("Dashboard")} <LuMoveRight />
-    </Link>
-  ) : (
-    // Agar user unauthenticated hai
-    <Link
-      href="/auth"
-      className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
-    >
-      {t("Register as Vendor")} <LuMoveRight />
-    </Link>
-  )}
-</div>
-
+          {user?.id ? (
+            <Link
+              href="/dashboard"
+              className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+            >
+              {t("Dashboard")} <LuMoveRight />
+            </Link>
+          ) : (
+            <Link
+              href="/auth"
+              className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+            >
+              {t("Register as Vendor")} <LuMoveRight />
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

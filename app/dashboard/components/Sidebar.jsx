@@ -14,7 +14,8 @@ import {
   MdPerson,
   MdLogout,
   MdMenu,
-  MdClose
+  MdClose,
+  MdLocalTaxi
 } from "react-icons/md";
 import { useAuthStore } from "@/lib/useAuthStore";
 
@@ -31,6 +32,7 @@ export default function Sidebar() {
     { label: t("Dashboard"), href: "/dashboard", icon: <MdDashboard size={20} /> },
     { label: t("Book a Ride"), href: "/Book", icon: <MdDirectionsCar size={20} /> },
     { label: t("Service Providers"), href: "/Service", icon: <MdDirectionsCar size={20} /> },
+    { label: t("Taxi Service"), href: "/TaxiServices", icon: <MdLocalTaxi size={20} /> },
     { label: t("My Rides"), href: "/myrides", icon: <MdListAlt size={20} /> },
     { label: t("My Packages"), href: "/my-packages", icon: <MdListAlt size={20} /> },
     { label: t("Support"), href: "/support", icon: <MdSupportAgent size={20} /> },

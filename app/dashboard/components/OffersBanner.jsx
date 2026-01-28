@@ -12,7 +12,7 @@ const offers = [
     subtitle: "Limited Time Offer",
     description: "Book your spiritual journey with exclusive rates",
     discount: "35% OFF",
-    image: "/Container.png",
+    image: "/dash1.jpg",
     badge: "HOT DEAL",
     gradient: "from-[#0E3C2F] via-[#1A5540] to-[#0E3C2F]",
     ctaText: "Book Now",
@@ -24,7 +24,7 @@ const offers = [
     subtitle: "Flash Sale Today",
     description: "Premium transport between the holy cities",
     discount: "25% OFF",
-    image: "/homebanner.png",
+    image: "/dash2.jpg",
     badge: "FLASH SALE",
     gradient: "from-[#0E3C2F] via-[#1A5540] to-[#0E3C2F]",
     ctaText: "Get Discount",
@@ -36,7 +36,7 @@ const offers = [
     subtitle: "Group Savings",
     description: "Save more when you travel together",
     discount: "UP TO 40%",
-    image: "https://images.unsplash.com/photo-1583944205378-a529b81a2481?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+    image: "/dash3.jpg",
     badge: "BEST VALUE",
     gradient: "from-[#8B7355] via-[#9B8365] to-[#8B7355]",
     ctaText: "Explore Deals",
@@ -61,10 +61,14 @@ export default function OffersBanner() {
   return (
     <div className="relative overflow-hidden rounded-3xl shadow-2xl mb-8 mt-5">
       {/* Banner Image */}
-      <div
-        className="h-[400px] lg:h-[450px] bg-cover bg-center rounded-3xl transition-all duration-700"
-        style={{ backgroundImage: `url(${currentOffer.image})` }}
-      ></div>
+      <div className="h-[400px] lg:h-[450px] rounded-3xl overflow-hidden transition-all duration-700">
+  <img
+    src={currentOffer.image}
+    alt="Offer"
+    className="w-full h-full"
+  />
+</div>
+
 
       {/* Banner Text */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 lg:px-16">

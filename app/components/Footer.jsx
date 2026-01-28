@@ -15,9 +15,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
           {/* 🔹 Logo Image */}
           <img
-            src="/logo11.png"
+            src="/footer.jpeg"
             alt={t("Way To Haramain Logo")}
-            className="h-10 md:h-12 object-contain"
+            className="h-10 md:h-17 object-contain"
           />
 
           <div className="hidden md:block h-6 w-px bg-gray-400"></div>
