@@ -1,79 +1,35 @@
 "use client";
+import { t } from "i18next";
+import Image from "next/image";
+import { useState, useTransition } from "react";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Gift, Star, Clock, ArrowRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import "../../../lib/i18n";
-
-const offers = [
-  {
-    id: 1,
-    title: "Umrah Season Special",
-    subtitle: "Limited Time Offer",
-    description: "Book your spiritual journey with exclusive rates",
-    discount: "35% OFF",
-    image: "/dash1.jpg",
-    badge: "HOT DEAL",
-    gradient: "from-[#0E3C2F] via-[#1A5540] to-[#0E3C2F]",
-    ctaText: "Book Now",
-    expiresIn: "2 Days Left",
-  },
-  {
-    id: 2,
-    title: "Makkah-Madinah Express",
-    subtitle: " Flash Sale Today",
-    description: "Premium transport between the holy cities",
-    discount: "25% OFF",
-    image: "/dash2.jpg",
-    badge: "FLASH SALE",
-    gradient: "from-[#0E3C2F] via-[#1A5540] to-[#0E3C2F]",
-    ctaText: "Get Discount",
-    expiresIn: "Ends Tonight",
-  },
-  {
-    id: 3,
-    title: "Family Package Bonanza",
-    subtitle: " Group Savings",
-    description: "Save more when you travel together",
-    discount: "UP TO 40%",
-    image: "dash3",
-    badge: "BEST VALUE",
-    gradient: "from-[#8B7355] via-[#9B8365] to-[#8B7355]",
-    ctaText: "Explore Deals",
-    expiresIn: "5 Days Left",
-  },
-];
-
-export default function OffersBanner() {
+export default function OffersBanner({ bannerData = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
- const { t } = useTranslation();
 
-  // Automatic slideshow
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % offers.length);
-    }, 5000); // 5 seconds per image
-    return () => clearInterval(interval);
-  }, []);
+  if (!bannerData.length) return null;
+  const image_url = "https://waytoharamain.com/backend/"
 
-  const currentOffer = offers[currentIndex];
-
+  const currentBanner = bannerData[currentIndex];
+  console.log("imagesssss" ,currentBanner)
   return (
-    <div className="relative overflow-hidden rounded-3xl shadow-2xl mb-8 mt-5">
+      <div className="relative overflow-hidden rounded-3xl shadow-2xl mb-8 mt-5">
       {/* Banner Image */}
-      <div
-        className="h-[400px] lg:h-[450px] bg-cover bg-center rounded-3xl transition-all duration-700"
-        style={{ backgroundImage: `url(${currentOffer.image})` }}
-      ></div>
+      <div className="h-[400px] lg:h-[450px] rounded-3xl overflow-hidden transition-all duration-700">
+  <img
+    src={`${image_url}${currentBanner.banner}`}
+    alt="Offer"
+    className="w-full h-full"
+  />
+</div>
+
 
       {/* Banner Text */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-8 lg:px-16">
-        <p className="text-white text-lg lg:text-xl mb-3">{t(currentOffer.subtitle)}</p>
+        <p className="text-white text-lg lg:text-xl mb-3">{t(currentBanner.subtitle)}</p>
         <h1 className="text-white text-4xl lg:text-6xl mb-4 font-bold leading-tight">
-          {t(currentOffer.title)}
+          {t(currentBanner.title)}
         </h1>
-        <p className="text-white text-lg lg:text-xl max-w-xl">{t(currentOffer.description)}</p>
+        <p className="text-white text-lg lg:text-xl max-w-xl">{t(currentBanner.description)}</p>
       </div>
     </div>
   );

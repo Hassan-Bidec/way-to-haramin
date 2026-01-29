@@ -17,7 +17,7 @@ export default function TrustWayToHaramain() {
           alt={t("Pilgrims in front of hotel")}
           width={600}
           height={500}
-          className="w-full max-w-sm sm:max-w-md md:w-[400px] md:h-[400px] h-auto md:ml-38 object-cover rounded-2xl"
+          className="w-full max-w-sm sm:max-w-md md:w-[400px] md:h-[500px] h-auto md:ml-38 object-cover rounded-2xl"
         />
       </div>
 
@@ -27,18 +27,18 @@ export default function TrustWayToHaramain() {
           {t("~ Why Haramain ~")}
         </span>
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-normal mb-6 text-gray-900">
-          {t("Trust Way To Haramain")}
+          {t("About Way To Haramain")}
         </h1>
 
         <span className="block text-gray-600 leading-relaxed mb-4 text-sm sm:text-base md:text-base max-w-lg md:max-w-[450px]">
           {t(
-            "At Way To Haramain, every journey is treated with the respect and care it deserves. We combine technology, verified service providers, and human support to ensure pilgrims experience peace of mind from the moment they book to the moment they arrive."
+            "Way To Haramain is a next-generation transportation platform built to modernize and simplify travel services for Hajj and Umrah pilgrims. Headquartered in Saudi Arabia, we operate at the heart of the world’s largest pilgrimage ecosystem.With over 15+ years of hands-on experience in Hajj and Umrah transportation services, our founders and leadership team deeply understand the complexities, challenges, and operational realities of this sector."
           )}
         </span>
 
         <span className="block text-gray-600 leading-relaxed text-sm sm:text-base md:text-base max-w-lg md:max-w-[450px]">
           {t(
-            "From carefully vetted drivers to secure online booking and 24/7 support, every detail is designed to make your sacred travel stress-free and seamless."
+            "Our startup is proudly supported by the Ministry of Communications and Information Technology (MCIT) for our innovative technology-driven idea. We also participated in the TGA Hackathon NAQL3 Program, organized by the Transport General Authority, and were honored to be selected among the top 50 startups out of 250 innovative ideas. This recognition highlights our commitment to driving technological innovation and shaping the future of transport in Saudi Arabia."
           )}
         </span>
       </div>

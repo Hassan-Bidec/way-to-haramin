@@ -6,6 +6,7 @@ import TrustWay from "./components/TrustWay";
 import AgentGroup from "./components/AgentGroup";
 import Travelers from "./components/Travelers";
 import Footer from "./components/Footer";
+import Newsfeed from "./components/Newsfeed";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
 <Vehicle/>
 <TrustWay/>
 <AgentGroup/>
+<Newsfeed/>
 <Travelers/>
 <Footer/>
 </>

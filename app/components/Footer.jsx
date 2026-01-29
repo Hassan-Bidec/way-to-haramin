@@ -9,81 +9,96 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#0D3C34] text-white py-6 md:py-8 px-6 md:px-16">
-      <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-0">
-        {/* Left Section */}
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
-          {/* 🔹 Logo Image */}
-          <img
-            src="/footer.jpeg"
-            alt={t("Way To Haramain Logo")}
-            className="h-10 md:h-17 object-contain"
-          />
+<footer className="bg-[#0D3C34] text-white py-6 md:py-8 px-6 md:px-16">
+  <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-0">
+    {/* Left Section */}
+    <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8">
+      <img
+        src="/footer.jpeg"
+        alt={t("Way To Haramain Logo")}
+        className="h-10 md:h-17 object-contain"
+      />
 
-          <div className="hidden md:block h-6 w-px bg-gray-400"></div>
+      <div className="hidden md:block h-6 w-px bg-gray-400"></div>
 
-          {/* Links + Copyright Container */}
-          <div className="flex flex-col gap-1 md:gap-0">
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-sm">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="hover:underline"
-              >
-                {t("How It Works")}
-              </a>
+      <div className="flex flex-col gap-1 md:gap-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-sm">
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hover:underline"
+          >
+            {t("How It Works")}
+          </a>
 
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("vehicle-categories")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="hover:underline"
-              >
-                {t("Vehicle Categories")}
-              </a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("vehicle-categories")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hover:underline"
+          >
+            {t("Vehicle Categories")}
+          </a>
 
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("why-choose-us")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="hover:underline"
-              >
-                {t("Why Choose Us")}
-              </a>
-            </div>
-
-            <p className="text-xs text-gray-300 mt-2 md:mt-1">
-              {t("Copyright")} © 2025 {t("Way To Haramain")}
-            </p>
-          </div>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("why-choose-us")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="hover:underline"
+          >
+            {t("Why Choose Us")}
+          </a>
         </div>
 
-        {/* Right Section (Social + Email) */}
-        <div className="flex flex-col items-start md:items-end gap-2">
-          <div className="flex items-center gap-4 text-white">
-            <Link href="https://www.instagram.com/" target="_blank" className="hover:text-gray-300">
-              <FaInstagram size={18} />
-            </Link>
-
-            <Link href="https://www.facebook.com/" target="_blank" className="hover:text-gray-300">
-              <FaFacebookF size={18} />
-            </Link>
-
-            <Link href="https://www.whatsapp.com/?lang=en" target="_blank" className="hover:text-gray-300">
-              <FaWhatsapp size={18} />
-            </Link>
-          </div>
-          <p className="text-xs text-gray-300">{t("support_email")}</p>
-        </div>
+        <p className="text-xs text-gray-300 mt-2 md:mt-1">
+          {t("Copyright")} © 2025 {t("Way To Haramain")}
+        </p>
       </div>
-    </footer>
+    </div>
+
+    {/* Right Section */}
+    <div className="flex flex-col items-start md:items-end gap-3">
+      {/* 🔔 Subscribe Field */}
+      <form className="flex items-center border border-gray-400 rounded-md overflow-hidden">
+        <input
+          type="email"
+          placeholder={t("Your email")}
+          className="px-3 py-2 bg-white text-sm text-black outline-none w-44 md:w-56"
+        />
+        <button
+          type="submit"
+          className="bg-gray-200 text-[#0D3C34] px-3 py-2 text-sm font-medium hover:bg-gray-200"
+        >
+          {t("Subscribe")}
+        </button>
+      </form>
+
+      <div className="flex items-center gap-4 text-white">
+        <Link href="https://www.instagram.com/" target="_blank" className="hover:text-gray-300">
+          <FaInstagram size={18} />
+        </Link>
+
+        <Link href="https://www.facebook.com/" target="_blank" className="hover:text-gray-300">
+          <FaFacebookF size={18} />
+        </Link>
+
+        <Link href="https://www.whatsapp.com/?lang=en" target="_blank" className="hover:text-gray-300">
+          <FaWhatsapp size={18} />
+        </Link>
+      </div>
+
+      <p className="text-xs text-gray-300">{t("support_email")}</p>
+    </div>
+  </div>
+</footer>
+
   );
 };
 

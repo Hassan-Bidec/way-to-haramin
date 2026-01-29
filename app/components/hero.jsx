@@ -16,15 +16,8 @@ export default function Hero() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  // Slider state
+  const [slides, setSlides] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Add your images here
-  const slides = [
-    "/banner1.jpg",
-    "/banner2.jpg",
-    "/banner3.jpg",
-  ];
 
   useEffect(() => {
     const savedLang = localStorage.getItem("i18nextLng") || "en";
@@ -34,9 +27,27 @@ export default function Hero() {
       document.documentElement.lang = savedLang;
     }
 
+    // Fetch slides from API
+    fetch("https://waytoharamain.com/backend/api/home-page")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status && data.data) {
+          const formattedSlides = data.data.map((slide) => ({
+            image: `https://waytoharamain.com/backend/${slide.banner}`,
+            title: slide.title,
+            subTitle: slide.sub_title,
+            description: slide.description,
+          }));
+          setSlides(formattedSlides);
+        }
+      })
+      .catch((err) => console.error("API fetch error:", err));
+
     // Auto slide every 5s
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      if (slides.length) {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }
     }, 5000);
 
     return () => clearInterval(interval);
@@ -52,32 +63,34 @@ export default function Hero() {
     }
   };
 
-  const isArabic = i18n.language?.startsWith("ar"); // Arabic check
+  const isArabic = i18n.language?.startsWith("ar");
+
+  if (!slides.length) return null; // or loader
+
+  const current = slides[currentSlide];
 
   return (
     <div className="relative min-h-[70vh] md:min-h-[90vh] flex items-center justify-center md:justify-start px-6 md:px-12 overflow-hidden">
-  {/* Slider */}
-  <AnimatePresence mode="wait">
-    {slides.map((slide, index) =>
-      index === currentSlide ? (
-        <motion.img
-          key={index}
-          src={slide}
-          alt={`Slide ${index}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 w-full h-full"
-        />
-      ) : null
-    )}
-  </AnimatePresence>
-  {/* Overlay */}
-<div className="absolute inset-0 bg-black/40 z-[5]"></div>
+      {/* Slider */}
+      <AnimatePresence mode="wait">
+        {slides.map((slide, index) =>
+          index === currentSlide ? (
+            <motion.img
+              key={index}
+              src={slide.image}
+              alt={slide.title}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0 w-full h-full"
+            />
+          ) : null
+        )}
+      </AnimatePresence>
 
-
-
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 z-[5]"></div>
 
       {/* Language + User */}
       <div className="absolute top-6 right-6 z-20 flex items-center gap-4">
@@ -110,40 +123,32 @@ export default function Hero() {
         className={`relative z-10 text-white flex flex-col items-center md:items-start text-center md:text-left ${isArabic ? "md:items-end md:text-right" : ""
           }`}
       >
-        <p className="tracking-widest uppercase text-sm mb-2">{t("~Seamless~")}</p>
+        <p className="tracking-widest uppercase text-sm mb-2">
+          {t(current.subTitle)}
+        </p>
 
         <h1 className="text-4xl md:text-6xl mb-4">
-          {isArabic
-            ? `${t("Hajj & Umrah")} ${t("Transportation Booking")}`
-            : (
-              <>
-                {t("Hajj & Umrah")}
-                <br />
-                {t("Transportation Booking")}
-              </>
-            )}
+          {isArabic ? (
+            `${t(current.title)}`
+          ) : (
+            <>
+              {t(current.title)}
+            </>
+          )}
         </h1>
 
         <span className="mb-6 max-w-md md:max-w-2xl text-gray-300">
-          {isArabic ? (
-            `${t("Book verified vehicles between Makkah, Madinah, and")} ${t("Jeddah")} ${t("with trusted service providers")}`
-          ) : (
-            <>
-              {t("Book verified vehicles between Makkah, Madinah, and")} <br />
-              <span>{t("Jeddah")}</span> {t("with trusted service providers")}
-            </>
-          )}
+          {t(current.description)}
         </span>
 
         <div className="flex flex-col md:flex-row items-center gap-2 mb-6 mt-5">
           <img
-            src="Ellipse.png"
+            src="/Ellipse.png"
             alt="trusted clients"
             className="w-15 h-8 rounded-full"
           />
           <span className="text-sm text-gray-300">
-            {t("Trusted by")}{" "}
-            <span className="font-semibold">{t("500+ clients")}</span>{" "}
+            {t("Trusted by")} <span className="font-semibold">{t("500+ clients")}</span>{" "}
             {t("all over the world")}
           </span>
         </div>

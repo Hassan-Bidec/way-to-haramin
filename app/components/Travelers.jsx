@@ -19,7 +19,7 @@ const Travelers = () => {
           src="/kaba.png"
           alt={t("Kaaba")}
           width={600}
-          height={20}
+          height={40}
           className="rounded-2xl object-cover w-full h-auto"
           priority
         />
@@ -29,18 +29,34 @@ const Travelers = () => {
       <div className="w-full md:w-1/2 flex flex-col space-y-8 relative z-10">
         {/* Heading */}
         <div className="space-y-3 mt-5 sm:mt-0">
-          <p className="text-sm font-semibold tracking-widest text-gray-800 uppercase">
-            {t("~ What Our ~")}
-          </p>
-          <h1 className="text-3xl sm:text-4xl font-normal text-gray-900">
-            {t("Travelers Say")}
-          </h1>
-          <span className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-full sm:max-w-md">
-            {t(
-              "Trusted by pilgrims for safe, comfortable, and reliable travel between Makkah, Madinah, and Jeddah, with verified vehicles and instant WhatsApp confirmations."
-            )}
-          </span>
-        </div>
+  <p className="text-sm font-semibold tracking-widest text-gray-800 uppercase">
+    {t("Our Experience & Industry Partnerships")}
+  </p>
+
+  <h1 className="text-3xl sm:text-4xl font-normal text-gray-900">
+    {t("15+ Years in Hajj & Umrah Operations")}
+  </h1>
+
+  <span className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-full sm:max-w-md">
+    {t(
+      "With more than 15+ years in Hajj & Umrah operations, we have served and collaborated with:"
+    )}
+  </span>
+
+  <ul className="list-disc pl-5 text-gray-600 text-sm sm:text-base leading-relaxed max-w-full sm:max-w-md space-y-1">
+    <li>{t("Global Airlines")}</li>
+    <li>{t("Hajj Operations with Multiple Embassies")}</li>
+    <li>{t("Multiple Rent-a-Car & Transportation Companies")}</li>
+    <li>{t("Umrah Tour Operators & Ground Handling Providers")}</li>
+  </ul>
+
+  <span className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-full sm:max-w-md">
+    {t(
+      "This deep industry integration allows us to provide reliable, compliant, and scalable transport solutions."
+    )}
+  </span>
+</div>
+
 
         <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 space-y-2 w-full md:w-[130%] md:-left-[23%] relative">
           <div className="flex items-center justify-between">
