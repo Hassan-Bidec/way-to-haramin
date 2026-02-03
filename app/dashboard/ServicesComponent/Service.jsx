@@ -20,7 +20,6 @@ import { getPartnersWithPackages } from '@/lib/api';
 import { Image_URL } from '@/config/constants';
 import { ImageWithFallback } from './ImageWithFallback';
 import Loading from '../components/Loading';
-import "../../../src/lib/i18n"; // Ensure path correct
 import i18n from '../../../src/lib/i18n';
 
 
