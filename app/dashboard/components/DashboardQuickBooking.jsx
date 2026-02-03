@@ -101,7 +101,7 @@ const minDate = tomorrow.toISOString().split("T")[0];
           <div className="space-y-2">
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4 text-[#C7A76C]" />
-              {t("To")}
+              {'To'}
             </label>
             <Select value={to} onValueChange={setTo}>
               <SelectTrigger className="h-11 bg-[#F7F7F9] border-gray-200">

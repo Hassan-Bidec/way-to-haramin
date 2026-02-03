@@ -161,21 +161,33 @@ export default function Hero() {
             {t("Booking")}
           </button>
 
-          {user?.id ? (
-            <Link
-              href="/dashboard"
-              className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
-            >
-              {t("Dashboard")} <LuMoveRight />
-            </Link>
-          ) : (
-            <Link
-              href="/auth"
-              className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
-            >
-              {t("Register as Vendor")} <LuMoveRight />
-            </Link>
-          )}
+        <div className="flex gap-3 flex-wrap">
+  {user?.id ? (
+    <Link
+      href="/dashboard"
+      className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+    >
+      {t("Dashboard")} <LuMoveRight />
+    </Link>
+  ) : (
+    <>
+      <Link
+        href="/auth"
+        className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[120px]"
+      >
+        {t("Register as Vendor")} <LuMoveRight />
+      </Link>
+
+      <Link
+        href="/dashboard"
+        className="flex text-gray-300 items-center gap-2 border border-white px-4 py-2 rounded-md font-medium hover:bg-white hover:text-black transition whitespace-nowrap justify-center min-w-[140px]"
+      >
+        {t("View Packages")} <LuMoveRight />
+      </Link>
+    </>
+  )}
+</div>
+
         </div>
       </div>
     </div>
